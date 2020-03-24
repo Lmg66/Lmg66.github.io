@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lmg66.github.io/"/>
-  <updated>2020-03-22T12:29:30.177Z</updated>
+  <updated>2020-03-24T08:04:49.464Z</updated>
   <id>https://lmg66.github.io/</id>
   
   <author>
@@ -17,11 +17,60 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>lpython</title>
+    <link href="https://lmg66.github.io/posts/cc0c.html"/>
+    <id>https://lmg66.github.io/posts/cc0c.html</id>
+    <published>2020-03-24T07:43:38.000Z</published>
+    <updated>2020-03-24T08:04:49.464Z</updated>
+    
+    <content type="html"><![CDATA[<p>#print(“hello word”)</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;#print(“hello word”)&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://Lmg66.github.io/categories/linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>测试</title>
+    <link href="https://lmg66.github.io/posts/938d.html"/>
+    <id>https://lmg66.github.io/posts/938d.html</id>
+    <published>2020-03-24T07:30:05.000Z</published>
+    <updated>2020-03-24T07:32:01.866Z</updated>
+    
+    <content type="html"><![CDATA[<p>百度翻译是百度发布的在线翻译服务，依托互联网数据资源和自然语言处理技术优势，致力于帮助用户跨越语言鸿沟，方便快捷地获取信息和服务。<br>百度翻译支持全球28种热门语言互译，包括中文（简体）、英语、日语、韩语、西班牙语、泰语、法语、阿拉伯语、葡萄牙语、俄语、德语、意大利语、荷兰语、希腊语、爱沙尼亚语、保加利亚语、波兰语、丹麦语、芬兰语、捷克语、罗马尼亚语、瑞典语、斯洛文尼亚语、匈牙利语、越南语、粤语、文言文和中文（繁体）等，覆盖756个翻译方向。<br>“世界很复杂，百度更懂你”，百度翻译拥有网页版和手机APP等多种产品形态，此外还针对开发者提供开放云接口服务，日均响应上亿次翻译请求。除文本翻译外，结合用户多样性的翻译需求，推出网页翻译、网络释义、海量例句、权威词典、离线翻译、语音翻译、对话翻译、实用口语、拍照翻译、AR翻译、趣味配音等功能，同时还针对对译文质量要求较高的用户，提供人工翻译服务，让用户畅享每一次翻译体验。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;百度翻译是百度发布的在线翻译服务，依托互联网数据资源和自然语言处理技术优势，致力于帮助用户跨越语言鸿沟，方便快捷地获取信息和服务。&lt;br&gt;百度翻译支持全球28种热门语言互译，包括中文（简体）、英语、日语、韩语、西班牙语、泰语、法语、阿拉伯语、葡萄牙语、俄语、德语、意大利语、
+      
+    
+    </summary>
+    
+    
+      <category term="web安全" scheme="https://Lmg66.github.io/categories/web%E5%AE%89%E5%85%A8/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Hello World</title>
     <link href="https://lmg66.github.io/posts/3eeb.html"/>
     <id>https://lmg66.github.io/posts/3eeb.html</id>
     <published>2020-03-20T04:28:51.054Z</published>
-    <updated>2020-03-22T12:29:30.177Z</updated>
+    <updated>2020-03-24T08:19:30.940Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
     
@@ -35,6 +84,27 @@
     </summary>
     
     
+    
+  </entry>
+  
+  <entry>
+    <title>CentOS7下Tomcat启动慢的原因及解决方案</title>
+    <link href="https://lmg66.github.io/posts/3cb8.html"/>
+    <id>https://lmg66.github.io/posts/3cb8.html</id>
+    <published>2017-12-02T13:01:24.000Z</published>
+    <updated>2020-03-24T09:46:57.940Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="博客" scheme="https://Lmg66.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+      <category term="centOS" scheme="https://Lmg66.github.io/tags/centOS/"/>
+    
+      <category term="tomcat" scheme="https://Lmg66.github.io/tags/tomcat/"/>
     
   </entry>
   
