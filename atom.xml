@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lmg66.github.io/"/>
-  <updated>2020-03-24T13:31:53.403Z</updated>
+  <updated>2020-04-06T05:18:40.903Z</updated>
   <id>https://lmg66.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>文件包含</title>
+    <link href="https://lmg66.github.io/posts/e8ab.html"/>
+    <id>https://lmg66.github.io/posts/e8ab.html</id>
+    <published>2020-04-06T05:14:45.000Z</published>
+    <updated>2020-04-06T05:18:40.903Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://Lmg66.github.io/imag/1.png" alt="笔记" title="笔记"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;https://Lmg66.github.io/imag/1.png&quot; alt=&quot;笔记&quot; title=&quot;笔记&quot;&gt;&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>两种搭建个人博客方法</title>
