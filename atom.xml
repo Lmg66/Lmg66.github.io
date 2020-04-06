@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lmg66.github.io/"/>
-  <updated>2020-04-06T05:18:40.903Z</updated>
+  <updated>2020-04-06T05:42:25.489Z</updated>
   <id>https://lmg66.github.io/</id>
   
   <author>
@@ -21,21 +21,26 @@
     <link href="https://lmg66.github.io/posts/e8ab.html"/>
     <id>https://lmg66.github.io/posts/e8ab.html</id>
     <published>2020-04-06T05:14:45.000Z</published>
-    <updated>2020-04-06T05:18:40.903Z</updated>
+    <updated>2020-04-06T05:42:25.489Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="https://Lmg66.github.io/imag/1.png" alt="笔记" title="笔记"></p>]]></content>
+    <content type="html"><![CDATA[<h3 id="前言：自从博客弄好后就休息了一段时间，所以没学啥就分享一下之前学的文件包含中的php伪协议，因为懒得在打一遍就直接把OneNote中的笔记用图片分享，而图片没有做加速可能加载会比较慢还望谅解。"><a href="#前言：自从博客弄好后就休息了一段时间，所以没学啥就分享一下之前学的文件包含中的php伪协议，因为懒得在打一遍就直接把OneNote中的笔记用图片分享，而图片没有做加速可能加载会比较慢还望谅解。" class="headerlink" title="前言：自从博客弄好后就休息了一段时间，所以没学啥就分享一下之前学的文件包含中的php伪协议，因为懒得在打一遍就直接把OneNote中的笔记用图片分享，而图片没有做加速可能加载会比较慢还望谅解。"></a>前言：自从博客弄好后就休息了一段时间，所以没学啥就分享一下之前学的文件包含中的php伪协议，因为懒得在打一遍就直接把OneNote中的笔记用图片分享，而图片没有做加速可能加载会比较慢还望谅解。</h3><h3 id="正文：php伪协议的目的-个人理解-用来读取文件，获得源码，写入木马"><a href="#正文：php伪协议的目的-个人理解-用来读取文件，获得源码，写入木马" class="headerlink" title="正文：php伪协议的目的(个人理解):用来读取文件，获得源码，写入木马"></a>正文：php伪协议的目的(个人理解):用来读取文件，获得源码，写入木马</h3><p><img src="https://Lmg66.github.io/img/1.png" alt="图片"></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;&lt;img src=&quot;https://Lmg66.github.io/imag/1.png&quot; alt=&quot;笔记&quot; title=&quot;笔记&quot;&gt;&lt;/p&gt;
-
+        &lt;h3 id=&quot;前言：自从博客弄好后就休息了一段时间，所以没学啥就分享一下之前学的文件包含中的php伪协议，因为懒得在打一遍就直接把OneNote中的笔记用图片分享，而图片没有做加速可能加载会比较慢还望谅解。&quot;&gt;&lt;a href=&quot;#前言：自从博客弄好后就休息了一段时间，所以没学啥
       
     
     </summary>
     
     
+      <category term="web安全" scheme="https://Lmg66.github.io/categories/web%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="文件包含" scheme="https://Lmg66.github.io/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"/>
+    
+      <category term="php伪协议" scheme="https://Lmg66.github.io/tags/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/"/>
     
   </entry>
   
