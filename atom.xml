@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lmg66.github.io/"/>
-  <updated>2020-04-06T05:42:25.489Z</updated>
+  <updated>2020-04-09T08:58:31.013Z</updated>
   <id>https://lmg66.github.io/</id>
   
   <author>
@@ -17,11 +17,65 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>文件包含</title>
+    <title>文件包含补充CGI技术原理</title>
+    <link href="https://lmg66.github.io/posts/832d.html"/>
+    <id>https://lmg66.github.io/posts/832d.html</id>
+    <published>2020-04-09T08:53:09.000Z</published>
+    <updated>2020-04-09T08:58:31.013Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="CGI技术原理"><a href="#CGI技术原理" class="headerlink" title="CGI技术原理"></a>CGI技术原理</h3><h4 id="1-1-CGI的提出"><a href="#1-1-CGI的提出" class="headerlink" title="1.1 CGI的提出"></a>1.1 CGI的提出</h4><p>CGI是外部扩展应用程序与WWW服务器交互的一个标准接口。按照CGI标准编写的外部扩展应用程序可以处理客户端（一般是WWW浏览器）输入的协同工作数据，完成客户端与服务器的交互操作。这在实际应用中非常有用，如可以编写CGI外部扩展程序来访问外部数据库，客户端用户可以通过它和WWW服务器来进行数据查询。CGI一般分两种：标准CGI和缓冲CGI。所有的WWW服务器均应支持标准CGI，按标准CGI编写的程序与具体的WWW服务器无关。而按缓冲CGI编写的程序与WWW服务器有关。</p><h3 id="1-2-CGI的工作原理"><a href="#1-2-CGI的工作原理" class="headerlink" title="1.2 CGI的工作原理"></a>1.2 CGI的工作原理</h3><h4 id="1．标准CGI"><a href="#1．标准CGI" class="headerlink" title="1．标准CGI"></a>1．标准CGI</h4><p>客户端、服务器、CGI接口与外部程序间的关系可用图1－1表示（编排者：图略）：如上图所示，服务器是客户端（如浏览器）与扩展程序之间的通道。当客户端的用户完成了一定输入工作（比如填充完HTML文档中的FORM表）之后向服务器发出HTTP请求（称为CGI请求），服务器守护进程接收到该请求后，就创建一个子进程（称为CGI进程）。该CGI子进程将CGI请求的有关数据设置成环境变量，在外部CGI程序与服务器间建立两条数据通道（标准I／O），然后启动URL指定的CGI程序，并与该子进程保持同步，以监测CGI程序的执行状态。子进程通过标准输出流将处理结果传递给服务器守护进程，守护进程再将处理结果作为应答消息回送到客户端。外部CGI程序通过环境变量、命令行参数、标准输入输出与WWW服务器进行通讯，传递有关参数和处理结果。<br>＊环境变量：当服务器守护进程创建子进程运行CGI程序时，设置相应的环境变量和命令行参数，以传递客户端和服务器的有关信息给该子进程。<br>＊命令行参数：命令行参数仅在有HTML文档中有SINDEX查询的情况下使用。<br>＊标准输入输出：当HTTP请求模式采用POST方式时，CGI程序通过标准输入流和有关环境变量来获取客户端传输数据；如采用GET方式时，CGI程序直接通过环境变量获取客户端传输数据。当CGI程序要返回处理结果（一般为HTML文档）给客户端时，它通过标准输出流将该结果数据传递给服务器守护进程。</p><h4 id="2．缓冲CGI"><a href="#2．缓冲CGI" class="headerlink" title="2．缓冲CGI"></a>2．缓冲CGI</h4><p>标准CGI使用Stdin／Stdout来进行数据通讯，这是由其最初开发环境（Unix操作系统）所决定的。但是许多Windows环境下的编程工具（如VB和Delphi等）是不支持这种I／O方式的，这时就不能用它们来开发基于标准CGI的应用程序。于是有些服务器提出了缓冲CGI的概念。缓冲CGI亦称为WinCGI。此时CGI扩展程序与服务器间通过缓冲CGI而不是标准CGI进行通讯，而缓冲CGI与服务器间的通讯还是通过标准CGI接口。后者由WWW服务器的内置缓冲处理程序实现。这几部分的关系可用图1－2表示（编排者：图略）：缓冲CGI的工作原理与标准CGI相似，不同的是当服务器守护进程接收到客户端的CGI请求时，所建立的CGI子进程将CGI请求的有关数据设置成环境变量外，还将它们保存在输入缓冲区中；通过缓冲处理程序在外部CGI程序与服务器间建立两条数据通道（输入／输出缓冲区）。CGI子进程通过输出缓冲区将处理结果传递给服务器守护进程。此处外部CGI程序通过环境变量和输入／输出缓冲区与WWW服务器进行通讯，传递有关参数和处理结果。此处环境变量的意义同上，不过这些环境变量及其相应值保存在输入缓冲区中。此外，输入缓冲区中还存放客户端的传输数据（如采用POST模式的话）。输出缓冲区用来存放扩展程序的处理结果。</p><h4 id="3．标准CGI与缓冲CGI的区别"><a href="#3．标准CGI与缓冲CGI的区别" class="headerlink" title="3．标准CGI与缓冲CGI的区别"></a>3．标准CGI与缓冲CGI的区别</h4><p>对CGI扩展程序而言，最主要差别在于数据的I／O不同：对缓冲CGI，服务器与CGI扩展程序间的数据交换是通过缓冲区；而标准CGI是通过标准I／O。使用缓冲CGI可选择更多的开发工具，可以开发Windows95和WindowsNT下的GUI扩展程序；而使用标准CGI所选用的开发工具必须支持标准I／O。只有少数几种WWW服务器支持缓冲CGI，因此基于它的扩展程序兼容性不如标准CGI好。</p><h3 id="1．3-CGI与其他WWW技术的关系"><a href="#1．3-CGI与其他WWW技术的关系" class="headerlink" title="1．3 CGI与其他WWW技术的关系"></a>1．3 CGI与其他WWW技术的关系</h3><p>CGI作为WWW服务器的标准扩展技术，由上面CGI的基本原理可知，它和许多其它的WWW技术密切相关，如HTTP、HTML、MIME和URL等，下面主要就它与前两种技术的关系进行研究。</p><h4 id="1．CGI与HTTP协议"><a href="#1．CGI与HTTP协议" class="headerlink" title="1．CGI与HTTP协议"></a>1．CGI与HTTP协议</h4><p>CGI通过HTTP协议在客户端和服务端进行通讯：＊客户端用户代理向服务器发送的请求是HTTP请求消息。该消息中含有处理用户输入的CGI扩展程序的URL值。＊CGI扩展程序在处理结束后，返回给客户端的应答是HTTP应答消息。因此CGI程序的输出数据必须符合HTTP应答消息的语法格式，这在基于CGI标准的开发中非常重要。</p><h4 id="2．CGI与HTML语言"><a href="#2．CGI与HTML语言" class="headerlink" title="2．CGI与HTML语言"></a>2．CGI与HTML语言</h4><p>CGI扩展程序的输出数据（HTTP应答消息）一般有两种：符合MIME类型的文档（最普遍的是HTML文档，表示为text/html）；指向其它文档的URL链接。这两种方式都与HTML语言有关，数据的组织须符合HTML语法格式。</p><h3 id="来自-https-www-cnblogs-com-lidabo-p-5756248-html"><a href="#来自-https-www-cnblogs-com-lidabo-p-5756248-html" class="headerlink" title="来自 https://www.cnblogs.com/lidabo/p/5756248.html"></a>来自 <a href="https://www.cnblogs.com/lidabo/p/5756248.html" target="_blank" rel="noopener">https://www.cnblogs.com/lidabo/p/5756248.html</a></h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;CGI技术原理&quot;&gt;&lt;a href=&quot;#CGI技术原理&quot; class=&quot;headerlink&quot; title=&quot;CGI技术原理&quot;&gt;&lt;/a&gt;CGI技术原理&lt;/h3&gt;&lt;h4 id=&quot;1-1-CGI的提出&quot;&gt;&lt;a href=&quot;#1-1-CGI的提出&quot; class=&quot;head
+      
+    
+    </summary>
+    
+    
+      <category term="web安全" scheme="https://Lmg66.github.io/categories/web%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="文件包含" scheme="https://Lmg66.github.io/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"/>
+    
+      <category term="CGI技术原理" scheme="https://Lmg66.github.io/tags/CGI%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>文件包含1</title>
+    <link href="https://lmg66.github.io/posts/6b68.html"/>
+    <id>https://lmg66.github.io/posts/6b68.html</id>
+    <published>2020-04-09T08:49:27.000Z</published>
+    <updated>2020-04-09T08:50:35.478Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h3><p>产生的原因:主要原因是在编写代码的时候，调用(包含)其他文件,让其他文件按照php代码执行，这就产生了漏洞，如果调用的时候没用经过过滤或者严格的定义，可以被用户所控制，用户可以通过包含其他文件，来恶意的执行php代码。<br>示例代码:<br><?php    $filename=$_GET['filename'];    include($filename);?><br>例如:$_GET[‘filename’]没有经过滤直接代入了include中，这就导致攻击者可以通过修改$_GET[‘filename’]的值，恶心执行php代码，产生非预期的效果。<br>php中文件包含的四种函数:<br>require()         函数调用时出现错误，会直接报错并退出程序<br>require_one() 与require()函数一样，但相同的文件只能调用执行一次<br>include()          函数包含出现错误时会报错，但会继续执行后面的代码<br>include_one()  与include()函数一样，但相同的文件只能调用执行一次<br><img src="https://Lmg66.github.io/img/2.png" alt="图片正在加载中"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;漏洞概述&quot;&gt;&lt;a href=&quot;#漏洞概述&quot; class=&quot;headerlink&quot; title=&quot;漏洞概述&quot;&gt;&lt;/a&gt;漏洞概述&lt;/h3&gt;&lt;p&gt;产生的原因:主要原因是在编写代码的时候，调用(包含)其他文件,让其他文件按照php代码执行，这就产生了漏洞，如果调用的时候没
+      
+    
+    </summary>
+    
+    
+      <category term="web安全" scheme="https://Lmg66.github.io/categories/web%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="文件包含" scheme="https://Lmg66.github.io/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>文件包含2</title>
     <link href="https://lmg66.github.io/posts/e8ab.html"/>
     <id>https://lmg66.github.io/posts/e8ab.html</id>
     <published>2020-04-06T05:14:45.000Z</published>
-    <updated>2020-04-06T05:42:25.489Z</updated>
+    <updated>2020-04-09T08:51:53.305Z</updated>
     
     <content type="html"><![CDATA[<h3 id="前言：自从博客弄好后就休息了一段时间，所以没学啥就分享一下之前学的文件包含中的php伪协议，因为懒得在打一遍就直接把OneNote中的笔记用图片分享，而图片没有做加速可能加载会比较慢还望谅解。"><a href="#前言：自从博客弄好后就休息了一段时间，所以没学啥就分享一下之前学的文件包含中的php伪协议，因为懒得在打一遍就直接把OneNote中的笔记用图片分享，而图片没有做加速可能加载会比较慢还望谅解。" class="headerlink" title="前言：自从博客弄好后就休息了一段时间，所以没学啥就分享一下之前学的文件包含中的php伪协议，因为懒得在打一遍就直接把OneNote中的笔记用图片分享，而图片没有做加速可能加载会比较慢还望谅解。"></a>前言：自从博客弄好后就休息了一段时间，所以没学啥就分享一下之前学的文件包含中的php伪协议，因为懒得在打一遍就直接把OneNote中的笔记用图片分享，而图片没有做加速可能加载会比较慢还望谅解。</h3><h3 id="正文：php伪协议的目的-个人理解-用来读取文件，获得源码，写入木马"><a href="#正文：php伪协议的目的-个人理解-用来读取文件，获得源码，写入木马" class="headerlink" title="正文：php伪协议的目的(个人理解):用来读取文件，获得源码，写入木马"></a>正文：php伪协议的目的(个人理解):用来读取文件，获得源码，写入木马</h3><p><img src="https://Lmg66.github.io/img/1.png" alt="图片"></p>]]></content>
     
