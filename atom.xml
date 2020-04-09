@@ -49,9 +49,9 @@
     <link href="https://lmg66.github.io/posts/6b68.html"/>
     <id>https://lmg66.github.io/posts/6b68.html</id>
     <published>2020-04-09T08:49:27.000Z</published>
-    <updated>2020-04-09T08:50:35.478Z</updated>
+    <updated>2020-04-09T09:02:22.430Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h3><p>产生的原因:主要原因是在编写代码的时候，调用(包含)其他文件,让其他文件按照php代码执行，这就产生了漏洞，如果调用的时候没用经过过滤或者严格的定义，可以被用户所控制，用户可以通过包含其他文件，来恶意的执行php代码。<br>示例代码:<br><?php    $filename=$_GET['filename'];    include($filename);?><br>例如:$_GET[‘filename’]没有经过滤直接代入了include中，这就导致攻击者可以通过修改$_GET[‘filename’]的值，恶心执行php代码，产生非预期的效果。<br>php中文件包含的四种函数:<br>require()         函数调用时出现错误，会直接报错并退出程序<br>require_one() 与require()函数一样，但相同的文件只能调用执行一次<br>include()          函数包含出现错误时会报错，但会继续执行后面的代码<br>include_one()  与include()函数一样，但相同的文件只能调用执行一次<br><img src="https://Lmg66.github.io/img/2.png" alt="图片正在加载中"></p>]]></content>
+    <content type="html"><![CDATA[<h3 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h3><p>产生的原因:主要原因是在编写代码的时候，调用(包含)其他文件,让其他文件按照php代码执行，这就产生了漏洞，如果调用的时候没用经过过滤或者严格的定义，可以被用户所控制，用户可以通过包含其他文件，来恶意的执行php代码。<br>示例代码:<br><?php    $filename=$_GET['filename'];    include($filename);?><br>例如:$_GET[‘filename’]没有经过滤直接代入了include中，这就导致攻击者可以通过修改$_GET[‘filename’]的值，恶心执行php代码，产生非预期的效果。<br>php中文件包含的四种函数:<br>require()         函数调用时出现错误，会直接报错并退出程序<br>require_one() 与require()函数一样，但相同的文件只能调用执行一次<br>include()          函数包含出现错误时会报错，但会继续执行后面的代码<br>include_one()  与include()函数一样，但相同的文件只能调用执行一次<br><img src="https://Lmg66.github.io/img/2.png" alt="图片"></p>]]></content>
     
     <summary type="html">
     
