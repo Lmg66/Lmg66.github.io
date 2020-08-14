@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="标签: 无线安全, HTML,CSS,JavaScript,php,python,linux,mysql等">
+    <meta name="keywords" content="简单快速搭建钓鱼wifi, HTML,CSS,JavaScript,php,python,linux,mysql等">
     <meta name="description" content="专注web，分享生活，分享知识">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>标签: 无线安全 | Script kiddie&#39;s life</title>
+    <title>简单快速搭建钓鱼wifi | Script kiddie&#39;s life</title>
     <link rel="icon" type="image/jpeg" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/favicon.jpg">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/awesome/css/all.css">
@@ -628,200 +628,584 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                学无止境
-                
-            </div>
+    
 
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                       strings: ['志之所向，金石为开，谁能御之？',
-                          '花开不是为了花落，而是为了开的更加灿烂。',
-                          '没有伞的孩子必须努力奔跑！',
-                          '欲望以提升热忱，毅力以磨平高山。',
-                          '如果放弃太早，你永远都不知道自己会错过什么。',
-                          '没有礁石，就没有美丽的浪花；没有挫折，就没有壮丽的人生。'],
-                 startDelay: 300,
-                 typeSpeed: 100,
-                 loop: true,   
-                 backSpeed: 50,
-                 showCursor: true
-                    });
-                </script>
-                
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://Lmg66.github.io/img/182.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">简单快速搭建钓鱼wifi</h1>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/banner/' + new Date().getDay() + '.jpg)');
-</script>
 
 
-    </div>
-</div>
-
-<main class="content">
+<main class="post-container content">
 
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
 
-<div id="tags" class="container chip-container">
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
     <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%90%AD%E5%BB%BA%E9%92%93%E9%B1%BCwifi/">
+                                <span class="chip bg-color">搭建钓鱼wifi</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8/" class="post-category">
+                                无线安全
+                            </a>
+                        
+                    </div>
+                    
+                </div>
             </div>
-            <div class="tag-chips">
+
+            <div class="post-info">
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-08-14
+                </div>
                 
-                <a href="/tags/xss/" title="xss: 5">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="xss" style="background-color: #F9EBEA;">xss
-                        <span class="tag-length">5</span>
-                    </span>
-                </a>
+
                 
+
                 
-                <a href="/tags/%E9%9D%B6%E5%9C%BA/" title="靶场: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="靶场" style="background-color: #F5EEF8;">靶场
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
+
                 
-                
-                <a href="/tags/python%E5%B0%8F%E6%B8%B8%E6%88%8F-%E6%89%93%E9%A3%9E%E6%9C%BA/" title="python小游戏(打飞机): 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="python小游戏(打飞机)" style="background-color: #D5F5E3;">python小游戏(打飞机)
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/qq%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E6%90%AD%E5%BB%BA/" title="qq机器人的搭建: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="qq机器人的搭建" style="background-color: #E8F8F5;">qq机器人的搭建
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA/" title="个人博客的搭建: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="个人博客的搭建" style="background-color: #FEF9E7;">个人博客的搭建
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" title="文件包含: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="文件包含" style="background-color: #F8F9F9;">文件包含
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" title="文件上传: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="文件上传" style="background-color: #82E0AA;">文件上传
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/CGI%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" title="CGI技术原理: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="CGI技术原理" style="background-color: #D7BDE2;">CGI技术原理
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/" title="php伪协议: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="php伪协议" style="background-color: #A3E4D7;">php伪协议
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8/" title="无线安全: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            data-tagname="无线安全" style="background-color: #85C1E9;">无线安全
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
+
+                 <span id="busuanzi_container_site_pv" style='display:none'></span> <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp; <span id="busuanzi_value_page_pv" ></span> 
+
             </div>
+
         </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>钓鱼wifi是很久的话题了，但是传统的方法可能比较麻烦需要手动配置dhcp，dns，网卡，流量转发，比较麻烦，而且还有根据每次的网络环境需要重新的配置，这里介绍用WIFIpumpkin3工具简单快速的搭建钓鱼wifi</p>
+<h2 id="WIFIpumpkin3的安装"><a href="#WIFIpumpkin3的安装" class="headerlink" title="WIFIpumpkin3的安装"></a>WIFIpumpkin3的安装</h2><p>WIFIpumpkin3依托的是python来构建dns，dhcp所以需要python环境且python环境要大于3.7，目前似乎不支持windows和mac，我用的kali上面已经集成了python3.8的环境，所以就不介绍python&gt;=3.7的安装了，需要的自行百度，下面的操作都是在kali2020.2上其他环境的安装参考官方文档<a href="https://wifipumpkin3.github.io/docs/getting-started" target="_blank" rel="noopener">WIFIpumpkin3</a></p>
+<h3 id="python安装依赖"><a href="#python安装依赖" class="headerlink" title="python安装依赖"></a>python安装依赖</h3><pre><code>sudo apt install libssl-dev libffi-dev build-essential</code></pre><h3 id="安装git，kali中似乎已经集成"><a href="#安装git，kali中似乎已经集成" class="headerlink" title="安装git，kali中似乎已经集成"></a>安装git，kali中似乎已经集成</h3><pre><code>apt-get install git</code></pre><h3 id="下载WIFIpumpkin3"><a href="#下载WIFIpumpkin3" class="headerlink" title="下载WIFIpumpkin3"></a>下载WIFIpumpkin3</h3><p>选择合适的目录</p>
+<pre><code>git clone https://github.com/P0cL4bs/wifipumpkin3.git</code></pre><p>下载完毕进入目录</p>
+<pre><code>cd wifipumpkin3</code></pre><h3 id="安装PyQt5"><a href="#安装PyQt5" class="headerlink" title="安装PyQt5"></a>安装PyQt5</h3><pre><code>sudo apt install python3-pyqt5</code></pre><p>验证是否安装成功，如果打印了done则表示安装成功</p>
+<pre><code>python3 -c &quot;from PyQt5.QtCore import QSettings; print(&#39;done&#39;)&quot;</code></pre><h3 id="编译安装WIFIpumpkin3"><a href="#编译安装WIFIpumpkin3" class="headerlink" title="编译安装WIFIpumpkin3"></a>编译安装WIFIpumpkin3</h3><pre><code>sudo python3 setup.py install</code></pre><p>如果显示下图这样就代表安装成功了<br><img src="https://Lmg66.github.io/img/175.png" alt="图片"></p>
+<h2 id="WIFIpumpkin3创建钓鱼wifi"><a href="#WIFIpumpkin3创建钓鱼wifi" class="headerlink" title="WIFIpumpkin3创建钓鱼wifi"></a>WIFIpumpkin3创建钓鱼wifi</h2><p>启动wifipumpkin3</p>
+<pre><code>wifipumpkin3</code></pre><p><img src="https://Lmg66.github.io/img/176.png" alt="图片"></p>
+<p>设置网卡这里的网卡同样要具备ap模拟的网卡，wlan0为你的网卡</p>
+<pre><code>set interface wlan0 </code></pre><p>设置wifi名称也就是ssid，demo修改为你要创建的wifi</p>
+<pre><code>set ssid demo</code></pre><p>设置代理插件</p>
+<pre><code>set proxy noproxy</code></pre><p>设置dns</p>
+<pre><code>ignore pydns_server</code></pre><p>开启钓鱼wifi</p>
+<pre><code>start</code></pre><p><img src="https://Lmg66.github.io/img/177.png" alt="图片"></p>
+<h2 id="查看利用"><a href="#查看利用" class="headerlink" title="查看利用"></a>查看利用</h2><p>这里我们用手机连接一下，发现成功分配ip且有网络<br><img src="https://Lmg66.github.io/img/178.png" alt="图片"></p>
+<p>看一下kali，这里显示了连接而且显示了连接的手机的型号<br><img src="https://Lmg66.github.io/img/179.png" alt="图片"></p>
+<p>继续，我们用手机登录一个网站<br><img src="https://Lmg66.github.io/img/180.png" alt="图片"><br>看一下kali，发现抓取到了账号密码，而且还有流量记录的信息图片等等，okwifi钓鱼完成<br><img src="https://Lmg66.github.io/img/181.png" alt="图片"></p>
+<h2 id="参考文章及说明"><a href="#参考文章及说明" class="headerlink" title="参考文章及说明"></a>参考文章及说明</h2><p>上文从渗透的角度说明陌生ifi，攻击者可以利用树莓派等小型设备放入大型的公共场所设置免费公共wifi是非常可怕的，所以提醒最好最好最好(重要的事情说三遍)不要连接陌生的wifi很容易盗取你的信息<br>WIFIpumpkin3还有很多用途可以自行探索，本文参考地址:<a href="https://wifipumpkin3.github.io/docs/getting-started" target="_blank" rel="noopener">https://wifipumpkin3.github.io/docs/getting-started</a></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://Lmg66.github.io" rel="external nofollow noreferrer">Lmg</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://Lmg66.github.io/posts/8b06.html">https://Lmg66.github.io/posts/8b06.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://Lmg66.github.io" target="_blank">Lmg</a>
+                    !
+                </span>
+            </div>
+        
     </div>
-</div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%90%AD%E5%BB%BA%E9%92%93%E9%B1%BCwifi/">
+                                    <span class="chip bg-color">搭建钓鱼wifi</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/share/js/social-share.min.js"></script>
+    
 
     
 
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="无线安全" data-aos="fade-up">
-                <div class="card">
-                    <a href="/posts/5e65.html">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/featureimages/12.jpg" class="responsive-img" alt="wifi安全">
-                            
-                            <span class="card-title">wifi安全</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-10
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/web%E5%AE%89%E5%85%A8/" class="post-category">
-                                web安全
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
+</div>
+
                 </div>
             </div>
             
         </div>
-    </article>
-</main>
+    </div>
 
+    
+
+    
+
+    
+
+    
+    <div class="livere-card card" data-aos="fade-up">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" class="card-content" data-id="city" data-uid="MTAyMC80OTIwMS8yNTY5NQ==">
+        <script type="text/javascript">
+            (function (d, s) {
+                let j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') {
+                    return;
+                }
+
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript。</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</div>
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/posts/8b06.html">
+                    <div class="card-image">
+                        
+                        <img src="https://Lmg66.github.io/img/182.png" class="responsive-img" alt="简单快速搭建钓鱼wifi">
+                        
+                        <span class="card-title">简单快速搭建钓鱼wifi</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            前言钓鱼wifi是很久的话题了，但是传统的方法可能比较麻烦需要手动配置dhcp，dns，网卡，流量转发，比较麻烦，而且还有根据每次的网络环境需要重新的配置，这里介绍用WIFIpumpkin3工具简单快速的搭建钓鱼wifi
+WIFIpumpk
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-14
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8/" class="post-category">
+                                    无线安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%90%AD%E5%BB%BA%E9%92%93%E9%B1%BCwifi/">
+                        <span class="chip bg-color">搭建钓鱼wifi</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/5e65.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/featureimages/19.jpg" class="responsive-img" alt="wifi渗透">
+                        
+                        <span class="card-title">wifi渗透</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            前言本文主要讲述 家庭家庭家庭中（重要的事情说三遍，企业认证服务器的wifi一般非常非常的安全破解不来）如何破解wifi密码，破解wifi密码后的内网渗透利用(简单说明)，如何设置wifi路由器更安全，从渗透的方面看wifi安全，根据需求选
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8/" class="post-category">
+                                    无线安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/wifi%E6%B8%97%E9%80%8F/">
+                        <span class="chip bg-color">wifi渗透</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Script kiddie&#39;s life<br />'
+            + '文章作者: Lmg<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
 
 
 
