@@ -879,6 +879,14 @@ WEB-INF/database.properties : 数据库配置文件
 WEB-INF/classes/ : 一般用来存放Java类文件(.class)
 WEB-INF/lib/ : 用来存放打包好的库(.jar)
 WEB-INF/src/ : 用来放源代码(.asp和.php等)</code></pre><p>通过找到 web.xml 文件，推断 class 文件的路径，最后直接 class 文件，再通过反编译 class 文件，得到网站源码。</p>
+<h3 id="CTF中WEB-INF-web-xml泄露"><a href="#CTF中WEB-INF-web-xml泄露" class="headerlink" title="CTF中WEB-INF/web.xml泄露"></a>CTF中WEB-INF/web.xml泄露</h3><p>平台：<a href="https://buuoj.cn" target="_blank" rel="noopener">https://buuoj.cn</a></p>
+<p><img src="/images/pasted-12.png" alt="upload successful"><br>打开题目是一个登录框</p>
+<p><img src="/images/pasted-13.png" alt="upload successful"><br>提示是java，登录框试试没发现什么，点击help发现</p>
+<p><img src="/images/pasted-14.png" alt="upload successful"><br>有个download，改为post传输尝试任意文件下载<br>先传入WEB-INF/web.xml看看配置，上面说过了</p>
+<p><img src="/images/pasted-15.png" alt="upload successful"><br>发现疑似一个类似flag的类文件，尝试下载<br>payload：</p>
+<pre><code>filename=WEB-INF/classes/com/wm/ctf/FlagController.class</code></pre><p><img src="/images/pasted-16.png" alt="upload successful"></p>
+<p><img src="/images/pasted-17.png" alt="upload successful"><br>下载下来发现一个类似的base64加密的东西解密看看，成功获得flag</p>
+<p><img src="/images/pasted-18.png" alt="upload successful"></p>
 <h2 id="SWP-文件泄露"><a href="#SWP-文件泄露" class="headerlink" title="SWP 文件泄露"></a>SWP 文件泄露</h2><p>swp即swap文件，在编辑文件时产生的临时文件，它是隐藏文件，如果程序正常退出，临时文件自动删除，如果意外退出就会保留，文件名为 .filename.swp。</p>
 <p>漏洞利用：直接访问.swp文件，下载回来后删掉末尾的.swp，获得源码文件。</p>
 <h2 id="github源码泄露"><a href="#github源码泄露" class="headerlink" title="github源码泄露"></a>github源码泄露</h2><p>GitHub是一个面向开源及私有软件项目的托管平台，很多人喜欢把自己的代码上传到平台托管。攻击者通过关键词进行搜索，可以找到关于目标站点的敏感信息，甚至可以下载网站源码。</p>
