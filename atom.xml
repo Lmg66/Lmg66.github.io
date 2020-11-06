@@ -51,7 +51,7 @@
     <link href="https://lmg66.github.io/posts/ba80.html"/>
     <id>https://lmg66.github.io/posts/ba80.html</id>
     <published>2020-11-04T13:38:00.000Z</published>
-    <updated>2020-11-06T10:59:53.891Z</updated>
+    <updated>2020-11-06T11:02:03.695Z</updated>
     
     <content type="html"><![CDATA[<h2 id="追寻"><a href="#追寻" class="headerlink" title="追寻"></a>追寻</h2><p>感觉黑阔很酷，志愿中报考了类似网络安全的专业，很荣幸被录取，然后在学长推荐下加入了校ctf工作室学习(感谢工作室学长们推荐和指点)</p><h2 id="执着"><a href="#执着" class="headerlink" title="执着"></a>执着</h2><p>然后在学长们教导下学习web安全:<br>c，c++，php，Python                  —学校基础课，也就会敲个成绩管理系统，留言板，最最基础爬虫，和没有用的Pygame小游戏(千万别学!!!)<br>DVWA<br>sql-labs                              —手注一遍(忘的也查不多了)，sqlmap还没学<br>upload-labs                       —过了一遍<br>xss-labs                            —过了一遍(beef没学)<br>文件包含php伪协议<br>php的反序列化，主要是对于ctf的(玩了一段ctf)<br>工具msf，nmap(看了一哈四舍五入等于没学)<br>wifi的入侵                        —看了一本书，其实也只是使用工具</p><h2 id="展望和思考"><a href="#展望和思考" class="headerlink" title="展望和思考"></a>展望和思考</h2><p>虽然在学长们的指导下，但学习网络安全中也浪费了蛮多的时间(关键我喜欢瞎折腾，不过是真有趣)，比如qq机器人，pygame，还有这个博客，都搞了蛮久的其实。感觉接下来应该把时间放在更有意义的事情上，还有一个错误的认识，之前想着要把东西都学完再操作，其实不是的，网络安全更注重实操(这个特别感谢学长的指点，不然可能还能要走更远的弯路)<br>后续学习小计划:<br>打打vulnhub<br>继续学习常见漏洞<br>学习代码审计<br>学习内网相关知识<br>学习脚本语言Python<br>sqlmap等工具，也尝试自己写点小工具(尽力吧!?)<br>希望再一年后看到博客的自己有所进步，最后，特别感谢工作室学长学姐指点教导。</p>]]></content>
     
