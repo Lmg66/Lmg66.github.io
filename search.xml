@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>内网域基础学习笔记</title>
+      <link href="/posts/95a7.html"/>
+      <url>/posts/95a7.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="工作组"><a href="#工作组" class="headerlink" title="工作组"></a>工作组</h3><p>为了方便区分不同的计算机的功能，划分了不同的组(没有服务器和客户机之分),右键”我的电脑”-&gt;”属性”-&gt;”更改”，里面有工作组的设置</p><p><img src="/images/pasted-303.png" alt="upload successful"><br>查看工作组和工作共享，”控制面板”-&gt;”选择家庭组和共享选项”-&gt;”创建家庭组”，即可共享资源<br><img src="/images/pasted-305.png" alt="upload successful"></p><h3 id="域"><a href="#域" class="headerlink" title="域"></a>域</h3><p>域是一个有边界的计算机集合(不同的域无法相互访问，除外建立信任关系)，<br>域与工作组相比，域的安全管理更加严格，用户在域内的权限取决于域内的身份。</p><h4 id="域控制器-DC"><a href="#域控制器-DC" class="headerlink" title="域控制器(DC)"></a>域控制器(DC)</h4><p>域控制器好比门禁系统，负责验证用户身份，如是否属于这个域，登录账号是否存在，密码是否正确，储存账号信息的数据库，负责验证所有权限用户</p><p>单域一般要两台域服务器，一台作为DC，令一台做备用DC(为了防止瘫痪数据的备份)</p><h4 id="父域和子域"><a href="#父域和子域" class="headerlink" title="父域和子域"></a>父域和子域</h4><p>在网络中划分多个域，第一域称为父域，各分部的域称为该域的子域，同一域内，信息交互的条目多，且不会压缩，不同域之间，信息的交互条目相对较少，而且，可以压缩，且每个域都有自己的安全策略</p><h4 id="域树"><a href="#域树" class="headerlink" title="域树"></a>域树</h4><p>域树是多个域通过建立信任关系组成的集合<br><img src="/images/pasted-306.png" alt="upload successful"></p><h4 id="域森林"><a href="#域森林" class="headerlink" title="域森林"></a>域森林</h4><p>多个域树建立信任关系组成的集合。<br><img src="/images/pasted-307.png" alt="upload successful"><br>域名服务器<br>实现域名与ip地址转换的服务器，DNS服务器和域控制器通常配置在同一台机器上<br>活动目录<br>用于存储有关网络对象(例如用户，组，计算机，共享资源，打印机和联系人等)的信息。安装活动目录数据的计算机就是DC                                                                               </p><h4 id="域名服务器"><a href="#域名服务器" class="headerlink" title="域名服务器"></a>域名服务器</h4><p>实现域名与ip地址转换的服务器，DNS服务器和域控制器通常配置在同一台机器上</p><p>活动目录</p><p>用于存储有关网络对象(例如用户，组，计算机，共享资源，打印机和联系人等)的信息。安装活动目录数据的计算机就是DC</p><h3 id="windows-server-2003搭建域控制器"><a href="#windows-server-2003搭建域控制器" class="headerlink" title="windows_server_2003搭建域控制器"></a>windows_server_2003搭建域控制器</h3><h4 id="设置ip，子网掩码，dns指向本地ip"><a href="#设置ip，子网掩码，dns指向本地ip" class="headerlink" title="设置ip，子网掩码，dns指向本地ip"></a>设置ip，子网掩码，dns指向本地ip</h4><p><img src="/images/pasted-310.png" alt="upload successful"></p><h4 id="更改计算机名"><a href="#更改计算机名" class="headerlink" title="更改计算机名"></a>更改计算机名</h4><p><img src="/images/pasted-311.png" alt="upload successful"><br>需要重启计算机</p><h4 id="安装域控制器和DNS服务"><a href="#安装域控制器和DNS服务" class="headerlink" title="安装域控制器和DNS服务"></a>安装域控制器和DNS服务</h4><p><img src="/images/pasted-312.png" alt="upload successful"></p><p><img src="/images/pasted-313.png" alt="upload successful"><br>然后一路默认就行</p><p>新建立用户<br><img src="/images/pasted-314.png" alt="upload successful"></p><p><img src="/images/pasted-315.png" alt="upload successful"></p><h4 id="加入域"><a href="#加入域" class="headerlink" title="加入域"></a>加入域</h4><p>加入的人设置dns设置为域设置时候的dns服务器<br><img src="/images/pasted-316.png" alt="upload successful"></p><p><img src="/images/pasted-317.png" alt="upload successful"></p><p><img src="/images/pasted-318.png" alt="upload successful"></p><p>如果加入的时候提示拒绝应该是非正常脱离域</p><p>到这里将其删除重写连接就行了</p><p><img src="/images/pasted-319.png" alt="upload successful"></p><h5 id="登录到域"><a href="#登录到域" class="headerlink" title="登录到域"></a>登录到域</h5><p><img src="/images/pasted-322.png" alt="upload successful"><br>向域发送一个请求测试一下</p><pre><code>net user /domain</code></pre><p><img src="/images/pasted-323.png" alt="upload successful"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 内网渗透 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>DC靶机1-9合集</title>
       <link href="/posts/2ea3.html"/>
       <url>/posts/2ea3.html</url>
