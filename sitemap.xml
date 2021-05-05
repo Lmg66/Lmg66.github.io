@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lnng.top/posts/68bd.html</loc>
+    
+    <lastmod>2021-05-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://lnng.top/posts/4b57.html</loc>
+    
+    <lastmod>2021-05-05</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://lnng.top/posts/74f.html</loc>
     
     <lastmod>2021-05-05</lastmod>
@@ -12,20 +26,6 @@
     <loc>https://lnng.top/posts/e2e8.html</loc>
     
     <lastmod>2021-04-01</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://lnng.top/posts/68bd.html</loc>
-    
-    <lastmod>2021-03-25</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://lnng.top/posts/4b57.html</loc>
-    
-    <lastmod>2021-02-17</lastmod>
     
   </url>
   
@@ -376,6 +376,13 @@
   
   <url>
     <loc>https://lnng.top/tags/MVC/</loc>
+    <lastmod>2021-05-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lnng.top/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/</loc>
     <lastmod>2021-05-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
