@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分类: 博客, HTML,CSS,JavaScript,php,python,linux,mysql等">
+    <meta name="keywords" content="Fofa&amp;&amp;钟馗之眼爬虫(golang), HTML,CSS,JavaScript,php,python,linux,mysql等">
     <meta name="description" content="专注web，分享生活，分享知识">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>分类: 博客 | Script kiddie&#39;s life</title>
+    <title>Fofa&amp;&amp;钟馗之眼爬虫(golang) | Script kiddie&#39;s life</title>
     <link rel="icon" type="image/jpeg" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/favicon.jpg">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/awesome/css/all.css">
@@ -710,211 +710,594 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                学无止境
-                
-            </div>
+    
 
-            <div class="description center-align">
-                
-                专注web，分享生活，分享知识
-                
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/Lmg66/picture@main/image/1626311997219-212542.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Fofa&amp;&amp;钟馗之眼爬虫(golang)</h1>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/banner/' + new Date().getDay() + '.jpg)');
-</script>
 
 
-    </div>
-</div>
-
-<main class="content">
+<main class="post-container content">
 
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
 
-<div id="category-cloud" class="container chip-container">
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
     <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
-            </div>
-            <div class="tag-chips">
-                
-                
-                
-                <a href="/categories/CTF/" title="CTF: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9EBEA;">CTF
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" title="内网渗透: 5">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F5EEF8;">内网渗透
-                        <span class="tag-length">5</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/web%E5%AE%89%E5%85%A8/" title="web安全: 13">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D5F5E3;">web安全
-                        <span class="tag-length">13</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/python/" title="python: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #E8F8F5;">python
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="qq机器人: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #FEF9E7;">qq机器人
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/web%E5%AE%89%E5%85%A8/CTF/" title="CTF: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8F9F9;">CTF
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%8D%9A%E5%AE%A2/" title="博客: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #82E0AA;">博客
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8/" title="无线安全: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D7BDE2;">无线安全
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E5%B8%B8/" title="个人日常: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #A3E4D7;">个人日常
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" title="代码审计: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #85C1E9;">代码审计
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%AE%89%E5%85%A8%E5%BC%80%E5%8F%91/" title="安全开发: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8C471;">安全开发
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/posts/2f31.html">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/featureimages/18.jpg" class="responsive-img" alt="两种搭建个人博客方法">
-                            
-                            <span class="card-title">两种搭建个人博客方法</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                前言:整了一个阿里云的服务器(不过没用上)，想着搭一个博客，记录自己菜鸡的日常，中间走了很多弯路，浪费了不少时间，下面是我总结的两种搭建博客的快捷方法，希望能帮到你方法一:个人服务器+宝塔+wordpress
-方法一:优势
-可拓展性强，可以
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-24
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
-                                    博客
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
                     
-                    <div class="card-action article-tags">
+                    <div class="article-tag">
                         
-                        <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA/">
-                            <span class="chip bg-color">个人博客的搭建</span>
-                        </a>
+                            <a href="/tags/Feye/">
+                                <span class="chip bg-color">Feye</span>
+                            </a>
+                        
+                            <a href="/tags/golang/">
+                                <span class="chip bg-color">golang</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%AE%89%E5%85%A8%E5%BC%80%E5%8F%91/" class="post-category">
+                                安全开发
+                            </a>
                         
                     </div>
                     
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-07-15
+                </div>
+                
+
+                
+
+                
+
+                
+
+                 <span id="busuanzi_container_site_pv" style='display:none'></span> <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp; <span id="busuanzi_value_page_pv" ></span> 
+
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>摸鱼了很久，学习了一下基本的golang语言，写个爬虫练练手</p>
+<h3 id="Feye说明"><a href="#Feye说明" class="headerlink" title="Feye说明"></a>Feye说明</h3><p>用于爬取fofa zoom，用于刷src，手动测试fofa上面每一个链接，并且进行漏洞测试着实麻烦，结合poc快速刷src</p>
+<p>，当然也可以封装为package，结合poc等快速刷洞(后来可能要写这么一个工具，暂时不知咋写，唉😔)。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>项目地址:<a href="https://github.com/Lmg66/Feye" target="_blank" rel="noopener">https://github.com/Lmg66/Feye</a></p>
+<p>git clone <a href="https://github.com/Lmg66/Feye.git" target="_blank" rel="noopener">https://github.com/Lmg66/Feye.git</a></p>
+<p>配置config.yaml</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Lmg66/picture@main/image/1626268360555-9999.png" alt=""></p>
+<p> Authorization登录fofa账号，随便查询一个语句，点第二页，burpsuite抓包将 Authorization粘贴到配置文件即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Lmg66/picture@main/image/1626268935029-9999967.png" alt=""></p>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p><img src="https://cdn.jsdelivr.net/gh/Lmg66/picture@main/image/1626311997219-212542.png" alt=""></p>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p><img src="https://cdn.jsdelivr.net/gh/Lmg66/picture@main/image/1626312008362-212859.png" alt=""></p>
+<h3 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h3><p>无mac无测试</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://lnng.top" rel="external nofollow noreferrer">lnng</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://lnng.top/posts/96c5.html">https://lnng.top/posts/96c5.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://lnng.top" target="_blank">lnng</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Feye/">
+                                    <span class="chip bg-color">Feye</span>
+                                </a>
+                            
+                                <a href="/tags/golang/">
+                                    <span class="chip bg-color">golang</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
             
         </div>
-    </article>
-</main>
+    </div>
 
+    
+
+    
+
+    
+
+    
+    <div class="livere-card card" data-aos="fade-up">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" class="card-content" data-id="city" data-uid="MTAyMC80OTIwMS8yNTY5NQ==">
+        <script type="text/javascript">
+            (function (d, s) {
+                let j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') {
+                    return;
+                }
+
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript。</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</div>
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/posts/96c5.html">
+                    <div class="card-image">
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/Lmg66/picture@main/image/1626311997219-212542.png" class="responsive-img" alt="Fofa&&钟馗之眼爬虫(golang)">
+                        
+                        <span class="card-title">Fofa&&钟馗之眼爬虫(golang)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            前言摸鱼了很久，学习了一下基本的golang语言，写个爬虫练练手
+Feye说明用于爬取fofa zoom，用于刷src，手动测试fofa上面每一个链接，并且进行漏洞测试着实麻烦，结合poc快速刷src
+，当然也可以封装为package，结合
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AE%89%E5%85%A8%E5%BC%80%E5%8F%91/" class="post-category">
+                                    安全开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Feye/">
+                        <span class="chip bg-color">Feye</span>
+                    </a>
+                    
+                    <a href="/tags/golang/">
+                        <span class="chip bg-color">golang</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/8568.html">
+                    <div class="card-image">
+                        
+                        <img src="https://Lmg66.github.io/images/pasted-490.png" class="responsive-img" alt="att&ck红队评估实战靶场一">
+                        
+                        <span class="card-title">att&ck红队评估实战靶场一</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            att&amp;ck红队评估实战靶场一环境搭建下载地址:http://vulnstack.qiyuanxuetang.net/vuln/detail/2/解压，使用VMware打开三个虚拟机因为靶机是放在内网服务器上,而不上自己本机所以需要
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" class="post-category">
+                                    内网渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                        <span class="chip bg-color">内网渗透</span>
+                    </a>
+                    
+                    <a href="/tags/att-ck%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA/">
+                        <span class="chip bg-color">att&amp;ck红队评估实战靶场</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Script kiddie&#39;s life<br />'
+            + '文章作者: Lmg<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
 
 
 
