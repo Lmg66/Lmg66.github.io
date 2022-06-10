@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://lnng.top/posts/68c7.html</loc>
-    
-    <lastmod>2022-06-10</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://lnng.top/posts/88aa.html</loc>
     
     <lastmod>2022-05-03</lastmod>
@@ -565,13 +558,6 @@
   
   <url>
     <loc>https://lnng.top/tags/php7-4%E6%96%B0%E7%89%B9%E6%80%A7/</loc>
-    <lastmod>2022-06-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://lnng.top/tags/CVE-2022-24990/</loc>
     <lastmod>2022-06-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
