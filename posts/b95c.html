@@ -1,0 +1,1989 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="应急响应基础, HTML,CSS,JavaScript,php,python,linux,mysql等">
+    <meta name="description" content="专注web，分享生活，分享知识">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>应急响应基础 | Script kiddie&#39;s life</title>
+    <link rel="icon" type="image/jpeg" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/favicon.jpg">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/jquery/jquery.min.js"></script>
+    
+<style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },1000); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+ </script><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Script kiddie's life" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },1000); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+ </script></head>
+
+
+
+ <div id="loading-container">
+     <p class="loading-text">玩命加载中 . . . </p> 
+     <div class="loading-image">
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div> 
+         <div></div>
+     </div>
+ </div><body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/logo.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Script kiddie's life</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>文章分类</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/web%E5%AE%89%E5%85%A8">
+          
+          <span>web安全</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F">
+          
+          <span>内网渗透</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/CTF">
+          
+          <span>CTF</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E5%AE%89%E5%85%A8%E5%BC%80%E5%8F%91">
+          
+          <span>安全开发</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1">
+          
+          <span>代码审计</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8">
+          
+          <span>无线安全</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-bicycle" style="zoom: 0.6;"></i>
+      
+      <span>各种折腾</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/%E5%8D%9A%E5%AE%A2">
+          
+          <span>博客</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA">
+          
+          <span>qq机器人</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E5%B8%B8">
+          
+          <span>个人日常</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-sitemap" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>文章标签</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>时间轴</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-envelope" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/medias/logo.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Script kiddie's life</div>
+        <div class="logo-desc">
+            
+            专注web，分享生活，分享知识
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-bookmark"></i>
+			
+			文章分类
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>   
+				
+                  <a href="/categories/web%E5%AE%89%E5%85%A8 " style="margin-left:75px";>
+				  
+		          <span>web安全</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F " style="margin-left:75px";>
+				  
+		          <span>内网渗透</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/CTF " style="margin-left:75px";>
+				  
+		          <span>CTF</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/%E5%AE%89%E5%85%A8%E5%BC%80%E5%8F%91 " style="margin-left:75px";>
+				  
+		          <span>安全开发</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1 " style="margin-left:75px";>
+				  
+		          <span>代码审计</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8 " style="margin-left:75px";>
+				  
+		          <span>无线安全</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-bicycle"></i>
+			
+			各种折腾
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>   
+				
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2 " style="margin-left:75px";>
+				  
+		          <span>博客</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA " style="margin-left:75px";>
+				  
+		          <span>qq机器人</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E5%B8%B8 " style="margin-left:75px";>
+				  
+		          <span>个人日常</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-sitemap"></i>
+			
+			归档
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>   
+				
+                  <a href="/tags " style="margin-left:75px";>
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+		          <span>文章标签</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/archives " style="margin-left:75px";>
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+		          <span>时间轴</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-envelope"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://Lmg66.github.io/images/pasted-864.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">应急响应基础</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
+                                <span class="chip bg-color">应急响应</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/web%E5%AE%89%E5%85%A8/" class="post-category">
+                                web安全
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-11-26
+                </div>
+                
+
+                
+
+                
+
+                
+
+                 <span id="busuanzi_container_site_pv" style='display:none'></span> <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp; <span id="busuanzi_value_page_pv" ></span> 
+
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="此文章为博客丢失找回内容"><a href="#此文章为博客丢失找回内容" class="headerlink" title="此文章为博客丢失找回内容"></a>此文章为博客丢失找回内容</h3><p>此文章为博客丢失找回内容可能存在部分内容缺失情况</p>
+<h3 id="一、应急响应概念"><a href="#一、应急响应概念" class="headerlink" title="一、应急响应概念"></a>一、应急响应概念</h3><p>为应对计算机和网络信息中的突发安全事件前的准备工作和事件后的处置措施</p>
+<h3 id="二、应急响应的流程"><a href="#二、应急响应的流程" class="headerlink" title="二、应急响应的流程"></a>二、应急响应的流程</h3><p><img src="/images/pasted-864.png" alt="upload successful"></p>
+<h3 id="三、实操排查点"><a href="#三、实操排查点" class="headerlink" title="三、实操排查点"></a>三、实操排查点</h3><p><img src="/images/pasted-865.png" alt="upload successful"></p>
+<h4 id="1-、windows应急响应"><a href="#1-、windows应急响应" class="headerlink" title="(1)、windows应急响应"></a>(1)、windows应急响应</h4><h5 id="1-检查系统账户安全"><a href="#1-检查系统账户安全" class="headerlink" title="1.检查系统账户安全"></a>1.检查系统账户安全</h5><h6 id="1-1-已有账号和远程管理端口"><a href="#1-1-已有账号和远程管理端口" class="headerlink" title="1.1 已有账号和远程管理端口"></a>1.1 已有账号和远程管理端口</h6><p>检查服务器已有系统或应用账号是否有弱口令，3389端口是否对外公网开放</p>
+<ul>
+<li>系统管理员账号</li>
+<li>网站后台账户</li>
+<li>数据库账户</li>
+<li>FTP</li>
+<li>Tomcat</li>
+<li>phpMyAdmin</li>
+</ul>
+<p>查看当前登录账号:<code>query user</code></p>
+<p><img src="/images/pasted-866.png" alt="upload successful"></p>
+<p>使用logoff ID 命令注销已登录用户(会注销到账号登录界面)，当可疑账号出于登录状态时，也可以使用mimikatz抓取密码</p>
+<h6 id="1-2-可疑账户、新增账户"><a href="#1-2-可疑账户、新增账户" class="headerlink" title="1.2 可疑账户、新增账户"></a>1.2 可疑账户、新增账户</h6><p>检查服务器内是否有可疑账户、新增账户</p>
+<p>检查方法:    打开cmd，输入<code>lusrmgr.msc</code>命令，查看是否有新增/可疑的账户</p>
+<p><img src="/images/pasted-867.png" alt="upload successful"></p>
+<p><code>wmic UserAccount get</code>列出当前系统所有账户(与查看lusrmgr结果一样，无法看到隐藏账户)</p>
+<p><img src="/images/pasted-868.png" alt="upload successful"></p>
+<h6 id="1-3-查看服务器是否存在隐藏账户、克隆账户"><a href="#1-3-查看服务器是否存在隐藏账户、克隆账户" class="headerlink" title="1.3 查看服务器是否存在隐藏账户、克隆账户"></a>1.3 查看服务器是否存在隐藏账户、克隆账户</h6><ol>
+<li>对于添加$符号的隐藏账户</li>
+</ol>
+<p>使用下面命令:<code>net localgroup administrators</code>(一般攻击者添加账户为管理组)或计算机管理查看</p>
+<p><img src="/images/pasted-869.png" alt="upload successful"></p>
+<p><img src="/images/pasted-870.png" alt="upload successful"></p>
+<ol start="2">
+<li>对于修改注册表的隐藏账户</li>
+</ol>
+<p>无法在”计算机管理”中看到，打开注册表，右键权限修改管理员权限</p>
+<p><img src="/images/pasted-871.png" alt="upload successful"></p>
+<p>退出注册表从进，查看Users表项目于Names表项中的项数量是否一致或者把这里存在的账户和计算机管理中存在的账户进行比较，多出来的账户就是隐藏账户。直接删除以隐藏账户命名的项。</p>
+<p><img src="/images/pasted-872.png" alt="upload successful"></p>
+<h6 id="1-4-工具使用"><a href="#1-4-工具使用" class="headerlink" title="1.4 工具使用"></a>1.4 工具使用</h6><ol>
+<li>D盾</li>
+</ol>
+<p><img src="/images/pasted-873.png" alt="upload successful"></p>
+<ol start="2">
+<li>pchunter</li>
+</ol>
+<p><img src="/images/pasted-874.png" alt="upload successful"></p>
+<h5 id="2-检查异常端口、进程"><a href="#2-检查异常端口、进程" class="headerlink" title="2.检查异常端口、进程"></a>2.检查异常端口、进程</h5><h6 id="2-1-检查端口连接情况，是否有远程连接、可疑连接"><a href="#2-1-检查端口连接情况，是否有远程连接、可疑连接" class="headerlink" title="2.1 检查端口连接情况，是否有远程连接、可疑连接"></a>2.1 检查端口连接情况，是否有远程连接、可疑连接</h6><ol>
+<li>端口状态查看</li>
+</ol>
+<p><img src="/images/pasted-875.png" alt="upload successful"></p>
+<p>管理员权限下:<code>netstat -anob</code>查看占用端口的应用情况</p>
+<p><img src="/images/pasted-876.png" alt="upload successful"></p>
+<p>-a        显示所有连接和监听端口。<br>-b        显示包含于创建每个连接或监听端口的可执行组件。在某些情况下已知可执行组件拥有多个独立组件，并且在这些情况下包含于创建连接或监听端口的组件序列被显示。这种情况下，可执行组件名在底部的 [] 中，顶部是其调用的组件等等，直到 TCP/IP部分。注意此选项可能需要很长时间，如果没有足够权限可能失败。</p>
+<p>-n        以数字形式显示地址和端口号。<br>-o        显示与每个连接相关的所属进程 ID。</p>
+<ol start="2">
+<li>查看路由表</li>
+</ol>
+<p><code>netstat -rn</code></p>
+<p><img src="/images/pasted-877.png" alt="upload successful"></p>
+<p> -r        显示路由表</p>
+<ol start="3">
+<li>进程定位</li>
+</ol>
+<p>根据netstat定位出pid，再通过tasklist命令进行进程定位</p>
+<p><code>tasklist | findstr &quot;pid&quot;</code></p>
+<p><img src="/images/pasted-878.png" alt="upload successful"></p>
+<ol start="4">
+<li>防火墙配置</li>
+</ol>
+<p>控制面板–&gt;windows防火墙–&gt;高级设置       入站策略和出站策略   查看防火墙入站和出站规则</p>
+<p><img src="/images/pasted-879.png" alt="upload successful"></p>
+<p>命令<code>netsh firewall show all</code></p>
+<p><img src="/images/pasted-880.png" alt="upload successful"></p>
+<ol start="5">
+<li>工具使用</li>
+</ol>
+<p>PChunter、火绒剑、DNSQuerySniffer</p>
+<p>使用火绒剑、PChunter查看网络连接</p>
+<p>PChunter:</p>
+<p><img src="/images/pasted-881.png" alt="upload successful"></p>
+<p>火绒剑: 可着重查看 <strong>未知文件</strong>，远程地址为 <strong>外部地址</strong>，状态为 <strong>ESTABLISHED</strong>、<strong>LISTEN</strong>的连接，另外需要注意模块路径是否正确。</p>
+<p><img src="/images/pasted-882.png" alt="upload successful"></p>
+<p>DNSQuerySniffer:DNS解析查询工具。可以通过此工具确定访问恶意域名的端口，该工具还可以将访问过的所有域名记录下来，重点关注红色记录的端口、响应代码、A记录(双击查看)</p>
+<p><img src="/images/pasted-883.png" alt="upload successful"></p>
+<h6 id="2-2-检查进程"><a href="#2-2-检查进程" class="headerlink" title="2.2 检查进程"></a>2.2 检查进程</h6><ol>
+<li><p>没有签名验证信息的进程</p>
+</li>
+<li><p>没有描述信息的进程</p>
+</li>
+<li><p>进程的属主</p>
+</li>
+<li><p>进程的路径</p>
+</li>
+<li><p>进程的占用</p>
+</li>
+</ol>
+<p>a、cmd查看</p>
+<p><code>tasklist /?</code> 查看tasklist 命令的使用</p>
+<p><img src="/images/pasted-884.png" alt="upload successful"></p>
+<p>查看进程对应的服务</p>
+<p><code>tasklist /svc</code></p>
+<p><img src="/images/pasted-885.png" alt="upload successful"></p>
+<p>查看指定进程对应详情</p>
+<p><code>tasklist /svc |findstr pid</code></p>
+<p><img src="/images/pasted-886.png" alt="upload successful"></p>
+<p>查看加载的DLL进程    查看DLL劫持</p>
+<p><code>tasklist /m |findstr pid</code></p>
+<p><img src="/images/pasted-887.png" alt="upload successful"></p>
+<p>b、powershell 查看进程</p>
+<p><code>get-process</code></p>
+<p><img src="/images/pasted-888.png" alt="upload successful"></p>
+<p>c、系统应用查看</p>
+<p>开始输入msinfo</p>
+<p><img src="/images/pasted-889.png" alt="upload successful"></p>
+<p><img src="/images/pasted-890.png" alt="upload successful"></p>
+<p>d、工具排查</p>
+<p>没有厂商名称、没有签名信息、没有描述信息、CPU占用高</p>
+<p>Pchunter:</p>
+<p>黑色为微软官方进程、蓝色为外界进程、红色为可疑进程</p>
+<p><img src="/images/pasted-891.png" alt="upload successful"></p>
+<p><img src="/images/pasted-892.png" alt="upload successful"></p>
+<p>ProcessExplorer(微软官方):</p>
+<p><img src="/images/pasted-893.png" alt="upload successful"></p>
+<h5 id="3-检查启动项目、计划任务、服务"><a href="#3-检查启动项目、计划任务、服务" class="headerlink" title="3.检查启动项目、计划任务、服务"></a>3.检查启动项目、计划任务、服务</h5><h6 id="3-1-开机启动项目"><a href="#3-1-开机启动项目" class="headerlink" title="3.1 开机启动项目"></a>3.1 开机启动项目</h6><ol>
+<li>windows7 启动目录</li>
+</ol>
+<p><img src="/images/pasted-894.png" alt="upload successful"></p>
+<p>windows10:</p>
+<p><img src="/images/pasted-895.png" alt="upload successful"></p>
+<p><img src="/images/pasted-896.png" alt="upload successful"></p>
+<p>开始菜单启动项:<code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup</code></p>
+<p>cmd:<br><img src="/images/pasted-897.png" alt="upload successful"></p>
+<p>系统自动启动的的目录： shell:Common Startup<br>用户自动启动的的目录： shell:Startup</p>
+<ol start="2">
+<li><p>任务管理器”启动”列表</p>
+<p>在任务管理器里查看</p>
+</li>
+</ol>
+<p><img src="/images/pasted-898.png" alt="upload successful"></p>
+<ol start="3">
+<li>注册表内启动项</li>
+</ol>
+<p>WIN+R 输入 regedit，打开注册表，查看开机启动项是否正常，有异常删除，并安装杀毒软件进行病毒查杀，清楚残留病毒或木马</p>
+<p><code>计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run</code></p>
+<p><img src="/images/pasted-899.png" alt="upload successful"></p>
+<p><code>计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</code></p>
+<p><img src="/images/pasted-900.png" alt="upload successful"></p>
+<p><code>计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce</code></p>
+<p>重启就会被清空</p>
+<p><img src="/images/pasted-901.png" alt="upload successful"></p>
+<p><code>计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer</code></p>
+<p><img src="/images/pasted-902.png" alt="upload successful"></p>
+<p><code>计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce</code></p>
+<p><img src="/images/pasted-903.png" alt="upload successful"></p>
+<p>排查发现计划任务可以计算MD5值看该进程与启动项是否一致</p>
+<p><code>certutil -hashfile file md5</code></p>
+<p>防止攻击者替换启动项目文件</p>
+<p><img src="/images/pasted-904.png" alt="upload successful"></p>
+<ol start="4">
+<li>组策略编辑器</li>
+</ol>
+<p>运行gpedit.msc</p>
+<p><img src="/images/pasted-905.png" alt="upload successful"></p>
+<p><img src="/images/pasted-906.png" alt="upload successful"></p>
+<ol start="5">
+<li>工具排查</li>
+</ol>
+<p>pchunter:</p>
+<p><img src="/images/pasted-907.png" alt="upload successful"></p>
+<p>Autoruns 微软官方: 黄色红色比较可疑</p>
+<p><img src="/images/pasted-908.png" alt="upload successful"></p>
+<p><img src="/images/pasted-909.png" alt="upload successful"></p>
+<p>WMI后门:无文件，相对难排查</p>
+<p><img src="/images/pasted-910.png" alt="upload successful"></p>
+<h6 id="3-2-计划任务"><a href="#3-2-计划任务" class="headerlink" title="3.2 计划任务"></a>3.2 计划任务</h6><p>taskschd.msc，查看计划任务属性，查看疑似木马文件的路径</p>
+<p><img src="/images/pasted-911.png" alt="upload successful"></p>
+<p><img src="/images/pasted-912.png" alt="upload successful"></p>
+<p>CMD schtasks.exe</p>
+<p><img src="/images/pasted-913.png" alt="upload successful"></p>
+<h6 id="3-3-服务"><a href="#3-3-服务" class="headerlink" title="3.3 服务"></a>3.3 服务</h6><ol>
+<li>服务自启动检查</li>
+</ol>
+<p><img src="/images/pasted-914.png" alt="upload successful"></p>
+<p><img src="/images/pasted-915.png" alt="upload successful"></p>
+<ol start="2">
+<li>进程注入</li>
+</ol>
+<p>cs进程注入:</p>
+<p><img src="/images/pasted-916.png" alt="upload successful"></p>
+<p><img src="/images/pasted-917.png" alt="upload successful"></p>
+<p>上线成功:</p>
+<p><img src="/images/pasted-918.png" alt="upload successful"></p>
+<p>ProcessExplorer(微软官方):</p>
+<p><img src="/images/pasted-919.png" alt="upload successful"></p>
+<p><img src="/images/pasted-920.png" alt="upload successful"></p>
+<p>火绒剑:</p>
+<p><img src="/images/pasted-921.png" alt="upload successful"></p>
+<h5 id="4-检查系统相关信息及文件排查"><a href="#4-检查系统相关信息及文件排查" class="headerlink" title="4.检查系统相关信息及文件排查"></a>4.检查系统相关信息及文件排查</h5><h6 id="4-1-查看系统信息"><a href="#4-1-查看系统信息" class="headerlink" title="4.1 查看系统信息"></a>4.1 查看系统信息</h6><ol>
+<li>msinfo32</li>
+</ol>
+<p><img src="/images/pasted-922.png" alt="upload successful"></p>
+<p><img src="/images/pasted-923.png" alt="upload successful"></p>
+<p>重点看正在运行的任务、服务、系统驱动程序、加载的模块、启动程序</p>
+<h6 id="4-2-查看可疑目录文件"><a href="#4-2-查看可疑目录文件" class="headerlink" title="4.2 查看可疑目录文件"></a>4.2 查看可疑目录文件</h6><ol>
+<li>可疑进程 cpu利用率  进程名 时间—-&gt;文件</li>
+</ol>
+<p>powershell:Get-ChildItem</p>
+<p>cmd:dir   dir /r 隐藏文件   dir  /x 短文件名</p>
+<p>Everything:</p>
+<p> <code>c: &lt;*.exe | *.bat&gt; dm:2022/11/10-2022/11/22 size:&gt;1mb</code></p>
+<p><img src="/images/pasted-924.png" alt="upload successful"></p>
+<p><strong>C: 表示盘符</strong>，如果是 C 盘、D 盘，对应的修改就行了。</p>
+<p><strong>&lt;*.exe | *.bat&gt;,</strong> 表示任意的以 .exe 或 .bat 结尾的文件，* 为通配符。</p>
+<p><strong>dm:2022/11/10-2022/11/22</strong> 表示修改时间为2022/11/10-2022/11/22间的文件，这里要与系统设置的时间格式保持一致，如果是月份在前，那这里也相应的修改一下。</p>
+<p> <strong>size:&gt;1mb</strong>:设置文件大小</p>
+<ol start="2">
+<li>注册表查看已安装应用程序目录:</li>
+</ol>
+<p><code>计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\</code></p>
+<p><img src="/images/pasted-925.png" alt="upload successful"></p>
+<ol start="3">
+<li>查看用户目录</li>
+</ol>
+<p>新建账户会在这个目录生成一个用户目录，查看是否有新建用户目录。就是c盘用户目录一般几个用户就会有几个文件夹。</p>
+<p><img src="/images/pasted-926.png" alt="upload successful"></p>
+<p>windows 2000/xp/2003 C:\Documents and Settings</p>
+<ol start="4">
+<li>其他位置文件</li>
+</ol>
+<p>回收站、浏览器下载目录(c盘下载和浏览器默认下载路径)、浏览器历史记录、系统临时文件、浏览器cookie信息</p>
+<ol start="5">
+<li>时间</li>
+</ol>
+<p>修改时间早于创建时间</p>
+<h4 id="2-、Linux-应急响应"><a href="#2-、Linux-应急响应" class="headerlink" title="(2)、Linux 应急响应"></a>(2)、Linux 应急响应</h4><h5 id="1-进程"><a href="#1-进程" class="headerlink" title="1. 进程"></a>1. 进程</h5><h6 id="1-1-查看占用大量CPU-RAM的进程"><a href="#1-1-查看占用大量CPU-RAM的进程" class="headerlink" title="1.1 查看占用大量CPU/RAM的进程"></a>1.1 查看占用大量CPU/RAM的进程</h6><p><code>top</code></p>
+<p><img src="/images/pasted-927.png" alt="upload successful"></p>
+<h6 id="1-2-进程树"><a href="#1-2-进程树" class="headerlink" title="1.2 进程树"></a>1.2 进程树</h6><p><code>ps -auxwf</code></p>
+<p><img src="/images/pasted-928.png" alt="upload successful"></p>
+<h6 id="1-3-开放的网络端口"><a href="#1-3-开放的网络端口" class="headerlink" title="1.3 开放的网络端口"></a>1.3 开放的网络端口</h6><pre><code>netstat -nalp
+ss -a -e -i
+lsof [many opitons]</code></pre><p><img src="/images/pasted-929.png" alt="upload successful"></p>
+<h6 id="1-4-查找被删除但还在运行的程序"><a href="#1-4-查找被删除但还在运行的程序" class="headerlink" title="1.4 查找被删除但还在运行的程序"></a>1.4 查找被删除但还在运行的程序</h6><pre><code>ls -alR /proc/*/exe 2&gt; /dev/null |grep deleted</code></pre><h6 id="1-5-进程相关名称及命令"><a href="#1-5-进程相关名称及命令" class="headerlink" title="1.5 进程相关名称及命令"></a>1.5 进程相关名称及命令</h6><pre><code>strings /proc/&lt;PID&gt;/comm
+strings /proc/&lt;PID&gt;/cmdline</code></pre><p><img src="/images/pasted-930.png" alt="upload successful"></p>
+<p><img src="/images/pasted-931.png" alt="upload successful"></p>
+<h6 id="1-6-进程实际路径"><a href="#1-6-进程实际路径" class="headerlink" title="1.6 进程实际路径"></a>1.6 <strong>进程实际路径</strong></h6><p><code>ls -al /proc/&lt;PID&gt;/exe</code></p>
+<p><img src="/images/pasted-932.png" alt="upload successful"></p>
+<h6 id="1-7-进程执行时环境变量"><a href="#1-7-进程执行时环境变量" class="headerlink" title="1.7 进程执行时环境变量"></a>1.7 进程执行时环境变量</h6><p><code>strings /proc/&lt;PID&gt;/environ</code></p>
+<p><img src="/images/pasted-933.png" alt="upload successful"></p>
+<h6 id="1-8-查看所有进程执行目录"><a href="#1-8-查看所有进程执行目录" class="headerlink" title="1.8 查看所有进程执行目录"></a>1.8 <strong>查看所有进程执行目录</strong></h6><pre><code>ls -alR /proc/*/cwd</code></pre><p><img src="/images/pasted-935.png" alt="upload successful"></p>
+<h6 id="1-9-查看在tmp-dev-目录下执行的程序"><a href="#1-9-查看在tmp-dev-目录下执行的程序" class="headerlink" title="1.9 查看在tmp dev 目录下执行的程序"></a>1.9 <strong>查看在tmp dev 目录下执行的程序</strong></h6><pre><code>ls -alR /proc/*/cwd 2&gt; /dev/null | grep tmp
+ls -alR /proc/*/cwd 2&gt; /dev/null | grep dev</code></pre><h5 id="2-目录"><a href="#2-目录" class="headerlink" title="2. 目录"></a>2. 目录</h5><p>需要检查的目录</p>
+<pre><code>/tmp, /var/tmp, /dev/shm, /var/run,
+/var/spool, user home directories</code></pre><p>常用命令:</p>
+<p><code>ls -alp path</code></p>
+<p><img src="/images/pasted-936.png" alt="upload successful"></p>
+<p>查找隐藏文件:</p>
+<p><code>find / -d -name &quot;.*&quot;</code></p>
+<h5 id="3-文件"><a href="#3-文件" class="headerlink" title="3. 文件"></a>3. 文件</h5><p><strong>查找设置属性为不可修改的文件</strong></p>
+<pre><code>lsattr / -R 2&gt; /dev/null | grep &quot;\----i&quot;</code></pre><p><strong>查找设置为SUID/SGUID的文件</strong></p>
+<pre><code>find / -type f \( -perm -04000 -o -perm -02000 \) -exec ls -lg {} \;</code></pre><p><img src="/images/pasted-937.png" alt="upload successful"></p>
+<p><strong>查找没有用户/组名称的文件</strong></p>
+<pre><code>find / \( -nouser -o -nogroup \) -exec ls -lg {} \;</code></pre><p><strong>列出当前目录中的所有文件类型</strong></p>
+<pre><code>file * -p</code></pre><p><strong>查找可执行文件</strong></p>
+<pre><code>find / -type f -exec file -p &#39;{}&#39; \; | grep ELF
+find /tmp -type f -exec file -p &#39;{}&#39; \; | grep ELF </code></pre><p><img src="/images/pasted-938.png" alt="upload successful"></p>
+<p><strong>最近一天有修改(modified/created)的文件</strong></p>
+<pre><code>find / -mtime -1</code></pre><p><strong>可存放后门持久化的目录</strong></p>
+<pre><code>/etc/rc.local, /etc/initd, /etc/rc*.d, /etc/modules, /etc/cron*, /var/spool/cron/*</code></pre><p><strong>查找已经修改的包文件</strong></p>
+<pre><code>rpm -Va | grep ^..5.
+debsums -c</code></pre><h5 id="4-用户"><a href="#4-用户" class="headerlink" title="4. 用户"></a>4. 用户</h5><p><strong>查找所有ssh公钥文件</strong></p>
+<pre><code>find / -name authorized_keys</code></pre><p><img src="/images/pasted-939.png" alt="upload successful"></p>
+<p><strong>查找所有用户历史日志文件</strong></p>
+<pre><code>find / -name .*history</code></pre><p><strong>查找历史日志文件重定向到/dev/null</strong></p>
+<pre><code>ls -alR / 2&gt; /dev/null | grep .*history | grep null</code></pre><p><strong>查看root用户/组</strong></p>
+<pre><code>grep &quot;:0:&quot; /etc/passwd</code></pre><p><img src="/images/pasted-940.png" alt="upload successful"></p>
+<p><strong>检测sudoers 文件</strong></p>
+<pre><code>cat /etc/sudoers
+cat /etc/group</code></pre><p><img src="/images/pasted-943.png" alt="upload successful"></p>
+<p><img src="/images/pasted-942.png" alt="upload successful"></p>
+<p><strong>检查计划任务</strong></p>
+<pre><code>crontab -l
+atq
+systemctl list-timers --all</code></pre><h5 id="5-日志"><a href="#5-日志" class="headerlink" title="5. 日志"></a>5. 日志</h5><p><strong>查找大小为0的文件</strong></p>
+<pre><code>ls -al /var/log/*</code></pre><p><strong>审计登录日志</strong></p>
+<pre><code>utmpdump /var/log/wtmp
+utmpdump /var/run/utmp
+utmpdump /var/log/btmp
+last
+lastb</code></pre><p><img src="/images/pasted-944.png" alt="upload successful"></p>
+<p><img src="/images/pasted-945.png" alt="upload successful"></p>
+<p><strong>查找包含有二进制文件的日志</strong></p>
+<pre><code>grep [[:cntrl:]] /var/log/*.log</code></pre><p>/var/log/secure：安全日志<br>/var/log/cron：定时任务日志<br>/var/log/yum.log：软件安装卸载日志<br>/var/log/maillog：邮件相关<br>登录成功：more /var/log/secure* | grep “Accepted password”<br>登录失败：more /var/log/secure* | grep “Failed password”<br>本机登录情况：more /var/log/secure* | grep -E “sshd:session.<em>session opened”<br>新增用户：more /var/log/secure</em> | grep “new user”<br>传输文件：more /var/log/message* | grep “ZMODEM:.<em>BPS”<br>定时任务日志：more /var/log/cron</em><br>定时执行脚本：more /var/log/cron* | grep -E “.py$|.sh$|.pl$”<br>下载软件情况：more /var/log/yum* | grep Installed<br>卸载软件情况：more /var/log/yum* | grep Erased<br>可疑工具：more /var/log/yum* | awk -F: ‘{print $NF}’ | awk -F ‘[-]’ ‘{print $1}’ | sort |<br>uniq | grep -E “(^nc|sqlmap|nmap|beef|nikto|john|ettercap|backdoor|msfcosole)”<br>错误登录：Lastb<br>所有用户最后一次登录：Lastlog<br>所有用户登录日志：last | grep pts | grep -vw :0ü /var/log/secure：安全日志<br>/var/log/cron：定时任务日志<br>/var/log/yum.log：软件安装卸载日志<br>/var/log/maillog：邮件相关<br>登录成功：more /var/log/secure* | grep “Accepted password”<br>登录失败：more /var/log/secure* | grep “Failed password”<br>本机登录情况：more /var/log/secure* | grep -E “sshd:session.<em>session opened”<br>新增用户：more /var/log/secure</em> | grep “new user”<br>传输文件：more /var/log/message* | grep “ZMODEM:.<em>BPS”<br>定时任务日志：more /var/log/cron</em><br>定时执行脚本：more /var/log/cron* | grep -E “.py$|.sh$|.pl$”<br>下载软件情况：more /var/log/yum* | grep Installed<br>卸载软件情况：more /var/log/yum* | grep Erased<br>可疑工具：more /var/log/yum* | awk -F: ‘{print $NF}’ | awk -F ‘[-]’ ‘{print $1}’ | sort |<br>uniq | grep -E “(^nc|sqlmap|nmap|beef|nikto|john|ettercap|backdoor|msfcosole)”<br>错误登录：Lastb<br>所有用户最后一次登录：Lastlog<br>所有用户登录日志：last | grep pts | grep -vw :0</p>
+<h3 id="四、案例"><a href="#四、案例" class="headerlink" title="四、案例"></a>四、案例</h3><h4 id="1-windows-应急响应"><a href="#1-windows-应急响应" class="headerlink" title="1.windows 应急响应"></a>1.windows 应急响应</h4><h6 id="1-1-检查"><a href="#1-1-检查" class="headerlink" title="1.1 检查"></a>1.1 检查</h6><p>系统       ————&gt;     windows server2008</p>
+<p>风扇噪声很大  —-&gt;    中毒</p>
+<p>无web服务     —–&gt;    推测横向移动或恶意软件</p>
+<h6 id="1-2-抑制"><a href="#1-2-抑制" class="headerlink" title="1.2 抑制"></a>1.2 抑制</h6><p>现象为风扇噪音大，先排查cpu占用与进程</p>
+<p><img src="/images/pasted-946.png" alt="upload successful"></p>
+<p><img src="/images/pasted-947.png" alt="upload successful"></p>
+<p>未发现其他疑似恶意程序，查看该程序</p>
+<p><img src="/images/pasted-948.png" alt="upload successful"></p>
+<p><img src="/images/pasted-950.png" alt="upload successful"></p>
+<p><img src="/images/pasted-951.png" alt="upload successful"></p>
+<p><img src="/images/pasted-952.png" alt="upload successful"></p>
+<p>发现存在恶意连接</p>
+<p><img src="/images/pasted-953.png" alt="upload successful"></p>
+<p><img src="/images/pasted-954.png" alt="upload successful"></p>
+<p>先kill掉该进程，结束进程后，发现还会恢复，可能存在计划任务</p>
+<p><img src="/images/pasted-955.png" alt="upload successful"></p>
+<h6 id="1-3-根除"><a href="#1-3-根除" class="headerlink" title="1.3 根除"></a>1.3 根除</h6><p>因为存在自启动先检查计划任务、服务、开机启动项目相关启动信息</p>
+<p><img src="/images/pasted-956.png" alt="upload successful"></p>
+<p><img src="/images/pasted-957.png" alt="upload successful"></p>
+<p>发现存在计划任务，继续查看你自动服务，并未发现恶意自动服务</p>
+<p><img src="/images/pasted-958.png" alt="upload successful"></p>
+<p><img src="/images/pasted-959.png" alt="upload successful"></p>
+<p>查看开机启动项目</p>
+<p><img src="/images/pasted-960.png" alt="upload successful"></p>
+<p>综上:目前启动项目只有计划任务，先将该任务暂停，在kill</p>
+<p><img src="/images/pasted-961.png" alt="upload successful"></p>
+<p><img src="/images/pasted-962.png" alt="upload successful"></p>
+<p>等待几分钟中，发现不存在该进程自启动了</p>
+<p>总结已处理情况:</p>
+<ul>
+<li><p>挖坑木马位置<code>C:\Users\Administrator\Downloads\wkbd\wkbd</code></p>
+</li>
+<li><p>‎发生时间2022‎年‎3‎月‎23‎日，‏‎9:39:13</p>
+</li>
+<li><p>获取的到的主机权限Administrator </p>
+</li>
+</ul>
+<p>继续排查所有windows可疑项目</p>
+<p>检查windows 系统账户安全:</p>
+<p><img src="/images/pasted-963.png" alt="upload successful"></p>
+<p><img src="/images/pasted-964.png" alt="upload successful"></p>
+<p><img src="/images/pasted-965.png" alt="upload successful"></p>
+<p>发现存在隐藏账户，删除指定注册表项目就可以了</p>
+<p>检查系统杂项发现辅助功能劫持</p>
+<p><img src="/images/pasted-966.png" alt="upload successful"></p>
+<p>辅助功能都拥有一个特点就是当用户未进行登录时也可以触发。所以攻击者很有可能通过篡改这些辅助功能的指向程序来达到权限维持的目的。</p>
+<p>锁屏状态下连续按5下shift确实调用cmd</p>
+<p><img src="/images/pasted-967.png" alt="upload successful"></p>
+<p>查看对应注册表项目</p>
+<p><code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\</code></p>
+<p><img src="/images/pasted-968.png" alt="upload successful"></p>
+<p>删除对应的项目</p>
+<p><img src="/images/pasted-969.png" alt="upload successful"></p>
+<p>继续总结一下目前情况:</p>
+<ul>
+<li><p>挖坑木马位置<code>C:\Users\Administrator\Downloads\wkbd\wkbd</code></p>
+</li>
+<li><p>‎发生时间2022‎年‎3‎月‎23‎日，‏‎9:39:13</p>
+</li>
+<li><p>获取的到的主机权限Administrator </p>
+</li>
+<li><p>做了xiaoge$隐藏账户的添加</p>
+</li>
+<li><p>辅助功能粘滞键被劫持</p>
+</li>
+</ul>
+<p>继续排查系统相关信息及文件排查:</p>
+<p>未发现威胁项目</p>
+<p><img src="/images/pasted-970.png" alt="upload successful"></p>
+<p>文件检查:</p>
+<p><img src="/images/pasted-971.png" alt="upload successful"></p>
+<p><img src="/images/pasted-972.png" alt="upload successful"></p>
+<p><img src="/images/pasted-973.png" alt="upload successful"></p>
+<p>进一步总结:</p>
+<ul>
+<li><p>挖坑木马位置<code>C:\Users\Administrator\Downloads\wkbd\wkbd</code></p>
+</li>
+<li><p>‎发生时间2022‎年‎3‎月‎23‎日，‏‎9:39:13</p>
+</li>
+<li><p>获取的到的主机权限Administrator </p>
+</li>
+<li><p>做了xiaoge$隐藏账户的添加</p>
+</li>
+<li><p>辅助功能粘滞键被劫持</p>
+</li>
+<li><p>恶意软件Services.exe</p>
+</li>
+<li><p>恶意软件WmiApSvr.exe</p>
+</li>
+</ul>
+<p>所有关键项目都检查完毕，现在要排查是怎么进去的，因为获取到Administrator权限，该服务器没有web服务，首先推测为暴力破解</p>
+<p><img src="/images/pasted-974.png" alt="upload successful"></p>
+<p>导出另存为</p>
+<p><img src="/images/pasted-975.png" alt="upload successful"><br>使用分析工具查看:</p>
+<pre class=" language-cmd"><code class="language-cmd">evtxLogparse.exe -s fail </code></pre>
+<p><img src="/images/pasted-976.png" alt="upload successful"></p>
+<p>2022-03-21 16:26:27 存在smb暴力破解</p>
+<p><img src="/images/pasted-977.png" alt="upload successful"></p>
+<p>总结:2022-03-21 16开始进行远程登录，并创建隐藏账户，进行远程登录，上传恶意文件Services.exe、WmiApSvr.exe，2022-03-23 9时继续登录上传恶意程序，并创建定时任务和辅助功能粘滞键劫持</p>
+<h6 id="1-4-恢复"><a href="#1-4-恢复" class="headerlink" title="1.4 恢复"></a>1.4 恢复</h6><ol>
+<li>更换Administrator密码，重启服务器</li>
+<li>注册表删除xiaoge$用户</li>
+<li>删除恶意程序Services.exe、WmiApSvr.exe</li>
+<li>删除定时任务system</li>
+<li>结束进程javs.exe并删除文件</li>
+<li>注册表删除辅助功能粘滞键</li>
+<li>观察后续情况</li>
+</ol>
+<h6 id="1-5-建议"><a href="#1-5-建议" class="headerlink" title="1.5 建议"></a>1.5 建议</h6><ol>
+<li>安装edr、杀软</li>
+<li>制定密码强度管理制定</li>
+</ol>
+<h4 id="2-流量分析"><a href="#2-流量分析" class="headerlink" title="2.流量分析"></a>2.流量分析</h4><p>某公司内网网络被黑客渗透，简单了解，黑客首先攻击了一台web服务器，破解了后台的账户密码，随之利用破解的账号密码登陆了mail系统，然后获取了vpn的申请方式，然后登陆了vpn，在内网pwn掉了一台打印机，请根据提供的流量包回答下面有关问题</p>
+<h6 id="2-1某公司内网网络被黑客渗透，请分析流量，给出黑客使用的扫描器"><a href="#2-1某公司内网网络被黑客渗透，请分析流量，给出黑客使用的扫描器" class="headerlink" title="2.1某公司内网网络被黑客渗透，请分析流量，给出黑客使用的扫描器"></a>2.1某公司内网网络被黑客渗透，请分析流量，给出黑客使用的扫描器</h6><p>扫描器一般伴随着大量请求，筛选GET请求，查看</p>
+<p><code>http.request.method == GET</code></p>
+<p><img src="/images/pasted-978.png" alt="upload successful"></p>
+<p><img src="/images/pasted-979.png" alt="upload successful"></p>
+<p>所有可以判断是<strong>awvs</strong>扫描器</p>
+<h6 id="2-2-某公司内网网络被黑客渗透，请分析流量，得到黑客扫描到的登陆后台是-相对路径即可"><a href="#2-2-某公司内网网络被黑客渗透，请分析流量，得到黑客扫描到的登陆后台是-相对路径即可" class="headerlink" title="2.2 某公司内网网络被黑客渗透，请分析流量，得到黑客扫描到的登陆后台是(相对路径即可)"></a>2.2 某公司内网网络被黑客渗透，请分析流量，得到黑客扫描到的登陆后台是(相对路径即可)</h6><p>有上面get请求包含admin路径，推测后台地址包含admin，请求类型为POST，因为要传输值</p>
+<p><code>http.request.full_uri contains  admin &amp;&amp; http.request.method == POST</code></p>
+<p><img src="/images/pasted-980.png" alt="upload successful"></p>
+<p>所以后台地址<strong>admin/login.php</strong></p>
+<h6 id="2-3-某公司内网网络被黑客渗透，请分析流量，得到黑客使用了什么账号密码登陆了web后台-形式-username-password"><a href="#2-3-某公司内网网络被黑客渗透，请分析流量，得到黑客使用了什么账号密码登陆了web后台-形式-username-password" class="headerlink" title="2.3 某公司内网网络被黑客渗透，请分析流量，得到黑客使用了什么账号密码登陆了web后台(形式:username/password)"></a>2.3 某公司内网网络被黑客渗透，请分析流量，得到黑客使用了什么账号密码登陆了web后台(形式:username/password)</h6><p>登录成功一般伴随着302重定向到管理员页面，可能还会有js的加载，所以我们查看出现不同于admin/login.php，就说明爆破成功，被重定向了</p>
+<p><img src="/images/pasted-981.png" alt="upload successful"></p>
+<p><img src="/images/pasted-982.png" alt="upload successful"></p>
+<p><img src="/images/pasted-983.png" alt="upload successful"></p>
+<p>可以看到获取到两个账户密码</p>
+<p><img src="/images/pasted-984.png" alt="upload successful"></p>
+<p>账户:人事 密码:hr123456</p>
+<p><img src="/images/pasted-985.png" alt="upload successful"></p>
+<p>账户:admin 密码:admin!@#pass123</p>
+<h6 id="2-4-某公司内网网络被黑客渗透，请分析流量，得到黑客上传的webshell文件名是，内容是什么-提交webshell内容的base编码"><a href="#2-4-某公司内网网络被黑客渗透，请分析流量，得到黑客上传的webshell文件名是，内容是什么-提交webshell内容的base编码" class="headerlink" title="2.4 某公司内网网络被黑客渗透，请分析流量，得到黑客上传的webshell文件名是，内容是什么,提交webshell内容的base编码"></a>2.4 某公司内网网络被黑客渗透，请分析流量，得到黑客上传的webshell文件名是，内容是什么,提交webshell内容的base编码</h6><p>images下php文件，流量特征蚁剑，所以webshell名称a.php</p>
+<p><img src="/images/pasted-986.png" alt="upload successful"></p>
+<p>过滤webshell，根据密码1234</p>
+<p><code>tcp contains &quot;1234&quot; &amp;&amp; tcp contains &quot;.php&quot;</code></p>
+<p><img src="/images/pasted-987.png" alt="upload successful"></p>
+<p>所以提交的内容</p>
+<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span> @<span class="token function">eval</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token number">1234</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token delimiter">?></span></code></pre>
+<h6 id="2-5-某公司内网网络被黑客渗透，请分析流量，黑客在robots-txt中找到的flag是什么"><a href="#2-5-某公司内网网络被黑客渗透，请分析流量，黑客在robots-txt中找到的flag是什么" class="headerlink" title="2.5 某公司内网网络被黑客渗透，请分析流量，黑客在robots.txt中找到的flag是什么"></a>2.5 某公司内网网络被黑客渗透，请分析流量，黑客在robots.txt中找到的flag是什么</h6><p>直接搜索就行<code>http contains &quot;robots.txt&quot;</code></p>
+<p><img src="/images/pasted-988.png" alt="upload successful"></p>
+<p>flag:<strong>87b7cb79481f317bde90c116cf36084b</strong></p>
+<h6 id="2-6-某公司内网网络被黑客渗透，请分析流量，黑客找到的数据库密码是多少"><a href="#2-6-某公司内网网络被黑客渗透，请分析流量，黑客找到的数据库密码是多少" class="headerlink" title="2.6 某公司内网网络被黑客渗透，请分析流量，黑客找到的数据库密码是多少"></a>2.6 某公司内网网络被黑客渗透，请分析流量，黑客找到的数据库密码是多少</h6><p>查看黑客执行的命令<code>http contains &quot;/images/article/a.php&quot; || tcp contains &quot;/images/article/a.php</code></p>
+<p><img src="/images/pasted-989.png" alt="upload successful"></p>
+<p><img src="/images/pasted-990.png" alt="upload successful"></p>
+<p>读取了product_category.php，包含的配置文件init.php 黑客下一步就要读取这个文件</p>
+<p><img src="/images/pasted-991.png" alt="upload successful"></p>
+<p>黑客读取了还是没有数据库账户密码</p>
+<p><img src="/images/pasted-992.png" alt="upload successful"></p>
+<p>继续读取:</p>
+<p><img src="/images/pasted-993.png" alt="upload successful"></p>
+<p>所以获取的账户密码:</p>
+<pre><code>// database username
+
+$dbuser   = &quot;web&quot;;
+
+// database password
+
+$dbpass   = &quot;e667jUPvJjXHvEUv&quot;;</code></pre><h6 id="2-7-某公司内网网络被黑客渗透，请分析流量，黑客在数据库中找到的hash-code是什么"><a href="#2-7-某公司内网网络被黑客渗透，请分析流量，黑客在数据库中找到的hash-code是什么" class="headerlink" title="2.7 某公司内网网络被黑客渗透，请分析流量，黑客在数据库中找到的hash_code是什么"></a>2.7 某公司内网网络被黑客渗透，请分析流量，黑客在数据库中找到的hash_code是什么</h6><p>直接搜索:<code>tcp contains &quot;hash_code&quot; || http contains &quot;hash_code&quot;</code></p>
+<p><img src="/images/pasted-994.png" alt="upload successful"></p>
+<p>所以得到的hash_code:<code>d1c029893df40cb0f47bcf8f1c3c17ac</code></p>
+<h6 id="2-8-某公司内网网络被黑客渗透，请分析流量，黑客破解了账号ijnu-test-com得到的密码是什么"><a href="#2-8-某公司内网网络被黑客渗透，请分析流量，黑客破解了账号ijnu-test-com得到的密码是什么" class="headerlink" title="2.8 某公司内网网络被黑客渗透，请分析流量，黑客破解了账号ijnu@test.com得到的密码是什么"></a>2.8 某公司内网网络被黑客渗透，请分析流量，黑客破解了账号<a href="mailto:ijnu@test.com">ijnu@test.com</a>得到的密码是什么</h6><p>直接搜索:<code>tcp contains &quot;ijnu@test.com&quot; || http contains &quot;ijnu@test.com&quot;</code></p>
+<p><img src="/images/pasted-995.png" alt="upload successful"></p>
+<p><img src="/images/pasted-996.png" alt="upload successful"></p>
+<p>所以得到的密码:<strong>edc123!@#</strong></p>
+<h6 id="2-9-某公司内网网络被黑客渗透，请分析流量，被黑客攻击的web服务器，网卡配置是是什么，提交网卡内网ip"><a href="#2-9-某公司内网网络被黑客渗透，请分析流量，被黑客攻击的web服务器，网卡配置是是什么，提交网卡内网ip" class="headerlink" title="2.9 某公司内网网络被黑客渗透，请分析流量，被黑客攻击的web服务器，网卡配置是是什么，提交网卡内网ip"></a>2.9 某公司内网网络被黑客渗透，请分析流量，被黑客攻击的web服务器，网卡配置是是什么，提交网卡内网ip</h6><p>继续看蚁剑流量<code>http contains &quot;/images/article/a.php&quot; || tcp contains &quot;/images/article/a.php</code></p>
+<p><img src="/images/pasted-997.png" alt="upload successful"></p>
+<p>网卡信息:</p>
+<p><img src="/images/pasted-998.png" alt="upload successful"></p>
+<h6 id="2-10-某公司内网网络被黑客渗透，请分析流量，黑客使用了什么账号登陆了mail系统（形式-username-password）"><a href="#2-10-某公司内网网络被黑客渗透，请分析流量，黑客使用了什么账号登陆了mail系统（形式-username-password）" class="headerlink" title="2.10 某公司内网网络被黑客渗透，请分析流量，黑客使用了什么账号登陆了mail系统（形式: username/password）"></a>2.10 某公司内网网络被黑客渗透，请分析流量，黑客使用了什么账号登陆了mail系统（形式: username/password）</h6><p>直接搜索登录url:<code>http contains &quot;/webmail/index.php?module=operate&amp;action=login&amp;web=1&quot;</code></p>
+<p>直接看最后一个就行，因为最后一个一般都是爆破成功的</p>
+<p><img src="/images/pasted-999.png" alt="upload successful"></p>
+<p><img src="/images/pasted-1000.png" alt="upload successful"></p>
+<p>账户:test.com 密码:+ZgE14UGcFcyRGLI0/ZXPQ==</p>
+<p>密码前端加密后，看下前端的混淆</p>
+<p><img src="/images/pasted-1001.png" alt="upload successful"></p>
+<p><img src="/images/pasted-1002.png" alt="upload successful"></p>
+<p>所以账户:test.com 密码:admin!@#PASS123</p>
+<h6 id="2-11-某公司内网网络被黑客渗透，请分析流量，黑客获得的vpn的ip是多少"><a href="#2-11-某公司内网网络被黑客渗透，请分析流量，黑客获得的vpn的ip是多少" class="headerlink" title="2.11 某公司内网网络被黑客渗透，请分析流量，黑客获得的vpn的ip是多少"></a>2.11 某公司内网网络被黑客渗透，请分析流量，黑客获得的vpn的ip是多少</h6><p><img src="/images/pasted-1003.png" alt="upload successful"></p>
+<p>vpn的ip是:10.3.4.3</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://lnng.top" rel="external nofollow noreferrer">lnng</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://lnng.top/posts/b95c.html">https://lnng.top/posts/b95c.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://lnng.top" target="_blank">lnng</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
+                                    <span class="chip bg-color">应急响应</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+    <div class="livere-card card" data-aos="fade-up">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" class="card-content" data-id="city" data-uid="MTAyMC80OTIwMS8yNTY5NQ==">
+        <script type="text/javascript">
+            (function (d, s) {
+                let j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') {
+                    return;
+                }
+
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript。</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</div>
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/posts/b95c.html">
+                    <div class="card-image">
+                        
+                        <img src="https://Lmg66.github.io/images/pasted-864.png" class="responsive-img" alt="应急响应基础">
+                        
+                        <span class="card-title">应急响应基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            此文章为博客丢失找回内容此文章为博客丢失找回内容可能存在部分内容缺失情况
+一、应急响应概念为应对计算机和网络信息中的突发安全事件前的准备工作和事件后的处置措施
+二、应急响应的流程
+三、实操排查点
+(1)、windows应急响应1.检查系统账
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
+                        <span class="chip bg-color">应急响应</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/db1b.html">
+                    <div class="card-image">
+                        
+                        <img src="https://Lmg66.github.io/images/pasted-838.png" class="responsive-img" alt="内存马分析与处置实验记录">
+                        
+                        <span class="card-title">内存马分析与处置实验记录</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            此文章为博客丢失找回内容此文章为博客丢失找回内容可能存在部分内容缺失情况
+一、找到命令执行
+
+构造命令执行:
+
+二、使用哥斯拉进行连接注入内存马
+
+访问xx已存在
+
+
+
+三、日志分析
+内存
+工具检测:
+memshell:
+
+
+
+
+
+哥斯拉内
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/webshell/">
+                        <span class="chip bg-color">webshell</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%86%85%E5%AD%98%E9%A9%AC/">
+                        <span class="chip bg-color">内存马</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Script kiddie&#39;s life<br />'
+            + '文章作者: Lmg<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://lnng.top" target="_blank">Lmg</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+             <span id="busuanzi_container_site_pv" style='display:none'></span> <i class="fa fa-heart-o"></i> 本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>   <span id="busuanzi_container_site_uv" style='display:none'></span> 人次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人. 
+
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "3";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+
+                setInterval(siteTime, 1000);
+            </script>
+
+            
+            <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script> 
+            <script type="text/javascript">  
+            document.write('欢迎来自:' + returnCitySN["cname"]+'的朋友' + ",您的IP:" + returnCitySN["cip"] + ",浏览器版本:"+getBrowserInfo());
+        function getBrowserInfo()
+{
+    var agent = navigator.userAgent.toLowerCase() ;
+    var regStr_ie = /msie [\d.]+;/gi ;
+    var regStr_ff = /firefox\/[\d.]+/gi
+    var regStr_chrome = /chrome\/[\d.]+/gi ;
+    var regStr_saf = /safari\/[\d.]+/gi ;
+    //IE
+    if(agent.indexOf("msie") > 0)
+    {
+        return agent.match(regStr_ie) ;
+    }
+    //firefox
+    if(agent.indexOf("firefox") > 0)
+    {
+        return agent.match(regStr_ff) ;
+    }
+    //Chrome
+    if(agent.indexOf("chrome") > 0)
+    {
+        return agent.match(regStr_chrome) ;
+    }
+    //Safari
+    if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0)
+    {
+        return agent.match(regStr_saf) ;
+    }
+}
+</script> 
+
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Lmg66" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1589862745@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1589862745" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1589862745" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+<!-- <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script> -->
+
+<!-- <script src="/js/cursor.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/Lmg66/Lmg66.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+    <script type="text/javascript">
+    var OriginTitile=document.title,st;
+    document.addEventListener("visibilitychange",function(){
+        document.hidden?(document.title="ヽ(●-`Д´-)ノ404啦",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ骗你的嘿嘿！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+    })
+
+</script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
