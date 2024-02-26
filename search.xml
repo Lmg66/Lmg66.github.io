@@ -4,7 +4,36 @@
   
     
     <entry>
-      <title>Fastjson漏洞学习</title>
+      <title>log4j2漏洞学习笔记</title>
+      <link href="/posts/3947.html"/>
+      <url>/posts/3947.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> Web安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 代码审计 </tag>
+            
+            <tag> Fastjson </tag>
+            
+            <tag> JAVA </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Fastjson漏洞学习笔记</title>
       <link href="/posts/1f24.html"/>
       <url>/posts/1f24.html</url>
       
